@@ -1,3 +1,5 @@
+import BasicGridLayout from '@/8th/shared/ui/BasicGridLayout'
+
 export default function Page() {
-  return <>E-Book</>
+  return <BasicGridLayout>E-Book</BasicGridLayout>
 }
