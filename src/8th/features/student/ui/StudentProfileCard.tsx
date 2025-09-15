@@ -1,18 +1,35 @@
 'use client'
 
 import { Assets } from '@/8th/assets/asset-library'
-import { WidgetBoxStyle } from '@/8th/shared/ui/Widgets'
+import { StudentProfileCardStyle } from '@/8th/features/FeaturesStyled'
+import { WidgetBoxStyle } from '@/8th/shared/SharedStyled'
+import SITE_PATH from '@/app/site-path'
 import Image from 'next/image'
-import styled from 'styled-components'
+import { useRouter } from 'next/navigation'
 
 /**
  * 리딩유닛, 아바타, 이름 나오는 카드
  */
+
+interface StudentProfileCardProps {
+  studentName: string
+  pointRank: number
+  booksRead: number
+  earnedPoints: string
+  toDoCount: number
+  favoriteCount: number
+}
+
 export default function StudentProfileCard({
   studentName = 'Rose',
-}: {
-  studentName: string
-}) {
+  pointRank = 10,
+  booksRead = 0,
+  earnedPoints = '100.1',
+  toDoCount = 0,
+  favoriteCount = 0,
+}: StudentProfileCardProps) {
+  const router = useRouter()
+
   return (
     <WidgetBoxStyle>
       <StudentProfileCardStyle>
@@ -25,7 +42,7 @@ export default function StudentProfileCard({
               height={50}
             />
           </div>
-          <div className="rank">#10</div>
+          <div className="rank">#{pointRank}</div>
           <div className="name">{studentName}</div>
         </div>
         <div className="body">
@@ -38,7 +55,7 @@ export default function StudentProfileCard({
             />
             Books Read
           </div>
-          <div className="value">20</div>
+          <div className="value">{booksRead}</div>
           <div className="label">
             <Image
               src={Assets.Icon.Side.earnedPoints}
@@ -48,12 +65,16 @@ export default function StudentProfileCard({
             />
             Earned Points
           </div>
-          <div className="value">100P</div>
+          <div className="value">{earnedPoints}P</div>
           <div className="label">
             <Image src={Assets.Icon.Side.toDo} alt="" width={34} height={34} />
             To-Do
           </div>
-          <div className="value link">10</div>
+          <div
+            className="value link"
+            onClick={() => router.push(SITE_PATH.NW8.TODO)}>
+            {toDoCount}
+          </div>
           <div className="label">
             <Image
               src={Assets.Icon.Side.favorite}
@@ -63,76 +84,13 @@ export default function StudentProfileCard({
             />
             Favorite
           </div>
-          <div className="value link">10</div>
+          <div
+            className="value link"
+            onClick={() => router.push(SITE_PATH.NW8.FAVORITE)}>
+            {favoriteCount}
+          </div>
         </div>
       </StudentProfileCardStyle>
     </WidgetBoxStyle>
   )
 }
-
-const StudentProfileCardStyle = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-
-  .header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    .avatar {
-      min-width: 50px;
-      min-height: 50px;
-      border-radius: 50%;
-      overflow: hidden;
-
-      img {
-        display: block;
-      }
-    }
-
-    .rank {
-      font-size: 1.1em;
-      padding-top: 5px;
-      color: var(--font-color-light-blue);
-    }
-
-    .name {
-      font-size: 1.2em;
-      font-weight: bold;
-      font-family: var(--font-family-secondary);
-      color: var(--font-color-primary);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-
-  .body {
-    display: grid;
-    grid-template-columns: 1fr 100px;
-    gap: 10px;
-
-    .label {
-      font-size: 0.9em;
-      color: var(--font-color-secondary);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .value {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      font-size: 0.9em;
-      font-weight: 600;
-
-      &.link {
-        cursor: pointer;
-        color: var(--font-color-light-blue);
-      }
-    }
-  }
-`

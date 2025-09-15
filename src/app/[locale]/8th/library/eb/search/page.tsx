@@ -1,3 +1,59 @@
+'use client'
+
+import BookList from '@/8th/features/library/ui/BookList'
+import BasicGridLayout from '@/8th/shared/ui/BasicGridLayout'
+import { SubPageNavHeader } from '@/8th/shared/ui/Navigation'
+import SITE_PATH from '@/app/site-path'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { sampleSearchBooks } from '../../sampleBooks'
+
 export default function Page() {
-  return <>E-Book Keyword Search</>
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const keyword = searchParams.get('keyword') || ''
+
+  const [isLoading, setIsLoading] = useState(true)
+
+  const books = sampleSearchBooks
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      try {
+        const imagePromises = books.map((book) => {
+          return new Promise((resolve, reject) => {
+            const img = new Image()
+            img.onload = resolve
+            img.onerror = reject
+            img.src = book.imgSrc
+          })
+        })
+
+        await Promise.all(imagePromises)
+
+        setIsLoading(false)
+      } catch (error) {
+        console.error('이미지 로딩 중 오류 발생:', error)
+        setIsLoading(false)
+      }
+    }
+
+    preloadImages()
+  }, [books])
+
+  return (
+    <BasicGridLayout>
+      <SubPageNavHeader
+        title="Search Result"
+        onBack={() => router.push(SITE_PATH.NW8.EB)}
+      />
+      <BookList
+        books={books}
+        isLoading={isLoading}
+        searchText={keyword}
+        actionType="search"
+        searchResultCount={books.length}
+      />
+    </BasicGridLayout>
+  )
 }

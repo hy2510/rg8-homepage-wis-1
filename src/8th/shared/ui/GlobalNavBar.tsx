@@ -1,19 +1,19 @@
 'use client'
 
 import { Assets } from '@/8th/assets/asset-library'
-import DropdownMenu from '@/8th/shared/ui/DropdownMenu'
+import DropdownMenu from '@/8th/shared/ui/Dropdowns'
 import SITE_PATH from '@/app/site-path'
 import Image, { StaticImageData } from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
-import styled from 'styled-components'
 import { useState } from 'react'
+import { GlobalNavBarStyle, MenuItemStyle } from '../SharedStyled'
 
 /**
  * Daily RG ... More 까지
  */
 
-export default function NavigationMenu() {
+export default function GlobalNavBar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const pathname = usePathname()
   const NW8 = SITE_PATH.NW8
@@ -22,6 +22,10 @@ export default function NavigationMenu() {
     { text: 'Level Test', onClick: () => console.log('Level Test clicked') },
     { text: 'Try Again', onClick: () => console.log('Try Again clicked') },
     { text: 'Setting', onClick: () => console.log('Setting clicked') },
+    {
+      text: 'Workbook Units',
+      onClick: () => console.log('Workbook MP3 clicked'),
+    },
     {
       text: 'Workbook MP3',
       onClick: () => console.log('Workbook MP3 clicked'),
@@ -134,79 +138,9 @@ const MenuItem = ({
           items={dropdownItems}
           isOpen={isOpen}
           onClose={() => onDropdownToggle?.()}
+          position="right"
         />
       )}
     </MenuItemStyle>
   )
 }
-
-const GlobalNavBarStyle = styled.div`
-  width: 288px;
-  height: 100vh;
-  background-color: #fff;
-  border-right: 1px solid rgb(212, 220, 230, 0.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 20px;
-
-  .logo-container {
-    width: 188px;
-    height: auto;
-
-    .logo {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-  }
-
-  .menu-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px 10px;
-    width: 100%;
-
-    .divider {
-      width: 100%;
-      height: 1px;
-      background-color: var(--line-color-primary);
-    }
-  }
-`
-
-const MenuItemStyle = styled.div`
-  cursor: pointer;
-  color: var(--font-color-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 15px;
-  position: relative;
-
-  &.is-active {
-    background-color: var(--color-light-blue-opacity-10);
-    border: 1px solid var(--line-color-light-blue);
-    color: var(--font-color-dark-blue);
-  }
-
-  .menu-item-icon {
-    img {
-      display: block;
-    }
-  }
-
-  .menu-item-text {
-    font-size: 0.9em;
-    font-weight: 400;
-  }
-`

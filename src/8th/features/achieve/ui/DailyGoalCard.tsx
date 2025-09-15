@@ -1,17 +1,19 @@
-import { CommonTitleStyle, WidgetBoxStyle } from '@/8th/shared/ui/Widgets'
-import styled from 'styled-components'
+import { DailyGoalCardStyle } from '@/8th/features/FeaturesStyled'
+import { CommonTitleStyle, WidgetBoxStyle } from '@/8th/shared/SharedStyled'
 
 /**
  * 일일목표 카드
  */
 
+interface DailyGoalCardProps {
+  dailyGoal?: number
+  dailyProgress?: number
+}
+
 export default function DailyGoalCard({
   dailyGoal = 3,
   dailyProgress = 2,
-}: {
-  dailyGoal?: number
-  dailyProgress?: number
-}) {
+}: DailyGoalCardProps) {
   return (
     <WidgetBoxStyle>
       <DailyGoalCardStyle>
@@ -68,74 +70,3 @@ export default function DailyGoalCard({
     </WidgetBoxStyle>
   )
 }
-
-const DailyGoalCardStyle = styled.div`
-  width: 100%;
-
-  .body {
-    display: grid;
-    grid-template-columns: 1fr 100px;
-    gap: 10px;
-    align-items: center;
-  }
-
-  .comment {
-    font-size: 1.1em;
-    font-weight: bold;
-    font-family: var(--font-family-secondary);
-    padding-left: 10px;
-  }
-
-  .progress {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .donut-progress {
-    position: relative;
-    width: 100px;
-    height: 100px;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 14px;
-      left: calc(50% - 1px);
-      width: 2px;
-      height: 2px;
-      background-color: #fff;
-      border-radius: 50%;
-      z-index: 10;
-    }
-  }
-
-  .donut-chart {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .donut-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1em;
-    text-align: center;
-
-    .daily-progress {
-      color: var(--font-color-secondary);
-
-      &.active {
-        color: var(--font-color-primary);
-      }
-    }
-
-    .daily-goal {
-      color: var(--font-color-secondary);
-    }
-  }
-`

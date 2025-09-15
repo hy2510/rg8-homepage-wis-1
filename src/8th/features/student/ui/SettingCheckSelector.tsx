@@ -1,14 +1,59 @@
+import CustomCheckbox from '@/8th/shared/ui/CustomCheckbox'
+import { BoxStyle } from '@/8th/shared/ui/Misc'
+import React, { useEffect, useState } from 'react'
+
+interface CheckboxOption {
+  id: string
+  label: string
+  value: string
+}
+
+interface SettingCheckSelectorProps {
+  value?: Record<string, boolean>
+  onChange?: (value: Record<string, boolean>) => void
+  options?: CheckboxOption[]
+}
+
 /**
  * Checkbox Select Option
  */
-export default function SettingCheckSelector() {
+export default function SettingCheckSelector({
+  value = {},
+  onChange,
+  options = [
+    { id: 'option1', label: 'option1', value: 'option1' },
+    { id: 'option2', label: 'option2', value: 'option2' },
+  ],
+}: SettingCheckSelectorProps) {
+  const [checkedValues, setCheckedValues] =
+    useState<Record<string, boolean>>(value)
+
+  // 외부에서 전달된 value가 변경될 때 내부 상태 동기화
+  useEffect(() => {
+    setCheckedValues(value)
+  }, [value])
+
+  const handleChange = (optionId: string, checked: boolean) => {
+    const newValues = { ...checkedValues, [optionId]: checked }
+    setCheckedValues(newValues)
+    if (onChange) {
+      onChange(newValues)
+    }
+  }
+
   return (
-    <div>
-      <img
-        src="data:image/png;base64,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"
-        alt="image"
-      />
-      SettingCheckSelector
-    </div>
+    <BoxStyle width="100%" padding="20px">
+      <BoxStyle display="flex" gap={20}>
+        {options.map((option) => (
+          <CustomCheckbox
+            key={option.id}
+            id={option.id}
+            checked={checkedValues[option.id] || false}
+            onChange={(checked) => handleChange(option.id, checked)}
+            label={option.label}
+          />
+        ))}
+      </BoxStyle>
+    </BoxStyle>
   )
 }

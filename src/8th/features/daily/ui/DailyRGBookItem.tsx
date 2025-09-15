@@ -1,137 +1,92 @@
-import { Assets } from '@/8th/assets/asset-library'
+import { DailyRGBookItemStyle } from '@/8th/features/FeaturesStyled'
 import { ResourceDownloadButton, StartButton } from '@/8th/shared/ui/Buttons'
+import { BoxStyle } from '@/8th/shared/ui/Misc'
 import Image from 'next/image'
-import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 
 /**
  * Book Single Item
  */
-export default function DailyRGBookItem({
-  imgUrl,
-  bookNumber = 1,
-  title = 'Title',
-  point = 1,
-  isCurrent = false,
-}: {
+
+interface DailyRGBookItemProps {
   imgUrl: string
   bookNumber?: number
   title?: string
   point?: number
   isCurrent?: boolean
-}) {
+  isCompleted?: number
+  color?: string
+}
+
+export default function DailyRGBookItem({
+  imgUrl,
+  bookNumber = 1,
+  title = 'Title',
+  point = 0,
+  isCurrent = false,
+  isCompleted = 0,
+  color = '#b535dc',
+}: DailyRGBookItemProps) {
   const [animation, setAnimation] = useState('')
 
   useEffect(() => {
-    if (isCurrent) {
-      const timer = setTimeout(() => {
-        setAnimation('animate__animated animate__bounce')
-        setTimeout(() => {
-          setAnimation('')
-        }, 1000)
+    if (!isCurrent) return
 
-        const interval = setInterval(() => {
-          setAnimation('animate__animated animate__bounce')
-          setTimeout(() => {
-            setAnimation('')
-          }, 1000)
-        }, 5000)
-
-        return () => clearInterval(interval)
-      }, 5000)
-
-      return () => clearTimeout(timer)
+    const startAnimation = () => {
+      setAnimation('animate__animated animate__bounce')
+      setTimeout(() => setAnimation(''), 1000)
     }
+
+    const timer = setTimeout(() => {
+      startAnimation()
+      const interval = setInterval(startAnimation, 10000)
+      return () => clearInterval(interval)
+    }, 10000)
+
+    return () => clearTimeout(timer)
   }, [isCurrent])
 
   return (
-    <DailyRGBookItemStyle className={isCurrent ? animation : ''}>
-      <div className="book-container">
-        <div className="book-number">{bookNumber}</div>
+    <DailyRGBookItemStyle
+      className={isCurrent ? animation : ''}
+      isCurrent={isCurrent}
+      isCompleted={isCompleted}
+      color={color}>
+      <BoxStyle
+        className="book-container"
+        display="flex"
+        alignItems="center"
+        gap={30}>
+        {isCompleted === 1 ? (
+          <div className="completed-mark" />
+        ) : isCompleted === 2 ? (
+          <div className="completed-mark-twin" />
+        ) : (
+          <div className="book-number">{bookNumber}</div>
+        )}
         <div className="thumbnail">
           <Image src={imgUrl || ''} alt="thumbnail" width={100} height={100} />
         </div>
-        <div className="title-box">
-          <div className="title">{title}</div>
-          <div className="point">+{point}P</div>
+        <BoxStyle
+          display="flex"
+          flexDirection="column"
+          alignItems="flex-start"
+          gap={10}>
+          <BoxStyle
+            className="title-box"
+            display="flex"
+            flexWrap="wrap"
+            gap={5}>
+            <span className="title">{title}</span>
+            <span className="dot">•</span>
+            <span className={`point ${point === 0 ? 'good-job' : ''}`}>
+              {point > 0 ? point + 'P' : 'Good Job 👍'}
+            </span>
+          </BoxStyle>
           {isCurrent && <StartButton />}
-        </div>
-      </div>
+        </BoxStyle>
+      </BoxStyle>
       <ResourceDownloadButton />
     </DailyRGBookItemStyle>
   )
 }
-
-const DailyRGBookItemStyle = styled.div`
-  width: 100%;
-  min-height: 150px;
-  border-radius: 20px;
-  border: 1px solid var(--line-color-primary);
-  box-shadow: 0 3px 0 0 var(--line-color-primary);
-  padding: 10px;
-  background: #fff;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  .book-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 30px;
-
-    .book-number {
-      font-size: 0.8em;
-      font-weight: 600;
-      color: #fff;
-      border-radius: 20px;
-      border: 2px solid #fff;
-      background: #b535dc;
-      background-image: url('${Assets.Icon.glossyPointSmall.src}');
-      background-size: 6px;
-      background-repeat: no-repeat;
-      background-position: top 5px left 5px;
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .thumbnail {
-      border-radius: 10px;
-
-      img {
-        display: block;
-        width: auto;
-        height: 130px;
-        border-radius: 15px;
-        background-color: #f0f2f5;
-      }
-    }
-  }
-
-  .title-box {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 10px;
-
-    .title {
-      font-size: 1.1em;
-      font-weight: 500;
-      padding-left: 5px;
-    }
-
-    .point {
-      color: var(--font-color-secondary);
-      font-size: 0.8em;
-      padding-left: 5px;
-    }
-  }
-`

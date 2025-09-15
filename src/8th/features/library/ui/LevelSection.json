@@ -1,0 +1,292 @@
+{
+    "accordionSections": [
+        {
+            "id": "Level PK",
+            "title": "Level PK",
+            "content": {
+                "levels": [
+                    {
+                        "level": "pk",
+                        "title": "Alphabet",
+                        "bgColor": "#FFD93D",
+                        "fontColor": "#fff",
+                        "type": "study",
+                        "imgSrc": "Assets.Thumbnail.AlphabetStudy"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Alphabet Game",
+                        "bgColor": "#FFD93D",
+                        "fontColor": "#fff",
+                        "type": "game",
+                        "imgSrc": "Assets.Thumbnail.AlphabetGame"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Alphabet Chant",
+                        "bgColor": "#FFD93D",
+                        "fontColor": "#fff",
+                        "type": "song",
+                        "imgSrc": "Assets.Thumbnail.AlphabetSong"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Phonics 1",
+                        "bgColor": "#24CBF3",
+                        "fontColor": "#fff",
+                        "type": "study",
+                        "imgSrc": "Assets.Thumbnail.Phonics1Study"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Phonics 2",
+                        "bgColor": "#24CBF3",
+                        "fontColor": "#fff",
+                        "type": "study",
+                        "imgSrc": "Assets.Thumbnail.Phonics2Study"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Phonics Game",
+                        "bgColor": "#24CBF3",
+                        "fontColor": "#fff",
+                        "type": "game",
+                        "imgSrc": "Assets.Thumbnail.PhonicsGame"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Phonics Chant",
+                        "bgColor": "#24CBF3",
+                        "fontColor": "#fff",
+                        "type": "song",
+                        "imgSrc": "Assets.Thumbnail.PhonicsSong"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Sight Word 1",
+                        "bgColor": "#7ADAA5",
+                        "fontColor": "#fff",
+                        "type": "study",
+                        "imgSrc": "Assets.Thumbnail.SightWord1Study"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Sight Word 2",
+                        "bgColor": "#7ADAA5",
+                        "fontColor": "#fff",
+                        "type": "study",
+                        "imgSrc": "Assets.Thumbnail.SightWord2Study"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Sight Word 1 Game",
+                        "bgColor": "#7ADAA5",
+                        "fontColor": "#fff",
+                        "type": "game",
+                        "imgSrc": "Assets.Thumbnail.SightWord1Game"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Sight Word 2 Game",
+                        "bgColor": "#7ADAA5",
+                        "fontColor": "#fff",
+                        "type": "game",
+                        "imgSrc": "Assets.Thumbnail.SightWord2Game"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Nursery Rhyme",
+                        "bgColor": "#7ADAA5",
+                        "fontColor": "#fff",
+                        "type": "song",
+                        "imgSrc": "Assets.Thumbnail.NurseryRhyme"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "Level K to 1",
+            "title": "Level K to 1",
+            "content": {
+                "levels": [
+                    {
+                        "level": "ka",
+                        "title": "KA",
+                        "bgColor": "#FBCE2A",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "kb",
+                        "title": "KB",
+                        "bgColor": "#FBB02C",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "kc",
+                        "title": "KC",
+                        "bgColor": "#FA9231",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "1a",
+                        "title": "1A",
+                        "bgColor": "#F66A2A",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "1b",
+                        "title": "1B",
+                        "bgColor": "#F75E44",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "1c",
+                        "title": "1C",
+                        "bgColor": "#EE3649",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    }
+                ]
+            }
+        },
+        {
+            "id": "Level 2 to 3",
+            "title": "Level 2 to 3",
+            "content": {
+                "levels": [
+                    {
+                        "level": "2a",
+                        "title": "2A",
+                        "bgColor": "#ADC335",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "2b",
+                        "title": "2B",
+                        "bgColor": "#80C133",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "2c",
+                        "title": "2C",
+                        "bgColor": "#5EB14E",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "3a",
+                        "title": "3A",
+                        "bgColor": "#60B0AD",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "3b",
+                        "title": "3B",
+                        "bgColor": "#5AA4C6",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "3c",
+                        "title": "3C",
+                        "bgColor": "#5390D1",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    }
+                ]
+            }
+        },
+        {
+            "id": "Level 4 to 6",
+            "title": "Level 4 to 6",
+            "content": {
+                "levels": [
+                    {
+                        "level": "4a",
+                        "title": "4A",
+                        "bgColor": "#7C6DCC",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "4b",
+                        "title": "4B",
+                        "bgColor": "#9458C9",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "4c",
+                        "title": "4C",
+                        "bgColor": "#994FA3",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "5a",
+                        "title": "5A",
+                        "bgColor": "#9A7E4B",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "5b",
+                        "title": "5B",
+                        "bgColor": "#72542E",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "5c",
+                        "title": "5C",
+                        "bgColor": "#584024",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "6a",
+                        "title": "6A",
+                        "bgColor": "#707070",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    },
+                    {
+                        "level": "6b",
+                        "title": "6B",
+                        "bgColor": "#464545",
+                        "fontColor": "#fff",
+                        "type": "eb",
+                        "imgSrc": ""
+                    }
+                ]
+            }
+        }
+    ]
+}

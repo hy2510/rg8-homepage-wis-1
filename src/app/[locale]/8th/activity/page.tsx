@@ -1,3 +1,52 @@
+'use client'
+
+import { Assets } from '@/8th/assets/asset-library'
+import ChallengeTrophyCard from '@/8th/features/achieve/ui/ChallengeTrophyCard'
+import LevelMasterCard from '@/8th/features/achieve/ui/LevelMasterCard'
+import RankCard from '@/8th/features/rank/ui/RankCard'
+import RecentReviewList from '@/8th/features/review/ui/RecentReviewList'
+import StudentInfoCard from '@/8th/features/student/ui/StudentInfoCard'
+import BasicGridLayout from '@/8th/shared/ui/BasicGridLayout'
+import { RoundedFullButton } from '@/8th/shared/ui/Buttons'
+import { BoxStyle, TextStyle } from '@/8th/shared/ui/Misc'
+import SITE_PATH from '@/app/site-path'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+
 export default function Page() {
-  return <>My Activity</>
+  const router = useRouter()
+
+  return (
+    <BasicGridLayout>
+      <StudentInfoCard />
+      <RecentReviewList />
+      <RoundedFullButton
+        onClick={() => router.push(SITE_PATH.NW8.REVIEW)}
+        fontColor="var(--font-color-primary)">
+        <BoxStyle display="flex" flexDirection="row" gap={5}>
+          <span>See all reports</span>
+          <Image
+            src={Assets.Icon.arrowRightBlack}
+            alt="right-arrow"
+            width={20}
+            height={20}
+          />
+        </BoxStyle>
+      </RoundedFullButton>
+      <StudentAchievements />
+    </BasicGridLayout>
+  )
+}
+
+function StudentAchievements() {
+  return (
+    <BoxStyle display="flex" flexDirection="column" gap={20}>
+      <TextStyle fontSize="xlarge">Achievements</TextStyle>
+      <BoxStyle display="flex" flexDirection="row" gap={20}>
+        <LevelMasterCard />
+        <RankCard />
+        <ChallengeTrophyCard />
+      </BoxStyle>
+    </BoxStyle>
+  )
 }
