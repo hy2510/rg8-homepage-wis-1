@@ -1,8 +1,11 @@
 'use client'
 
 import { ReviewBookItemStyle } from '@/8th/features/FeaturesStyled'
+import CustomCheckbox from '@/8th/shared/ui/CustomCheckbox'
+import DropdownMenu from '@/8th/shared/ui/Dropdowns'
 import { BoxStyle } from '@/8th/shared/ui/Misc'
 import Image from 'next/image'
+import { useState } from 'react'
 
 const getOrdinalSuffix = (num: number): string => {
   if (num === 1) return 'st'
@@ -17,6 +20,7 @@ const getOrdinalSuffix = (num: number): string => {
 
 interface ReviewBookItemProps {
   title?: string
+  bookCode?: string
   coverImage?: string
   totalScore?: number
   stepScore1?: number
@@ -27,11 +31,16 @@ interface ReviewBookItemProps {
   passMark?: 'PASS' | 'FAIL'
   passCount?: number
   studyDate?: string
+  earnPoints?: number
+  isExportMode?: boolean
+  isSelected?: boolean
+  onSelectionChange?: (selected: boolean) => void
 }
 
 export default function ReviewBookItem({
-  title = 'Aligator’s Apples',
+  title = 'no title',
   coverImage = 'https://wcfresource.a1edu.com/newsystem/image/br/covernew1/eb-ka-001.jpg',
+  bookCode = 'EB-KA-001',
   totalScore = 0,
   stepScore1,
   stepScore2,
@@ -41,12 +50,32 @@ export default function ReviewBookItem({
   passMark,
   passCount,
   studyDate,
+  earnPoints,
+  isExportMode = false,
+  isSelected = false,
+  onSelectionChange,
 }: ReviewBookItemProps) {
+  const [isReportMenuOpen, setIsReportMenuOpen] = useState(false)
+
   return (
     <ReviewBookItemStyle>
       <BoxStyle display="flex" alignItems="center" gap={20}>
         <BoxStyle className="book-cover">
           <Image src={coverImage} alt="book-cover" width={100} height={136} />
+          {isExportMode && (
+            <BoxStyle
+              position="absolute"
+              top={'28px'}
+              left={'8px'}
+              zIndex={1}
+              className="animate__animated animate__bounce">
+              <CustomCheckbox
+                id={`book-${title}-${Math.random()}`}
+                checked={isSelected}
+                onChange={(checked) => onSelectionChange?.(checked)}
+              />
+            </BoxStyle>
+          )}
         </BoxStyle>
         <BoxStyle
           display="flex"
@@ -59,9 +88,13 @@ export default function ReviewBookItem({
             flexDirection="column"
             alignItems="flex-start"
             gap={10}>
-            <div className="book-title">{title}</div>
+            <div>
+              <div className="book-code">{bookCode}</div>
+              <div className="book-title">{title}</div>
+            </div>
             <div className={`total-score ${passMark === 'PASS' ? 'pass' : ''}`}>
-              {totalScore}%
+              {totalScore}% {passMark === 'PASS' && earnPoints != 0 ? ', ' : ''}
+              {earnPoints != 0 && `+${earnPoints}P`}
             </div>
           </BoxStyle>
           <BoxStyle display="flex">
@@ -80,21 +113,67 @@ export default function ReviewBookItem({
           </BoxStyle>
         </BoxStyle>
       </BoxStyle>
-      <BoxStyle
-        display="flex"
-        alignItems="flex-end"
-        flexDirection="column"
-        gap={10}>
-        <BoxStyle className="study-results">
-          <span>
-            {passMark}/{passCount}
-            {passCount && getOrdinalSuffix(passCount)}
-          </span>
-          <span>({studyDate})</span>
+      <BoxStyle display="flex" alignItems="center" gap={10}>
+        <BoxStyle
+          display="flex"
+          alignItems="flex-end"
+          flexDirection="column"
+          gap={10}>
+          <BoxStyle className="study-results">
+            <span>
+              {passMark}
+              {passMark === 'PASS' && ' / ' + passCount}
+              {passMark === 'PASS' && getOrdinalSuffix(passCount || 0)}
+            </span>
+            <span>{studyDate}</span>
+          </BoxStyle>
+          {totalScore === 100 && (
+            <div className="perfect-mark perfect">
+              <span>Perfect</span>
+            </div>
+          )}
         </BoxStyle>
-        <div className={`perfect-mark ${totalScore === 100 ? 'perfect' : ''}`}>
-          <span>{totalScore === 100 ? 'Perfect' : ''}</span>
-        </div>
+        <BoxStyle position="relative">
+          <BoxStyle
+            className="more-icon"
+            onClick={() => setIsReportMenuOpen(true)}
+          />
+          {isReportMenuOpen && (
+            <BoxStyle position="relative" zIndex={10}>
+              <DropdownMenu
+                items={[
+                  {
+                    text: 'Retry',
+                    onClick: () => {
+                      console.log('Retry clicked for:', title)
+                    },
+                    subText: '다시 보기',
+                  },
+                  {
+                    text: 'Print Report',
+                    onClick: () => {
+                      console.log('Print Report clicked for:', title)
+                    },
+                  },
+                  {
+                    text: 'Print Vocabulary',
+                    onClick: () => {
+                      console.log('Print Vocabulary clicked for:', title)
+                    },
+                  },
+                  {
+                    text: 'Print Worksheet',
+                    onClick: () => {
+                      console.log('Print Worksheet clicked for:', title)
+                    },
+                  },
+                ]}
+                isOpen={isReportMenuOpen}
+                onClose={() => setIsReportMenuOpen(false)}
+              />
+            </BoxStyle>
+          )}
+        </BoxStyle>
       </BoxStyle>
     </ReviewBookItemStyle>
   )

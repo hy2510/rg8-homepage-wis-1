@@ -72,6 +72,10 @@ interface RoundedFullButtonProps {
   onClick?: () => void
   viewSmall?: boolean
   fontColor?: string
+  fontFamily?: string
+  bgColor?: 'primary' | 'secondary'
+  active?: boolean
+  tabs?: boolean
 }
 
 export function RoundedFullButton({
@@ -81,6 +85,10 @@ export function RoundedFullButton({
   onClick,
   viewSmall,
   fontColor,
+  fontFamily,
+  bgColor,
+  active,
+  tabs,
 }: RoundedFullButtonProps) {
   return (
     <RoundedFullButtonStyle
@@ -88,20 +96,41 @@ export function RoundedFullButton({
       marginBottom={marginBottom}
       onClick={onClick}
       isSmall={viewSmall}
-      fontColor={fontColor}>
+      fontColor={fontColor}
+      bgColor={bgColor}
+      active={active}
+      tabs={tabs}
+      fontFamily={fontFamily}>
       {children ? children : 'More Books'}
     </RoundedFullButtonStyle>
   )
 }
 
 export function MoreHorizontalButton() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen)
+  }
+
   return (
-    <MoreHorizontalButtonStyle>
+    <MoreHorizontalButtonStyle onClick={toggleDropdown}>
       <Image
         src={Assets.Icon.moreHorizontalWhite}
         alt="more"
         width={40}
         height={40}
+      />
+      <DropdownMenu
+        items={[
+          {
+            text: 'Speaking Practice',
+            onClick: () => console.log('Speaking Practice clicked'),
+          },
+        ]}
+        isOpen={isDropdownOpen}
+        onClose={() => setIsDropdownOpen(false)}
+        position="right"
       />
     </MoreHorizontalButtonStyle>
   )

@@ -3,6 +3,7 @@ import { ResourceDownloadButton, StartButton } from '@/8th/shared/ui/Buttons'
 import { BoxStyle } from '@/8th/shared/ui/Misc'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import BookInfoModal from '../../library/ui/BookInfoModal'
 
 /**
  * Book Single Item
@@ -16,6 +17,7 @@ interface DailyRGBookItemProps {
   isCurrent?: boolean
   isCompleted?: number
   color?: string
+  isPreK?: boolean
 }
 
 export default function DailyRGBookItem({
@@ -26,8 +28,10 @@ export default function DailyRGBookItem({
   isCurrent = false,
   isCompleted = 0,
   color = '#b535dc',
+  isPreK = false,
 }: DailyRGBookItemProps) {
   const [animation, setAnimation] = useState('')
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     if (!isCurrent) return
@@ -48,7 +52,8 @@ export default function DailyRGBookItem({
 
   return (
     <DailyRGBookItemStyle
-      className={isCurrent ? animation : ''}
+      // className={isCurrent ? animation : ''}
+      isPreK={isPreK}
       isCurrent={isCurrent}
       isCompleted={isCompleted}
       color={color}>
@@ -64,7 +69,7 @@ export default function DailyRGBookItem({
         ) : (
           <div className="book-number">{bookNumber}</div>
         )}
-        <div className="thumbnail">
+        <div className="thumbnail" onClick={() => setIsModalOpen(true)}>
           <Image src={imgUrl || ''} alt="thumbnail" width={100} height={100} />
         </div>
         <BoxStyle
@@ -87,6 +92,12 @@ export default function DailyRGBookItem({
         </BoxStyle>
       </BoxStyle>
       <ResourceDownloadButton />
+      {isModalOpen && (
+        <BookInfoModal
+          onClickClose={() => setIsModalOpen(false)}
+          title={title}
+        />
+      )}
     </DailyRGBookItemStyle>
   )
 }

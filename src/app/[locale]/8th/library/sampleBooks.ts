@@ -39,6 +39,7 @@ export const sampleBooksData: SampleBooksData = {
       point: '3.2',
       imgSrc:
         'https://wcfresource.a1edu.com/newsystem/image/br/covernew1/eb-ka-001.jpg',
+      videoSrc: 'https://moviebook.a1edu.com/newsystem/moviebook/eb-ka-001.mp4',
     },
     {
       id: '2',
@@ -46,6 +47,7 @@ export const sampleBooksData: SampleBooksData = {
       point: '3.2',
       imgSrc:
         'https://wcfresource.a1edu.com/newsystem/image/br/covernew1/eb-ka-002.jpg',
+      videoSrc: 'https://moviebook.a1edu.com/newsystem/moviebook/eb-ka-002.mp4',
     },
     {
       id: '3',
@@ -60,6 +62,7 @@ export const sampleBooksData: SampleBooksData = {
       point: '3.2',
       imgSrc:
         'https://wcfresource.a1edu.com/newsystem/image/br/covernew1/eb-ka-004.jpg',
+      videoSrc: 'https://moviebook.a1edu.com/newsystem/moviebook/eb-ka-004.mp4',
     },
     {
       id: '5',
@@ -67,6 +70,7 @@ export const sampleBooksData: SampleBooksData = {
       point: '3.2',
       imgSrc:
         'https://wcfresource.a1edu.com/newsystem/image/br/covernew1/eb-ka-005.jpg',
+      videoSrc: 'https://moviebook.a1edu.com/newsystem/moviebook/eb-ka-005.mp4',
     },
     {
       id: '6',
@@ -74,6 +78,7 @@ export const sampleBooksData: SampleBooksData = {
       point: '3.2',
       imgSrc:
         'https://wcfresource.a1edu.com/newsystem/image/br/covernew1/eb-ka-006.jpg',
+      videoSrc: 'https://moviebook.a1edu.com/newsystem/moviebook/eb-ka-006.mp4',
     },
     {
       id: '7',
@@ -88,6 +93,7 @@ export const sampleBooksData: SampleBooksData = {
       point: '3.2',
       imgSrc:
         'https://wcfresource.a1edu.com/newsystem/image/br/covernew1/eb-ka-008.jpg',
+      videoSrc: 'https://moviebook.a1edu.com/newsystem/moviebook/eb-ka-008.mp4',
     },
     {
       id: '9',
@@ -95,6 +101,7 @@ export const sampleBooksData: SampleBooksData = {
       point: '3.2',
       imgSrc:
         'https://wcfresource.a1edu.com/newsystem/image/br/covernew1/eb-ka-009.jpg',
+      videoSrc: 'https://moviebook.a1edu.com/newsystem/moviebook/eb-ka-009.mp4',
     },
     {
       id: '10',
@@ -102,6 +109,7 @@ export const sampleBooksData: SampleBooksData = {
       point: '3.2',
       imgSrc:
         'https://wcfresource.a1edu.com/newsystem/image/br/covernew1/eb-ka-010.jpg',
+      videoSrc: 'https://moviebook.a1edu.com/newsystem/moviebook/eb-ka-010.mp4',
     },
     {
       id: '11',
@@ -109,6 +117,7 @@ export const sampleBooksData: SampleBooksData = {
       point: '3.2',
       imgSrc:
         'https://wcfresource.a1edu.com/newsystem/image/br/covernew1/eb-ka-011.jpg',
+      videoSrc: 'https://moviebook.a1edu.com/newsystem/moviebook/eb-ka-011.mp4',
     },
     {
       id: '12',
@@ -116,6 +125,7 @@ export const sampleBooksData: SampleBooksData = {
       point: '3.2',
       imgSrc:
         'https://wcfresource.a1edu.com/newsystem/image/br/covernew1/eb-ka-012.jpg',
+      videoSrc: 'https://moviebook.a1edu.com/newsystem/moviebook/eb-ka-012.mp4',
     },
   ],
   sampleBooks1a: [

@@ -23,8 +23,12 @@ export default function Page() {
       <RoundedFullButton
         onClick={() => router.push(SITE_PATH.NW8.REVIEW)}
         fontColor="var(--font-color-primary)">
-        <BoxStyle display="flex" flexDirection="row" gap={5}>
-          <span>See all reports</span>
+        <BoxStyle
+          display="flex"
+          alignItems="center"
+          flexDirection="row"
+          gap={5}>
+          <span>All Study Results</span>
           <Image
             src={Assets.Icon.arrowRightBlack}
             alt="right-arrow"

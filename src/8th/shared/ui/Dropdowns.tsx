@@ -14,7 +14,7 @@ import {
   DropdownStatusContainer,
   DropdownStatusDivider,
 } from '../SharedStyled'
-import { BoxStyle } from './Misc'
+import { BoxStyle, TextStyle } from './Misc'
 
 /**
  * 드롭다운 메뉴
@@ -134,6 +134,8 @@ interface DropdownButtonBigProps {
   onGroup1Change?: (value: string) => void
   group0SelectedValue?: string
   group1SelectedValue?: string
+  fontFamily?: 'round' | 'sans'
+  fontColor?: 'primary' | 'secondary'
 }
 
 export function DropdownButtonSmall({
@@ -145,10 +147,14 @@ export function DropdownButtonSmall({
   onGroup1Change,
   group0SelectedValue,
   group1SelectedValue = '모든 장르',
+  fontFamily = 'round',
+  fontColor = 'secondary',
 }: DropdownButtonBigProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [internalSelectedValue, setInternalSelectedValue] = useState(
-    initialValue || '',
+    initialValue ||
+      (text.toLowerCase() === 'log' ? 'My Reading' : '') ||
+      (text.toLowerCase() === 'exportreports' ? 'Export' : ''),
   )
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -173,29 +179,33 @@ export function DropdownButtonSmall({
         'Book List',
         'All Books List',
       ],
+      exportreports: ['Vocabulary', 'Report', 'Worksheet', 'Performance'],
       todoexport: ['Vocabulary', 'Book List', 'All Books List'],
       edit: ['Delete', 'Delete All (학습전)'],
+      log: ['My Reading', 'My Speaking', 'My Writing'],
     }
-    return (
-      items[label.toLowerCase() as keyof typeof items] || [
-        'option 1',
-        'option 2',
-        'option 3',
-      ]
+    const result = items[label.toLowerCase() as keyof typeof items] || [
+      'option 1',
+      'option 2',
+      'option 3',
+    ]
+    console.log(
+      `getDropdownItems for ${label} (lowercase: ${label.toLowerCase()}):`,
+      result,
     )
+    return result
   }
 
   // 아이템 클릭 핸들러
   const handleItemClick = (item: string, groupIndex?: number) => {
-    console.log(`${text}: ${item} selected`)
-
     if (isStatusDropdown && groupIndex !== undefined) {
       // Status 드롭다운: 그룹별 핸들러 사용
       const handler = groupIndex === 0 ? onGroup0Change : onGroup1Change
       handler?.(item)
     } else if (
       text.toLowerCase() === 'export' ||
-      text.toLowerCase() === 'todoexport'
+      text.toLowerCase() === 'todoexport' ||
+      text.toLowerCase() === 'exportreports'
     ) {
       // Export 드롭다운: 상태 관리 없이 액션만 수행
       console.log(`Export action: ${item}`)
@@ -236,7 +246,8 @@ export function DropdownButtonSmall({
     index: number,
     groupIndex?: number,
   ) => {
-    const isExportDropdown = text.toLowerCase() === 'export'
+    const isExportDropdown =
+      text.toLowerCase() === 'export' || text.toLowerCase() === 'exportreports'
     const isSelected = isExportDropdown
       ? false // Export 드롭다운은 선택 상태 표시 안함
       : groupIndex !== undefined
@@ -293,9 +304,17 @@ export function DropdownButtonSmall({
   return (
     <DropdownButtonSmallContainerStyle ref={dropdownRef}>
       <DropdownButtonSmallStyle onClick={() => setIsOpen(!isOpen)}>
-        <div className="link-text">
-          {text === 'todoexport' ? 'Export' : text}
-        </div>
+        <TextStyle
+          className={`link-text ${text === 'log' ? 'black' : ''}`}
+          fontFamily={fontFamily}>
+          {text === 'todoexport'
+            ? 'Export'
+            : text === 'exportReports'
+              ? currentSelectedValue || 'Export Reports'
+              : text === 'log'
+                ? currentSelectedValue
+                : text}
+        </TextStyle>
         <div className="icon">
           <Image
             src={Assets.Icon.chevronDownGraySmall}

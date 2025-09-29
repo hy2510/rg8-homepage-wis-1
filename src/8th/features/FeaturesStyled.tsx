@@ -15,6 +15,9 @@ export const ChallengeTrophyCardStyle = styled.div`
 
   .title-link {
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 
     span {
       font-family: var(--font-family-secondary);
@@ -147,6 +150,140 @@ export const LevelMasterCardStyle = styled.div`
   .earn-points {
     color: var(--font-color-secondary);
     font-size: var(--font-size-medium);
+  }
+`
+
+export const LevelMasterItemStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  .container {
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: #fff;
+    border: 1px solid var(--line-color-primary);
+    position: relative;
+
+    &.current {
+      border: 1px solid var(--line-color-light-blue);
+      background-color: var(--color-light-blue-opacity-10);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+
+    &.complete {
+      background-color: var(--color-light-blue-opacity-10);
+      border: none;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+
+    .check-mark {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid var(--line-color-primary);
+
+      &.current {
+        border: 1.5px solid var(--line-color-light-blue);
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 15px;
+          height: 15px;
+          border-radius: 50%;
+          background-color: var(--line-color-light-blue);
+        }
+      }
+    }
+  }
+
+  .level {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--font-color-secondary);
+
+    &.current {
+      color: var(--font-color-light-blue);
+    }
+  }
+
+  .books-read {
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    color: var(--font-color-primary);
+  }
+
+  .earn-points {
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    color: var(--font-color-secondary);
+  }
+
+  .complete-text {
+    cursor: pointer;
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-medium);
+    font-weight: 800;
+    color: var(--font-color-light-blue);
+  }
+
+  .progress {
+    width: calc(100% - 30px);
+    align-items: center;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    z-index: 1;
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      position: relative;
+      background-color: var(--line-color-primary);
+      border-radius: 100px;
+
+      .progress-bar-fill {
+        min-width: 30px;
+        height: 14px;
+        background-color: var(--line-color-light-blue);
+        border-radius: 100px;
+        position: absolute;
+        top: -2px;
+        left: 0;
+        z-index: 1;
+        transition: width 0.3s ease;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 3px;
+          right: 5px;
+          width: 15px;
+          height: 3px;
+          background-color: #f0fef5;
+          border-radius: 100px;
+        }
+      }
+    }
   }
 `
 
@@ -324,12 +461,248 @@ export const StreakStatusStyle = styled.div`
   }
 `
 
+export const StreakItemStyle = styled.div<{ streakDays: string }>`
+  width: 100%;
+
+  .container {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-gray-light);
+    border-radius: 20px;
+
+    .streak-fire-icon {
+      position: absolute;
+      top: calc(50% - 10px);
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      z-index: 1;
+    }
+
+    .streak-award-gray-image {
+      filter: grayscale(100%);
+      opacity: 0.3;
+    }
+  }
+
+  .progress {
+    width: calc(100% - 30px);
+    align-items: center;
+    position: absolute;
+    bottom: 12px;
+    left: 15px;
+    right: 15px;
+    z-index: 1;
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      position: relative;
+      background-color: #ffd6d9;
+      border-radius: 100px;
+
+      .progress-bar-fill {
+        min-width: 30px;
+        height: 14px;
+        background-color: var(--color-red-medium);
+        border-radius: 100px;
+        position: absolute;
+        top: -2px;
+        left: 0;
+        z-index: 1;
+        transition: width 0.3s ease;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 3px;
+          right: 5px;
+          width: 15px;
+          height: 3px;
+          background-color: #f0fef5;
+          border-radius: 100px;
+        }
+      }
+    }
+  }
+`
+
+export const DailyGoalSettingStyle = styled.div`
+  min-width: 320px;
+  min-height: 200px;
+  border: 1px solid var(--line-color-primary);
+  border-radius: 20px;
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .goal-method-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .goal-method-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+  }
+
+  .goal-method-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .goal-method-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .count-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-gray-light);
+    padding: 10px;
+    border-radius: 100px;
+
+    .btn-count {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      font-size: 1.2em;
+    }
+  }
+
+  .change-history-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .change-history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* 텍스트 스타일 클래스들 */
+  .section-title {
+    font-family: var(--font-family-secondary);
+    color: var(--font-color-primary);
+    font-weight: 700;
+    font-size: var(--font-size-large);
+  }
+
+  .goal-method-item-text {
+    font-family: var(--font-family-secondary);
+    color: var(--font-color-primary);
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+  }
+
+  .cancel-button {
+    font-family: var(--font-family-secondary);
+    color: var(--font-color-secondary);
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .save-button {
+    font-family: var(--font-family-secondary);
+    color: var(--font-color-light-blue);
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .count-text {
+    font-family: var(--font-family-secondary);
+    color: var(--font-color-primary);
+    font-weight: bold;
+  }
+
+  .history-item-title {
+    font-family: var(--font-family-secondary);
+    color: var(--font-color-primary);
+    font-weight: bold;
+    font-size: var(--font-size-medium);
+  }
+
+  .history-item-date {
+    font-family: var(--font-family-secondary);
+    color: var(--font-color-secondary);
+    font-weight: bold;
+    font-size: var(--font-size-medium);
+  }
+`
+
+export const DailyGoalItemStyle = styled.div`
+  width: 100%;
+  height: auto;
+
+  .daily-goal-item {
+    width: 200px;
+    min-height: 120px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    background-color: var(--color-gray-light);
+    border-radius: 20px;
+
+    &.get-award {
+      background-color: transparent;
+    }
+
+    &.current-box {
+      background-color: #fff;
+      border: 1.5px solid var(--color-gray-medium);
+    }
+
+    .daily-goal-image {
+      margin-bottom: 10px;
+    }
+
+    .daily-goal-text {
+      width: 200px;
+      font-family: var(--font-family-secondary);
+      color: var(--font-color-secondary);
+      font-size: var(--font-size-medium);
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+
+      &.current {
+        color: var(--font-color-primary);
+      }
+    }
+  }
+`
+
 // features > daily
 
 export const DailyRGBookItemStyle = styled.div<{
   isCurrent?: boolean
   isCompleted?: number
   color?: string
+  isPreK?: boolean
 }>`
   width: 100%;
   min-height: 150px;
@@ -399,8 +772,9 @@ export const DailyRGBookItemStyle = styled.div<{
 
       img {
         display: block;
-        width: auto;
-        height: 130px;
+        width: 100%;
+        max-width: ${({ isPreK }) => (isPreK ? '260px' : '125px')};
+        height: auto;
         border-radius: 15px;
         background-color: var(--color-gray-medium);
         filter: ${({ isCurrent, isCompleted }) =>
@@ -482,6 +856,7 @@ export const ProgressBarContainerStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   gap: 10px;
 `
 
@@ -717,6 +1092,10 @@ export const BookInfoDetailStyle = styled.div`
   margin: 0 10px;
   border-top: 1px solid var(--line-color-primary);
   border-bottom: 1px solid var(--line-color-primary);
+
+  &:last-child {
+    border-top: none;
+  }
 `
 
 export const BookInfoDetailItemStyle = styled.div`
@@ -946,10 +1325,41 @@ export const BookItemStyle = styled.div<{ level: string }>`
 `
 
 export const BookListDateGroupStyle = styled.div`
-  margin-bottom: 32px;
+  margin-bottom: 10px;
 
   &:last-child {
     margin-bottom: 0;
+  }
+
+  .divider {
+    width: 100%;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: calc(50% - 2px);
+      right: 0;
+      z-index: 1;
+      width: calc(100% - 150px);
+      height: 1px;
+      border-radius: 100px;
+      background-color: var(--line-color-primary);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      width: calc(100% + 20px);
+      height: calc(100% + 10px);
+      background-color: #fff;
+      z-index: -1;
+    }
   }
 `
 
@@ -1231,9 +1641,12 @@ export const LevelSectionStyle = styled.div`
     padding: 20px;
     transition: all 0.3s ease;
     border-bottom: 1px solid var(--line-color-primary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 
     &.open {
-      background-color: var(--color-light-blue-opacity-10);
+      background-color: #edfafe;
 
       .accordion-title {
         color: var(--font-color-dark-blue);
@@ -1261,8 +1674,15 @@ export const LevelSectionStyle = styled.div`
       padding 0.3s ease;
 
     &.open {
-      max-height: 1000px;
+      max-height: 10000px;
       border-bottom: 1px solid var(--line-color-primary);
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 
@@ -1518,6 +1938,7 @@ export const ReviewBookItemStyle = styled.div`
     transform: rotate(-5deg);
     display: flex;
     align-items: flex-end;
+    position: relative;
 
     img {
       width: 100%;
@@ -1528,12 +1949,22 @@ export const ReviewBookItemStyle = styled.div`
     }
   }
 
+  .book-code {
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-small);
+    font-weight: 700;
+    color: var(--font-color-secondary);
+    margin-bottom: 3px;
+  }
+
   .book-title {
     font-size: var(--font-size-large);
   }
 
   .total-score {
+    font-family: var(--font-family-secondary);
     font-size: var(--font-size-large);
+    font-weight: 700;
     color: var(--font-color-secondary);
     padding-left: 5px;
 
@@ -1576,7 +2007,8 @@ export const ReviewBookItemStyle = styled.div`
     letter-spacing: -0.05em;
     font-size: var(--font-size-medium);
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-end;
     gap: 5px;
 
     span {
@@ -1585,7 +2017,10 @@ export const ReviewBookItemStyle = styled.div`
       }
 
       &:last-child {
+        font-family: var(--font-family-secondary);
         color: var(--font-color-secondary);
+        font-weight: 700;
+        font-size: var(--font-size-large);
       }
     }
   }
@@ -1634,6 +2069,32 @@ export const ReviewBookItemStyle = styled.div`
       }
     }
   }
+
+  .more-icon {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background-image: url(${Assets.Icon.moreVerticalGray.src});
+    background-size: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 1;
+  }
+
+  .report-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+`
+
+export const ReviewListStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `
 
 export const ExtraOptionLayoutStyle = styled.div`
@@ -1802,7 +2263,7 @@ export const SettingImageSelectorAvatarItemStyle = styled.div<{
     bottom: -8px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--color-primary);
+    background-color: var(--font-color-primary);
     color: white;
     padding: 4px 8px;
     border-radius: 12px;
@@ -1859,7 +2320,7 @@ export const CustomRadioInputStyle = styled.input`
   }
 
   &:focus {
-    outline: 2px solid var(--color-primary);
+    outline: 2px solid var(--font-color-primary);
     outline-offset: 2px;
   }
 `
@@ -2049,6 +2510,7 @@ export const StudentProfileCardStyle = styled.div`
     }
 
     .rank {
+      cursor: pointer;
       font-size: var(--font-size-large);
       padding-top: 5px;
       color: var(--font-color-light-blue);

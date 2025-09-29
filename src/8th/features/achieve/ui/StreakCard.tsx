@@ -5,6 +5,8 @@ import {
 } from '@/8th/features/FeaturesStyled'
 import { CommonTitleStyle, WidgetBoxStyle } from '@/8th/shared/SharedStyled'
 import Image from 'next/image'
+import { useState } from 'react'
+import StreakModal from './StreakModal'
 
 /**
  * 연속학습 카드
@@ -13,23 +15,38 @@ import Image from 'next/image'
 interface StreakCardProps {
   streakCount?: number
   totalCount?: number
+  earnedDates?: { [key: number]: string }
 }
 
 export default function StreakCard({
   streakCount = 0,
-  totalCount = 20,
+  totalCount = 0,
+  earnedDates = {},
 }: StreakCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
-    <WidgetBoxStyle>
-      <StreakCardStyle>
-        <CommonTitleStyle>연속 학습</CommonTitleStyle>
-        <StreakStatus
-          isStreak={totalCount - streakCount !== 20}
-          streakCount={streakCount}
-          totalCount={totalCount}
+    <>
+      <WidgetBoxStyle>
+        <StreakCardStyle>
+          <CommonTitleStyle onClick={() => setIsModalOpen(true)}>
+            연속 학습
+          </CommonTitleStyle>
+          <StreakStatus
+            isStreak={totalCount - streakCount !== 20}
+            streakCount={streakCount}
+            totalCount={totalCount}
+          />
+        </StreakCardStyle>
+      </WidgetBoxStyle>
+      {isModalOpen && (
+        <StreakModal
+          currentUserStreak={streakCount}
+          onClose={() => setIsModalOpen(false)}
+          earnedDates={earnedDates}
         />
-      </StreakCardStyle>
-    </WidgetBoxStyle>
+      )}
+    </>
   )
 }
 

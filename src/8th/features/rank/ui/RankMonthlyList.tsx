@@ -1,6 +1,99 @@
+import RankMonthlyItem from './RankMonthlyItem'
+
 /**
  * 랭킹 월간 리스트
  */
 export default function RankMonthlyList() {
-  return <div>RankMonthlyList</div>
+  return (
+    <div>
+      <RankMonthlyItem
+        rank={999}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        readingCount={100}
+        point={100}
+        isMe
+      />
+      <RankMonthlyItem
+        rank={1}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        schoolClass="3-1"
+        readingCount={100}
+        point={100}
+      />
+      <RankMonthlyItem
+        rank={2}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        schoolClass="3-1"
+        readingCount={100}
+        point={100}
+      />
+      <RankMonthlyItem
+        rank={3}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        schoolClass="3-1"
+        readingCount={100}
+        point={100}
+      />
+      <RankMonthlyItem
+        rank={4}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        schoolClass="3-1"
+        readingCount={100}
+        point={100}
+      />
+      <RankMonthlyItem
+        rank={5}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        schoolClass="3-1"
+        readingCount={100}
+        point={100}
+      />
+      <RankMonthlyItem
+        rank={6}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        schoolClass="3-1"
+        readingCount={100}
+        point={100}
+      />
+      <RankMonthlyItem
+        rank={7}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        schoolClass="3-1"
+        readingCount={100}
+        point={100}
+      />
+      <RankMonthlyItem
+        rank={8}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        schoolClass="3-1"
+        readingCount={100}
+        point={100}
+      />
+      <RankMonthlyItem
+        rank={9}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        schoolClass="3-1"
+        readingCount={100}
+        point={100}
+      />
+      <RankMonthlyItem
+        rank={10}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        schoolClass="3-1"
+        readingCount={100}
+        point={100}
+      />
+    </div>
+  )
 }

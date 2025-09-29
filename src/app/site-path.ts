@@ -120,6 +120,7 @@ const NW8 = {
   REVIEW: '/8th/activity/result',
   ACCOUNT: '/8th/activity/account',
   SETTING: '/8th/activity/setting',
+  RANKING: '/8th/activity/ranking',
 }
 
 export const STAFF_PATH = {

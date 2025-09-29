@@ -3,14 +3,18 @@
 import { Assets } from '@/8th/assets/asset-library'
 import { RankCardStyle } from '@/8th/features/FeaturesStyled'
 import { BoxStyle } from '@/8th/shared/ui/Misc'
+import SITE_PATH from '@/app/site-path'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 /**
  * 레벨마스터 카드(퍼포먼스)
  */
 export default function RankCard() {
+  const router = useRouter()
+
   return (
-    <RankCardStyle>
+    <RankCardStyle onClick={() => router.push(SITE_PATH.NW8.RANKING)}>
       <BoxStyle className="title-link">
         <span>랭킹</span>
         <Image

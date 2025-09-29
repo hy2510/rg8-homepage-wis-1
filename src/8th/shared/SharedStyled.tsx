@@ -13,7 +13,10 @@ export const ActionBarHeaderStyle = styled.div`
   gap: 20px;
 `
 
-export const ActionBarContainerStyle = styled.div<{ isBottom?: boolean }>`
+export const ActionBarContainerStyle = styled.div<{
+  isBottom?: boolean
+  isPeriodSearch?: boolean
+}>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -22,6 +25,8 @@ export const ActionBarContainerStyle = styled.div<{ isBottom?: boolean }>`
   border-top: ${({ isBottom }) =>
     isBottom ? 'none' : '1px solid var(--line-color-primary)'};
   border-bottom: 1px solid var(--line-color-primary);
+  background-color: ${({ isPeriodSearch }) =>
+    isPeriodSearch ? 'var(--color-gray-light)' : 'transparent'};
   font-size: ${({ isBottom }) =>
     isBottom ? '16px' : 'var(--font-size-medium)'};
   /* 모바일 대응 */
@@ -33,6 +38,16 @@ export const ActionBarContainerStyle = styled.div<{ isBottom?: boolean }>`
   background-color: ${({ isBottom }) => (isBottom ? '#fff' : 'transparent')};
   box-shadow: ${({ isBottom }) =>
     isBottom ? '0 -4px 12px rgba(0, 0, 0, 0.1)' : 'none'}; */
+
+  input {
+    padding: 8px 12px;
+    border: 1px solid var(--line-color-primary);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--font-family-secondary);
+    background-color: #fff;
+  }
 `
 
 export const DailyRgResultActionBarStyle = styled.div`
@@ -137,6 +152,10 @@ export const RoundedFullButtonStyle = styled.button<{
   marginBottom?: number
   isSmall?: boolean
   fontColor?: string
+  bgColor?: 'primary' | 'secondary'
+  active?: boolean
+  tabs?: boolean
+  fontFamily?: string
 }>`
   cursor: pointer;
   width: fit-content;
@@ -145,10 +164,39 @@ export const RoundedFullButtonStyle = styled.button<{
   border-radius: 100px;
   color: ${({ fontColor }) => fontColor || 'var(--font-color-secondary)'};
   font-size: var(--font-size-medium);
-  background: var(--color-gray-light);
+  background: ${({ bgColor, tabs }) =>
+    bgColor === 'primary'
+      ? '#3c4b62'
+      : bgColor === 'secondary'
+        ? 'var(--color-gray-light)'
+        : tabs
+          ? 'var(--color-gray-medium)'
+          : 'var(--color-gray-light)'};
   margin: 0 auto;
   margin-top: ${({ marginTop }) => marginTop}px;
   margin-bottom: ${({ marginBottom }) => marginBottom}px;
+  ${({ active }) =>
+    active &&
+    `
+      background: #3c4b62;
+      color: #fff;
+    `}
+  font-family: ${({ tabs, fontFamily }) =>
+    fontFamily === 'round'
+      ? 'var(--font-family-primary)'
+      : fontFamily === 'sans'
+        ? 'var(--font-family-secondary)'
+        : tabs
+          ? 'var(--font-family-secondary)'
+          : 'var(--font-family-primary)'};
+  font-weight: ${({ fontFamily, tabs }) =>
+    fontFamily === 'round'
+      ? '500'
+      : fontFamily === 'sans'
+        ? '700'
+        : tabs
+          ? '700'
+          : '500'};
 `
 
 export const MoreHorizontalButtonStyle = styled.button`
@@ -162,6 +210,7 @@ export const MoreHorizontalButtonStyle = styled.button`
   align-items: center;
   justify-content: center;
   margin-top: 5px;
+  position: relative;
 
   &:active {
     transform: translateY(2px);
@@ -213,7 +262,7 @@ export const DropdownContainerStyle = styled.div<{
   position: absolute;
   top: ${({ position }) => (position === 'bottom' ? '100%' : 'auto')};
   bottom: ${({ position }) => (position === 'bottom' ? 'auto' : '0')};
-  left: ${({ position }) => (position === 'right' ? '100%' : '0')};
+  left: ${({ position }) => (position === 'right' ? 'calc(100% + 5px)' : '0')};
   z-index: 1000;
   min-width: 200px;
   background-color: ${({ viewGrid }) => (viewGrid ? '#f0f2f5' : '#fff')};
@@ -307,6 +356,10 @@ export const DropdownButtonSmallStyle = styled.div`
   .link-text {
     font-size: 14px;
     color: var(--font-color-secondary);
+
+    &.black {
+      color: var(--font-color-primary);
+    }
   }
 
   .icon {
@@ -959,6 +1012,7 @@ export const ModalContainerStyle = styled.div`
   width: 100%;
   max-width: 600px;
   min-height: 400px;
+  max-height: calc(100vh - 20px);
   background-color: #fff;
   border-radius: 20px;
   overflow: hidden;
@@ -972,7 +1026,10 @@ export const ModalHeaderStyle = styled.div`
   border-bottom: 1px solid var(--line-color-primary);
 
   .title {
-    font-size: var(--font-size-large);
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-xlarge);
+    font-weight: 800;
+    color: var(--font-color-primary);
   }
 
   .btn-close {
@@ -988,8 +1045,35 @@ export const ModalHeaderStyle = styled.div`
   }
 `
 
-export const ModalBodyStyle = styled.div`
+export const ModalBodyStyle = styled.div<{ viewCloud?: boolean }>`
   padding: 25px;
+  overflow-y: auto;
+  max-height: calc(100vh - 133px);
+  ${({ viewCloud }) =>
+    viewCloud &&
+    `
+    background-image:
+      url(${Assets.Image.Cloud1.src}), url(${Assets.Image.Cloud2.src});
+    background-size: 140px, 120px;
+    background-repeat: no-repeat;
+    background-position:
+      top 50px left -120px,
+      top 300px left -120px;
+    animation: cloudFloat 20s linear infinite;
+
+    @keyframes cloudFloat {
+      0% {
+        background-position:
+          top 50px left -120px,
+          top 300px left -120px;
+      }
+      100% {
+        background-position:
+          top 50px left calc(100% + 500px),
+          top 300px left calc(100% + 120px);
+        }
+      }
+  `}
 `
 
 export const SubPageNavHeaderStyle = styled.div`
@@ -1049,6 +1133,7 @@ export const WidgetBoxStyle = styled.div`
   border-radius: 20px;
   padding: 20px;
   border: 1px solid var(--line-color-primary);
+  overflow: hidden;
 `
 
 export const CommonTitleStyle = styled.div`
@@ -1071,5 +1156,35 @@ export const CommonTitleStyle = styled.div`
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
+  }
+`
+
+export const TabBarStyle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 10px;
+  border-top: 1px solid var(--line-color-primary);
+  border-bottom: 1px solid var(--line-color-primary);
+`
+
+export const SelectBoxStyle = styled.div`
+  select {
+    padding: 0;
+    border: none;
+    background-color: var(--color-white);
+    font-size: 16px;
+    font-family: var(--font-family-secondary);
+    font-weight: 700;
+    color: var(--font-color-primary);
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    background-image: url(${Assets.Icon.chevronDownGraySmall.src});
+    background-position: center right 2px;
+    background-repeat: no-repeat;
+    background-size: 14px;
+    padding-right: 20px;
+    min-width: 40px;
   }
 `

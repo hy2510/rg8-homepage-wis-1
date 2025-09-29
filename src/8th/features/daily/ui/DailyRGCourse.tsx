@@ -18,6 +18,7 @@ interface DailyRGCourseProps {
   bookCount?: number
   total?: number
   isCurrent?: boolean
+  isCompleted?: boolean
   bgColor?: string
   progressColor?: string
 }
@@ -27,6 +28,7 @@ export default function DailyRGCourse({
   bookCount = 0,
   total = 0,
   isCurrent = false,
+  isCompleted = false,
   bgColor,
   progressColor,
 }: DailyRGCourseProps) {
@@ -35,19 +37,41 @@ export default function DailyRGCourse({
 
   return (
     <DailyRGCourseStyle
-      bgColor={isCurrent ? bgColor : 'var(--color-gray-opacity-70)'}
+      bgColor={
+        isCurrent
+          ? bgColor
+          : isCompleted
+            ? '#3C4B62'
+            : 'var(--color-gray-opacity-70)'
+      }
       isCurrent={isCurrent}>
       <ProgressBarContainerStyle>
-        <TextStyle fontColor={isCurrent ? '#fff' : 'secondary'}>
+        <TextStyle fontColor={isCurrent || isCompleted ? '#fff' : 'secondary'}>
           {title}
         </TextStyle>
-        <ProgressBarStyle>
-          <ProgressBarFillStyle
-            progressColor={
-              isCurrent ? progressColor : 'var(--color-gray-strong)'
-            }
-            style={{ width: `${progressPercent}%` }}></ProgressBarFillStyle>
-        </ProgressBarStyle>
+        {!isCompleted && (
+          <ProgressBarStyle>
+            <ProgressBarFillStyle
+              progressColor={
+                isCurrent ? progressColor : 'var(--color-gray-strong)'
+              }
+              style={{ width: `${progressPercent}%` }}></ProgressBarFillStyle>
+          </ProgressBarStyle>
+        )}
+        {isCompleted && (
+          <Image
+            src={Assets.Image.DailyRGCourseCompleted}
+            alt="daily-rg-course-completed"
+            width={100}
+            height={100}
+            style={{
+              position: 'absolute',
+              bottom: '-5px',
+              right: '10px',
+              zIndex: 1,
+            }}
+          />
+        )}
       </ProgressBarContainerStyle>
       <BoxStyle
         display="flex"

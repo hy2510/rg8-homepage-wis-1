@@ -4,14 +4,20 @@ import { Assets } from '@/8th/assets/asset-library'
 import { LevelMasterCardStyle } from '@/8th/features/FeaturesStyled'
 import { BoxStyle } from '@/8th/shared/ui/Misc'
 import Image from 'next/image'
+import { useState } from 'react'
+import LevelMasterModal from './LevelMasterModal'
 
 /**
  * 랭킹 카드(퍼포먼스)
  */
 export default function RankCard() {
+  const [isLevelMasterModalOpen, setIsLevelMasterModalOpen] = useState(false)
+
   return (
     <LevelMasterCardStyle>
-      <BoxStyle className="title-link" gap={5}>
+      <BoxStyle
+        className="title-link"
+        onClick={() => setIsLevelMasterModalOpen(true)}>
         <span>레벨 마스터</span>
         <Image
           src={Assets.Icon.arrowUpRightBlack}
@@ -29,6 +35,11 @@ export default function RankCard() {
         <div className="level">KA</div>
         <div className="earn-points">1/100P</div>
       </BoxStyle>
+      {isLevelMasterModalOpen && (
+        <LevelMasterModal
+          onCloseModal={() => setIsLevelMasterModalOpen(false)}
+        />
+      )}
     </LevelMasterCardStyle>
   )
 }

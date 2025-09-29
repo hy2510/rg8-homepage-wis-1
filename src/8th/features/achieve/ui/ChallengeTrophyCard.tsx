@@ -4,14 +4,21 @@ import { Assets } from '@/8th/assets/asset-library'
 import { ChallengeTrophyCardStyle } from '@/8th/features/FeaturesStyled'
 import { BoxStyle } from '@/8th/shared/ui/Misc'
 import Image from 'next/image'
+import { useState } from 'react'
+import ChallengeTrophyModal from './ChallengeTrophyModal'
 
 /**
  * 영어독서왕 수상 이력(퍼포먼스)
  */
 export default function ChallengeTrophyCard() {
+  const [isChallengeTrophyModalOpen, setIsChallengeTrophyModalOpen] =
+    useState(false)
+
   return (
     <ChallengeTrophyCardStyle>
-      <BoxStyle className="title-link" gap={5}>
+      <BoxStyle
+        className="title-link"
+        onClick={() => setIsChallengeTrophyModalOpen(true)}>
         <span>영어 독서왕 수상 이력</span>
         <Image
           src={Assets.Icon.arrowUpRightBlack}
@@ -41,6 +48,11 @@ export default function ChallengeTrophyCard() {
           <span>2022-09-20</span>
         </BoxStyle>
       </BoxStyle>
+      {isChallengeTrophyModalOpen && (
+        <ChallengeTrophyModal
+          onClickClose={() => setIsChallengeTrophyModalOpen(false)}
+        />
+      )}
     </ChallengeTrophyCardStyle>
   )
 }

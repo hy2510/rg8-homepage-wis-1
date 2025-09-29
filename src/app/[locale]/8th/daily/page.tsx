@@ -20,7 +20,6 @@ export default function Page() {
           bgColor="#b535dc"
           progressColor="#ffca2b"
         />
-        <Divide title="Today's Pick" />
         <DailyRGBookItem
           bookNumber={1}
           imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-301.jpg"
@@ -28,6 +27,7 @@ export default function Page() {
           point={1}
           isCurrent={true}
           isCompleted={0}
+          isPreK={true}
         />
         <DailyRGBookItem
           bookNumber={2}
@@ -36,6 +36,7 @@ export default function Page() {
           point={1}
           isCurrent={false}
           isCompleted={0}
+          isPreK={true}
         />
         <DailyRGBookItem
           bookNumber={3}
@@ -44,11 +45,180 @@ export default function Page() {
           point={1}
           isCurrent={false}
           isCompleted={0}
+          isPreK={true}
         />
-        <RoundedFullButton marginTop={5} marginBottom={10} />
+        <DailyRGBookItem
+          bookNumber={4}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-304.jpg"
+          title="Alphabet Dd"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={5}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-305.jpg"
+          title="Alphabet Ee"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={6}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-306.jpg"
+          title="Alphabet Ff"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={2}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-302.jpg"
+          title="Alphabet Bb"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={3}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-303.jpg"
+          title="Alphabet Cc"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={4}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-304.jpg"
+          title="Alphabet Dd"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={5}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-305.jpg"
+          title="Alphabet Ee"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={6}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-306.jpg"
+          title="Alphabet Ff"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={2}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-302.jpg"
+          title="Alphabet Bb"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={3}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-303.jpg"
+          title="Alphabet Cc"
+          point={1}
+          isCurrent={false}
+          isCompleted={1}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={4}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-304.jpg"
+          title="Alphabet Dd"
+          point={1}
+          isCurrent={false}
+          isCompleted={2}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={5}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-305.jpg"
+          title="Alphabet Ee"
+          point={1}
+          isCurrent={true}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={6}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-306.jpg"
+          title="Alphabet Ff"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={2}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-302.jpg"
+          title="Alphabet Bb"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={3}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-303.jpg"
+          title="Alphabet Cc"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={4}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-304.jpg"
+          title="Alphabet Dd"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={5}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-305.jpg"
+          title="Alphabet Ee"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        <DailyRGBookItem
+          bookNumber={6}
+          imgUrl="https://wcfresource.a1edu.com/newsystem/image/dodoabc/cover/eb-pk-306.jpg"
+          title="Alphabet Ff"
+          point={1}
+          isCurrent={false}
+          isCompleted={0}
+          isPreK={true}
+        />
+        {/* <RoundedFullButton marginTop={5} marginBottom={10} /> */}
       </BoxStyle>
+
       <BoxStyle display="flex" flexDirection="column" gap={30}>
-        <DailyRGCourse title="2. Learn Phonics 1" bookCount={2} total={26} />
+        <DailyRGCourse
+          title="2. Learn Phonics 1"
+          bookCount={26}
+          total={26}
+          isCompleted={true}
+        />
         <DailyRGCourse title="3. Learn Phonics 2" bookCount={2} total={26} />
         <DailyRGCourse title="4. Sight Words 1" bookCount={2} total={26} />
         <DailyRGCourse title="5. Sight Words 2" bookCount={2} total={26} />

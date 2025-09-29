@@ -1,6 +1,46 @@
 {
     "accordionSections": [
         {
+            "id": "Level PK Classic",
+            "title": "Level PK Classic",
+            "content": {
+                "levels": [
+                    {
+                        "level": "pk",
+                        "title": "Alphabet",
+                        "bgColor": "#3fae45",
+                        "fontColor": "#fff",
+                        "type": "study",
+                        "imgSrc": "Assets.Thumbnail.ClassicAlphabetStudy"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Phonics",
+                        "bgColor": "#e31313",
+                        "fontColor": "#fff",
+                        "type": "study",
+                        "imgSrc": "Assets.Thumbnail.ClassicPhonicsStudy"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Word",
+                        "bgColor": "#fea500",
+                        "fontColor": "#fff",
+                        "type": "study",
+                        "imgSrc": "Assets.Thumbnail.ClassicWordStudy"
+                    },
+                    {
+                        "level": "pk",
+                        "title": "Story",
+                        "bgColor": "#2b93d2",
+                        "fontColor": "#fff",
+                        "type": "study",
+                        "imgSrc": "Assets.Thumbnail.ClassicStoryStudy"
+                    }
+                ]
+            }
+        },
+        {
             "id": "Level PK",
             "title": "Level PK",
             "content": {

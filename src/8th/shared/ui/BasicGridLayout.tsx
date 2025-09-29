@@ -37,7 +37,18 @@ export function RightContainer({ children }: { children?: React.ReactNode }) {
         toDoCount={10}
         favoriteCount={10}
       />
-      <StreakCard streakCount={130} totalCount={140} />
+      <StreakCard
+        streakCount={130}
+        totalCount={140}
+        earnedDates={{
+          20: '2022.09.23',
+          40: '2023.09.23',
+          60: '2024.09.23',
+          80: '2025.01.23',
+          100: '2025.03.23',
+          120: '2025.04.23',
+        }}
+      />
       <DailyGoalCard dailyProgress={2} dailyGoal={3} />
       <ReadingUnitCard
         friendName="MILLO"

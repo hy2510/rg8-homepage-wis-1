@@ -1,10 +1,12 @@
 'use client'
 
+import { Assets } from '@/8th/assets/asset-library'
 import {
   BoxStyled,
   DivideLineStyle,
   DivideStyle,
   GapStyle,
+  SelectBoxStyle,
   TextDivStyled,
   TextSpanStyled,
 } from '../SharedStyled'
@@ -495,4 +497,63 @@ export function Divide({ title = "Today's Pick" }: { title?: string }) {
 
 export function Gap({ size = 10 }: { size?: number }) {
   return <GapStyle size={size} />
+}
+
+interface SelectBoxProps {
+  selectedValue: string
+  onChange: (value: string) => void
+  options: string[]
+  optionSubtext?: string
+}
+
+export function SelectBox({
+  selectedValue,
+  onChange,
+  options,
+  optionSubtext,
+}: SelectBoxProps) {
+  return (
+    <SelectBoxStyle>
+      <select value={selectedValue} onChange={(e) => onChange(e.target.value)}>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+            {optionSubtext}
+          </option>
+        ))}
+      </select>
+    </SelectBoxStyle>
+  )
+}
+
+export function StreakLine() {
+  return (
+    <BoxStyle
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      gap={3}
+      margin="10px 0">
+      <BoxStyle
+        width="8px"
+        height="8px"
+        backgroundColor="#E9EDF3"
+        borderRadius={100}
+      />
+      <BoxStyle
+        width="3px"
+        height="20px"
+        backgroundColor="#E9EDF3"
+        margin="auto"
+        borderRadius={100}
+      />
+      <BoxStyle
+        width="8px"
+        height="8px"
+        backgroundColor="#E9EDF3"
+        borderRadius={100}
+      />
+    </BoxStyle>
+  )
 }

@@ -27,7 +27,7 @@ export default function MainScreenSetting() {
   return (
     <>
       <SettingHeader
-        title="Main screen (after login)"
+        title="Home Screen"
         onEdit={isEdit}
         onSave={handleSave}
         onCancel={handleCancel}

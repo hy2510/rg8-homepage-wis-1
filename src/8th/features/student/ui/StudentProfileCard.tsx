@@ -3,6 +3,7 @@
 import { Assets } from '@/8th/assets/asset-library'
 import { StudentProfileCardStyle } from '@/8th/features/FeaturesStyled'
 import { WidgetBoxStyle } from '@/8th/shared/SharedStyled'
+import { BoxStyle } from '@/8th/shared/ui/Misc'
 import SITE_PATH from '@/app/site-path'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -42,8 +43,14 @@ export default function StudentProfileCard({
               height={50}
             />
           </div>
-          <div className="rank">#{pointRank}</div>
-          <div className="name">{studentName}</div>
+          <BoxStyle
+            display="flex"
+            alignItems="center"
+            gap={5}
+            onClick={() => router.push(SITE_PATH.NW8.RANKING)}>
+            <div className="rank">#{pointRank}</div>
+            <div className="name">{studentName}</div>
+          </BoxStyle>
         </div>
         <div className="body">
           <div className="label">

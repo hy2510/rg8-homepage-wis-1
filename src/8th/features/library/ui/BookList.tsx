@@ -18,6 +18,7 @@ export interface Book {
   point: string
   imgSrc: string
   assignDate?: string
+  videoSrc?: string
 }
 
 /**
@@ -36,6 +37,7 @@ interface BookListProps {
   searchResultCount?: number
   isTodo?: boolean
   isFavorite?: boolean
+  isTryAgain?: boolean
 }
 
 export default function BookList({
@@ -49,6 +51,7 @@ export default function BookList({
   searchResultCount = 0,
   isTodo,
   isFavorite,
+  isTryAgain,
 }: BookListProps) {
   const [isExportMode, setIsExportMode] = useState(false)
 
@@ -111,10 +114,24 @@ export default function BookList({
           </TextStyle>
         </BoxStyle>
       )}
+
+      {isTryAgain && (
+        <BoxStyle
+          padding="10px 15px"
+          backgroundColor="rgba(212, 220, 230, 0.50)"
+          borderRadius={10}>
+          <TextStyle fontSize="small" fontFamily="sans" fontColor="primary">
+            여기서 PASS Mark(70점)를 넘기지 못한 도서를 확인할 수 있습니다.
+          </TextStyle>
+        </BoxStyle>
+      )}
+
       {isTodo ? (
         <TodoActionBar onExportChange={setIsExportMode} />
       ) : isFavorite ? (
         <ActionBar optionLabels={['Status']} />
+      ) : isTryAgain ? (
+        <></>
       ) : (
         <ActionBar
           onExportChange={setIsExportMode}
@@ -142,6 +159,7 @@ export default function BookList({
                 title={book.title}
                 point={book.point}
                 imgSrc={book.imgSrc}
+                videoSrc={book.videoSrc}
                 isExportMode={isExportMode}
               />
             ))}
@@ -158,6 +176,7 @@ export default function BookList({
               title={book.title}
               point={book.point}
               imgSrc={book.imgSrc}
+              videoSrc={book.videoSrc}
               isExportMode={isExportMode}
             />
           ))}

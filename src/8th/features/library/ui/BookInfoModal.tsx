@@ -1,6 +1,5 @@
 'use client'
 
-import { Assets } from '@/8th/assets/asset-library'
 import {
   BookInfoButtonsStyle,
   BookInfoDetailItemStyle,
@@ -18,7 +17,7 @@ import {
 import { MoreHorizontalButton, StartButton } from '@/8th/shared/ui/Buttons'
 import { BoxStyle } from '@/8th/shared/ui/Misc'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 /**
  * 도서정보 팝업
@@ -40,6 +39,7 @@ interface BookInfoModalProps {
   passed?: number
   speak?: boolean
   point?: string
+  videoSrc?: string
 }
 
 export default function BookInfoModal({
@@ -58,9 +58,17 @@ export default function BookInfoModal({
   passed = 0,
   speak = false,
   point = '1.1',
+  videoSrc,
 }: BookInfoModalProps) {
   const [addToDo, setAddToDo] = useState(false)
   const [addFavorite, setAddFavorite] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = 0.5
+    }
+  }, [videoSrc])
 
   return (
     <BookInfoModalStyle>
@@ -73,14 +81,14 @@ export default function BookInfoModal({
           <BookInfoMainBannerStyle bookCover={imgSrc || ''}>
             <BoxStyle className="wrapper" display="flex" gap={20}>
               <div className="book-cover">
-                <div className="movie-play-button">
+                {/* <div className="movie-play-button">
                   <Image
                     src={Assets.Icon.playRed}
                     alt="badge"
                     width={40}
                     height={40}
                   />
-                </div>
+                </div> */}
                 <Image
                   src={imgSrc || ''}
                   alt="book"
@@ -112,6 +120,28 @@ export default function BookInfoModal({
               </BoxStyle>
             </BoxStyle>
           </BookInfoMainBannerStyle>
+          {videoSrc && (
+            <BoxStyle
+              width="100%"
+              margin="0 0 20px 0"
+              borderRadius={20}
+              overflow="hidden">
+              <video
+                ref={videoRef}
+                src={videoSrc}
+                controls
+                autoPlay
+                loop
+                controlsList="nodownload nofullscreen noremoteplayback"
+                onContextMenu={(e) => e.preventDefault()}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  height: 'auto',
+                }}
+              />
+            </BoxStyle>
+          )}
           <BookInfoSummaryStyle>
             <BoxStyle display="flex" flexDirection="column" gap={20}>
               <div className="summary-content">{summary}</div>
@@ -164,19 +194,21 @@ export default function BookInfoModal({
                 <BoxStyle
                   className="earn-point"
                   display="flex"
-                  alignItems="flex-start"
+                  alignItems="center"
                   gap={10}>
                   <div className="point-icon passed"></div>
-                  <div className="passed">Passed 1</div>
+                  {/* <div className="passed">Passed 1</div> */}
+                  <div className="passed">Full Mode</div>
                   <div className="point">+{point}P</div>
                 </BoxStyle>
                 <BoxStyle
                   className="earn-point"
                   display="flex"
-                  alignItems="flex-start"
+                  alignItems="center"
                   gap={10}>
                   <div className="point-icon"></div>
-                  <div className="passed">Passed 2</div>
+                  {/* <div className="passed">Passed 2</div> */}
+                  <div className="passed">Easy Mode</div>
                   <div className="point">
                     +{(Number(point) / 2).toFixed(1)}P
                   </div>

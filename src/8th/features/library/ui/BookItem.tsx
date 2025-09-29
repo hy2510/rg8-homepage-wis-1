@@ -20,6 +20,7 @@ interface BookItemProps {
   isExportMode?: boolean
   isOnTodo?: boolean
   completedCount?: number
+  videoSrc?: string
 }
 
 export default function BookItem({
@@ -31,6 +32,7 @@ export default function BookItem({
   isExportMode = false,
   isOnTodo = false,
   completedCount = 0,
+  videoSrc,
 }: BookItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
@@ -113,14 +115,16 @@ export default function BookItem({
                 />
               )}
             </div>
-            <div className="movie-icon">
-              <Image
-                src={Assets.Icon.playRed}
-                alt="badge"
-                width={40}
-                height={40}
-              />
-            </div>
+            {videoSrc && (
+              <div className="movie-icon">
+                <Image
+                  src={Assets.Icon.playRed}
+                  alt="badge"
+                  width={40}
+                  height={40}
+                />
+              </div>
+            )}
           </div>
         </div>
         <div className="book-info-container">
@@ -140,6 +144,7 @@ export default function BookItem({
           onClickClose={() => setIsModalOpen(false)}
           title={title}
           imgSrc={imgSrc}
+          videoSrc={videoSrc}
         />
       )}
     </>

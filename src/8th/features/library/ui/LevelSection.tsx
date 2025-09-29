@@ -85,29 +85,52 @@ export default function LeveledReading() {
           </span>
         </div>
         <div className={`accordion-body ${isOpen ? 'open' : ''}`}>
-          {section.id !== 'Level PK' && (
+          {section.id !== 'Level PK' && section.id !== 'Level PK Classic' && (
             <div className="sub-header">• by Level</div>
           )}
-          {section.id === 'Level PK' && <Gap size={30} />}
-          <div className="level-container">
-            {section.content.levels.map(
-              ({ level, bgColor, fontColor, type, imgSrc, title }) => (
-                <LevelItem
-                  key={level}
-                  level={level}
-                  bgColor={bgColor}
-                  fontColor={fontColor}
-                  type={type}
-                  imgSrc={imgSrc as string}
-                  title={title}
-                />
-              ),
-            )}
-          </div>
+          {section.id === 'Level PK Classic' && <Gap size={30} />}
+          {section.id === 'Level PK' && <LevelSectionPk section={section} />}
           {section.id !== 'Level PK' && (
+            <div className="level-container">
+              {section.content.levels.map(
+                ({ level, bgColor, fontColor, type, imgSrc, title }) => (
+                  <LevelItem
+                    key={level}
+                    level={level}
+                    bgColor={bgColor}
+                    fontColor={fontColor}
+                    type={type}
+                    imgSrc={imgSrc as string}
+                    title={title}
+                  />
+                ),
+              )}
+            </div>
+          )}
+          {section.id !== 'Level PK' && section.id !== 'Level PK Classic' && (
             <>
               <div className="sub-header">• by Series</div>
               <div className="series-container">
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
+                <SeriesItem />
                 <SeriesItem />
               </div>
             </>
@@ -136,5 +159,51 @@ export default function LeveledReading() {
         {ACCORDION_SECTIONS.map(renderAccordionSection)}
       </BoxStyle>
     </LevelSectionStyle>
+  )
+}
+
+function LevelSectionPk({
+  section,
+}: {
+  section: (typeof ACCORDION_SECTIONS)[0]
+}) {
+  const pkCategories = [
+    {
+      title: 'Alphabet',
+      levels: section.content.levels.slice(0, 3), // 0-2
+    },
+    {
+      title: 'Phonics',
+      levels: section.content.levels.slice(3, 7), // 3-6
+    },
+    {
+      title: 'Sight Word',
+      levels: section.content.levels.slice(7, 12), // 7-11
+    },
+  ]
+
+  const renderLevelItem = (level: any, index: number) => (
+    <LevelItem
+      key={`${level.level}-${index}`}
+      level={level.level}
+      bgColor={level.bgColor}
+      fontColor={level.fontColor}
+      type={level.type}
+      imgSrc={level.imgSrc as string}
+      title={level.title}
+    />
+  )
+
+  return (
+    <>
+      {pkCategories.map((category) => (
+        <div key={category.title}>
+          <div className="sub-header">• {category.title}</div>
+          <div className="level-container">
+            {category.levels.map(renderLevelItem)}
+          </div>
+        </div>
+      ))}
+    </>
   )
 }
