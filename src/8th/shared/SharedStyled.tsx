@@ -82,6 +82,19 @@ export const RightContainerStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  position: sticky;
+  top: 20px;
+  z-index: 900;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & {
+    scrollbar-width: none;
+  }
 `
 
 export const BodyContainerStyle = styled.div`
@@ -256,7 +269,7 @@ export const CheckboxLabelStyle = styled.label`
 `
 
 export const DropdownContainerStyle = styled.div<{
-  position: 'right' | 'bottom'
+  position: 'right' | 'bottom' | 'left'
   viewGrid: boolean
 }>`
   position: absolute;
@@ -358,6 +371,11 @@ export const DropdownButtonSmallStyle = styled.div`
     color: var(--font-color-secondary);
 
     &.black {
+      color: var(--font-color-primary);
+    }
+
+    &.large-text {
+      font-size: 18px;
       color: var(--font-color-primary);
     }
   }
@@ -1025,11 +1043,43 @@ export const ModalHeaderStyle = styled.div`
   padding: 20px;
   border-bottom: 1px solid var(--line-color-primary);
 
+  .calendar-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .nav-button {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background-color: var(--color-gray-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--font-color-primary);
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--color-gray-medium);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
   .title {
     font-family: var(--font-family-secondary);
     font-size: var(--font-size-xlarge);
     font-weight: 800;
     color: var(--font-color-primary);
+    min-width: 120px;
+    text-align: center;
   }
 
   .btn-close {
@@ -1045,9 +1095,13 @@ export const ModalHeaderStyle = styled.div`
   }
 `
 
-export const ModalBodyStyle = styled.div<{ viewCloud?: boolean }>`
-  padding: 25px;
+export const ModalBodyStyle = styled.div<{
+  viewCloud?: boolean
+  calendarBody?: boolean
+}>`
+  padding: ${({ calendarBody }) => (calendarBody ? '0' : '25px')};
   overflow-y: auto;
+  overflow-x: hidden;
   max-height: calc(100vh - 133px);
   ${({ viewCloud }) =>
     viewCloud &&
@@ -1074,6 +1128,82 @@ export const ModalBodyStyle = styled.div<{ viewCloud?: boolean }>`
         }
       }
   `}
+`
+
+export const MiniModalContainerStyle = styled.div`
+  width: 100%;
+  max-width: 300px;
+  min-height: 300px;
+  max-height: calc(100vh - 20px);
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+
+  .mini-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid var(--line-color-primary);
+
+    .header-title {
+      font-size: var(--font-size-medium);
+      margin-left: 10px;
+    }
+
+    .btn-close {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .mini-modal-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .select-box-container {
+      width: 100%;
+      height: 40px;
+      border: 1px solid var(--line-color-primary);
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+
+      .select-box-label {
+        font-size: var(--font-size-small);
+        font-family: var(--font-family-secondary);
+        color: var(--font-color-secondary);
+        padding-bottom: 2px;
+      }
+    }
+  }
+
+  .btn-print {
+    width: calc(100% - 40px);
+    height: 40px;
+    border-radius: 10px;
+    background-color: var(--font-color-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-medium);
+    font-weight: 700;
+    font-family: var(--font-family-secondary);
+    cursor: pointer;
+    margin: 20px;
+    margin-top: 0;
+  }
 `
 
 export const SubPageNavHeaderStyle = styled.div`
@@ -1128,7 +1258,8 @@ export const PagenationItemStyle = styled.div`
 
 export const WidgetBoxStyle = styled.div`
   width: 100%;
-  min-height: 150px;
+  min-height: fit-content;
+  height: fit-content;
   background-color: #fff;
   border-radius: 20px;
   padding: 20px;
@@ -1168,14 +1299,21 @@ export const TabBarStyle = styled.div`
   border-bottom: 1px solid var(--line-color-primary);
 `
 
-export const SelectBoxStyle = styled.div`
+export const SelectBoxStyle = styled.div<{
+  largeFont: boolean
+  smallFont: boolean
+}>`
+  width: fit-content;
+  height: fit-content;
+
   select {
     padding: 0;
     border: none;
     background-color: var(--color-white);
-    font-size: 16px;
+    font-size: ${({ largeFont, smallFont }) =>
+      largeFont ? '18px' : smallFont ? '14px' : '16px'};
     font-family: var(--font-family-secondary);
-    font-weight: 700;
+    font-weight: ${({ largeFont }) => (largeFont ? '800' : '700')};
     color: var(--font-color-primary);
     cursor: pointer;
     outline: none;

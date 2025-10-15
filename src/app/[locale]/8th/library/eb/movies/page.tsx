@@ -2,7 +2,7 @@
 
 import BookList, { Book } from '@/8th/features/library/ui/BookList'
 import BasicGridLayout from '@/8th/shared/ui/BasicGridLayout'
-import { DropdownButtonBig } from '@/8th/shared/ui/Dropdowns'
+import { SelectBox } from '@/8th/shared/ui/Misc'
 import { SubPageNavHeader } from '@/8th/shared/ui/Navigation'
 import SITE_PATH from '@/app/site-path'
 import { useRouter } from 'next/navigation'
@@ -15,6 +15,12 @@ export default function Page() {
   const books = sampleMovies
 
   const [isLoading, setIsLoading] = useState(true)
+  const [selectedLevel, setSelectedLevel] = useState('KA')
+
+  const handleChangeLevel = (level: string) => {
+    setSelectedLevel(level)
+    console.log(level)
+  }
 
   useEffect(() => {
     const preloadImages = async () => {
@@ -49,7 +55,14 @@ export default function Page() {
       <BookList
         books={books}
         isLoading={isLoading}
-        headerContent={<DropdownButtonBig text="Level KA" />}
+        headerContent={
+          <SelectBox
+            selectedValue={selectedLevel}
+            largeFont
+            onChange={handleChangeLevel}
+            options={['KA', 'KB', 'KC', '1A', '1B', '1C', '2C']}
+          />
+        }
       />
     </BasicGridLayout>
   )

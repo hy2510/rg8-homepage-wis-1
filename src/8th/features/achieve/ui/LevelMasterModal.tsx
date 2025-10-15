@@ -256,7 +256,7 @@ export default function LevelMasterModal({
     <BookInfoModalStyle>
       <ModalContainerStyle>
         <ModalHeaderStyle>
-          <div className="title">레벨 마스터</div>
+          <div className="title">학습 레벨</div>
           <div className="btn-close" onClick={onCloseModal} />
         </ModalHeaderStyle>
         <ModalBodyStyle viewCloud ref={modalBodyRef}>

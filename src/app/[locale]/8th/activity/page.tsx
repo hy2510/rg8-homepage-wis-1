@@ -19,6 +19,7 @@ export default function Page() {
   return (
     <BasicGridLayout>
       <StudentInfoCard />
+      <StudentAchievements />
       <RecentReviewList />
       <RoundedFullButton
         onClick={() => router.push(SITE_PATH.NW8.REVIEW)}
@@ -28,16 +29,18 @@ export default function Page() {
           alignItems="center"
           flexDirection="row"
           gap={5}>
-          <span>All Study Results</span>
+          <TextStyle fontSize="medium" fontWeight="bolder" fontFamily="sans">
+            {/* All Study Results */}
+            학습 결과 더보기
+          </TextStyle>
           <Image
             src={Assets.Icon.arrowRightBlack}
             alt="right-arrow"
-            width={20}
-            height={20}
+            width={14}
+            height={14}
           />
         </BoxStyle>
       </RoundedFullButton>
-      <StudentAchievements />
     </BasicGridLayout>
   )
 }
@@ -47,8 +50,8 @@ function StudentAchievements() {
     <BoxStyle display="flex" flexDirection="column" gap={20}>
       <TextStyle fontSize="xlarge">Achievements</TextStyle>
       <BoxStyle display="flex" flexDirection="row" gap={20}>
-        <LevelMasterCard />
-        <RankCard />
+        <LevelMasterCard level="KA" earnPoints={1.2} levelMasterPoint={100} />
+        <RankCard rank={10} />
         <ChallengeTrophyCard />
       </BoxStyle>
     </BoxStyle>

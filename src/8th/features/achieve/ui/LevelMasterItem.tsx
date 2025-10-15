@@ -78,7 +78,7 @@ export default function LevelMasterItem({
         alignItems="center"
         gap={3}>
         <TextStyle className="books-read">
-          {isComplete ? '[Completed] ' : ''}
+          {isComplete ? '[Level Master] ' : ''}
           {booksRead} Books Read
         </TextStyle>
         <TextStyle className="earn-points">

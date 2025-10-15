@@ -37,13 +37,7 @@ export default function DailyRGCourse({
 
   return (
     <DailyRGCourseStyle
-      bgColor={
-        isCurrent
-          ? bgColor
-          : isCompleted
-            ? '#3C4B62'
-            : 'var(--color-gray-opacity-70)'
-      }
+      bgColor={isCurrent ? bgColor : isCompleted ? '#3C4B62' : '#E9EDF3'}
       isCurrent={isCurrent}>
       <ProgressBarContainerStyle>
         <TextStyle fontColor={isCurrent || isCompleted ? '#fff' : 'secondary'}>

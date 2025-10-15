@@ -1,5 +1,6 @@
 'use client'
 
+import CalendarModal from '@/8th/features/achieve/ui/CalendarModal'
 import DailyGoalCard from '@/8th/features/achieve/ui/DailyGoalCard'
 import ReadingUnitCard from '@/8th/features/achieve/ui/ReadingUnitCard'
 import StreakCard from '@/8th/features/achieve/ui/StreakCard'
@@ -9,6 +10,7 @@ import {
   LeftContainerStyle,
   RightContainerStyle,
 } from '@/8th/shared/SharedStyled'
+import { useEffect, useState } from 'react'
 
 /**
  * 기본 그리드 레이아웃
@@ -27,6 +29,24 @@ export default function BasicGridLayout({
 }
 
 export function RightContainer({ children }: { children?: React.ReactNode }) {
+  const [isCalendarModalOpen, setIsCalendarModalOpen] = useState(false)
+
+  useEffect(() => {
+    const handleOpenCalendarModal = () => {
+      setIsCalendarModalOpen(true)
+    }
+
+    window.addEventListener('openCalendarModal', handleOpenCalendarModal)
+
+    return () => {
+      window.removeEventListener('openCalendarModal', handleOpenCalendarModal)
+    }
+  }, [])
+
+  const handleCloseCalendarModal = () => {
+    setIsCalendarModalOpen(false)
+  }
+
   return (
     <RightContainerStyle>
       <StudentProfileCard
@@ -57,6 +77,9 @@ export function RightContainer({ children }: { children?: React.ReactNode }) {
         friendPoint={100}
       />
       {children}
+      {isCalendarModalOpen && (
+        <CalendarModal onCloseModal={handleCloseCalendarModal} />
+      )}
     </RightContainerStyle>
   )
 }

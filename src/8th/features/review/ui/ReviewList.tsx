@@ -156,7 +156,7 @@ export default function ReviewList() {
           </BoxStyle>
         </BookListDateGroupStyle>
       ))}
-      <RoundedFullButton>More Reports</RoundedFullButton>
+      <RoundedFullButton>See more</RoundedFullButton>
     </ReviewListStyle>
   )
 }

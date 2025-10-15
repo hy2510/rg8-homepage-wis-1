@@ -109,23 +109,7 @@ export default function DropdownMenu({
   )
 }
 
-export function DropdownButtonBig({ text }: { text: string }) {
-  return (
-    <DropdownButtonBigStyle>
-      <div className="link-text">{text}</div>
-      <div className="icon">
-        <Image
-          src={Assets.Icon.chevronDownGraySmall}
-          alt="arrow up right"
-          width={16}
-          height={16}
-        />
-      </div>
-    </DropdownButtonBigStyle>
-  )
-}
-
-interface DropdownButtonBigProps {
+interface DropdownButtonSmallProps {
   text: string
   selectedValue?: string
   onValueChange?: (value: string) => void
@@ -136,6 +120,7 @@ interface DropdownButtonBigProps {
   group1SelectedValue?: string
   fontFamily?: 'round' | 'sans'
   fontColor?: 'primary' | 'secondary'
+  fontSize?: 'medium' | 'large'
 }
 
 export function DropdownButtonSmall({
@@ -149,7 +134,8 @@ export function DropdownButtonSmall({
   group1SelectedValue = '모든 장르',
   fontFamily = 'round',
   fontColor = 'secondary',
-}: DropdownButtonBigProps) {
+  fontSize = 'medium',
+}: DropdownButtonSmallProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [internalSelectedValue, setInternalSelectedValue] = useState(
     initialValue ||
@@ -305,7 +291,7 @@ export function DropdownButtonSmall({
     <DropdownButtonSmallContainerStyle ref={dropdownRef}>
       <DropdownButtonSmallStyle onClick={() => setIsOpen(!isOpen)}>
         <TextStyle
-          className={`link-text ${text === 'log' ? 'black' : ''}`}
+          className={`link-text ${text === 'log' ? 'black' : ''} ${fontSize === 'large' ? 'large-text' : ''}`}
           fontFamily={fontFamily}>
           {text === 'todoexport'
             ? 'Export'

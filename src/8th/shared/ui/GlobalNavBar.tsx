@@ -24,13 +24,17 @@ export default function GlobalNavBar() {
     { text: 'Setting', onClick: () => console.log('Setting clicked') },
     {
       text: 'Workbook Units',
-      onClick: () => console.log('Workbook MP3 clicked'),
+      onClick: () => console.log('Workbook Units clicked'),
     },
     {
       text: 'Workbook MP3',
       onClick: () => console.log('Workbook MP3 clicked'),
     },
   ]
+
+  const handleCalendarClick = () => {
+    window.dispatchEvent(new CustomEvent('openCalendarModal'))
+  }
 
   return (
     <GlobalNavBarStyle>
@@ -73,7 +77,11 @@ export default function GlobalNavBar() {
 
         <div className="divider" />
 
-        <MenuItem icon={Assets.Icon.Gnb.calendar} text="CALENDAR" />
+        <MenuItem
+          icon={Assets.Icon.Gnb.calendar}
+          text="CALENDAR"
+          onClick={handleCalendarClick}
+        />
 
         <MenuItem
           icon={Assets.Icon.Gnb.more}
@@ -89,6 +97,18 @@ export default function GlobalNavBar() {
   )
 }
 
+interface MenuItemProps {
+  icon?: StaticImageData
+  text?: string
+  isActive?: boolean
+  isDropdown?: boolean
+  onDropdownToggle?: () => void
+  isOpen?: boolean
+  dropdownItems?: { text: string; onClick: () => void }[]
+  linkUrl?: string
+  onClick?: () => void
+}
+
 const MenuItem = ({
   icon,
   text,
@@ -98,20 +118,14 @@ const MenuItem = ({
   isOpen,
   dropdownItems,
   linkUrl,
-}: {
-  icon?: StaticImageData
-  text?: string
-  isActive?: boolean
-  isDropdown?: boolean
-  onDropdownToggle?: () => void
-  isOpen?: boolean
-  dropdownItems?: { text: string; onClick: () => void }[]
-  linkUrl?: string
-}) => {
+  onClick,
+}: MenuItemProps) => {
   const router = useRouter()
 
   const handleClick = () => {
-    if (linkUrl) {
+    if (onClick) {
+      onClick()
+    } else if (linkUrl) {
       router.push(linkUrl)
     } else if (isDropdown && onDropdownToggle) {
       onDropdownToggle()

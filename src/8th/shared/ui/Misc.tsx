@@ -1,6 +1,5 @@
 'use client'
 
-import { Assets } from '@/8th/assets/asset-library'
 import {
   BoxStyled,
   DivideLineStyle,
@@ -411,7 +410,6 @@ export function BoxStyle({
 export function TextStyle({
   children,
   className,
-  id,
   padding = '0',
   margin = '0',
   width = 'fit-content',
@@ -425,7 +423,6 @@ export function TextStyle({
 }: {
   children: React.ReactNode
   className?: string
-  id?: string
   padding?: string
   margin?: string
   width?: string
@@ -504,6 +501,9 @@ interface SelectBoxProps {
   onChange: (value: string) => void
   options: string[]
   optionSubtext?: string
+  largeFont?: boolean
+  smallFont?: boolean
+  placeholder?: string
 }
 
 export function SelectBox({
@@ -511,10 +511,18 @@ export function SelectBox({
   onChange,
   options,
   optionSubtext,
+  largeFont = false,
+  smallFont = false,
+  placeholder = '옵션을 선택하세요',
 }: SelectBoxProps) {
   return (
-    <SelectBoxStyle>
+    <SelectBoxStyle largeFont={largeFont} smallFont={smallFont}>
       <select value={selectedValue} onChange={(e) => onChange(e.target.value)}>
+        {!selectedValue && (
+          <option value="" disabled>
+            {placeholder}
+          </option>
+        )}
         {options.map((option) => (
           <option key={option} value={option}>
             {option}

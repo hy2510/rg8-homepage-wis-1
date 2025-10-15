@@ -126,7 +126,6 @@ export const LevelMasterCardStyle = styled.div`
   border: 1px solid var(--line-color-primary);
 
   .title-link {
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -696,6 +695,495 @@ export const DailyGoalItemStyle = styled.div`
   }
 `
 
+export const ReadingUnitStoryItemStyle = styled.div``
+
+export const ReadingUnitPrologueStyle = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  .reading-unit-name {
+    font-size: var(--font-size-xxlarge);
+    font-family: var(--font-family-secondary);
+    font-weight: 800;
+    color: var(--font-color-primary);
+  }
+
+  .reading-unit-prologue-container {
+    width: 300px;
+    text-align: center;
+
+    .reading-unit-prologue-text {
+      font-size: var(--font-size-medium);
+      font-family: var(--font-family-secondary);
+      color: var(--font-color-secondary);
+      font-weight: 500;
+    }
+  }
+`
+
+export const EarnedReadingUnitImageStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+
+  .earned-reading-unit-image {
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    transition: all 0.3s ease;
+
+    &.active {
+      width: 300px;
+      height: 300px;
+      border-radius: 20px;
+    }
+  }
+
+  .earned-reading-unit-text-container {
+    text-align: center;
+
+    .title {
+      font-size: var(--font-size-large);
+      font-family: var(--font-family-secondary);
+      color: var(--font-color-primary);
+      font-weight: 800;
+      padding: 10px 0;
+    }
+
+    .message {
+      font-size: var(--font-size-medium);
+      font-family: var(--font-family-secondary);
+      color: var(--font-color-secondary);
+      font-weight: 500;
+      width: 300px;
+    }
+  }
+
+  .play-icon-container {
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    bottom: 0;
+
+    .play-icon {
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+      width: 30px;
+      height: 30px;
+      background-color: #fff;
+      border-radius: 50%;
+    }
+  }
+`
+
+export const CurrentReadingUnitImageStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+
+  .current-reading-unit-image-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+
+    .current-reading-unit-image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 150px;
+      height: 150px;
+      border-radius: 100px;
+    }
+
+    .current-reading-unit-image {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 100px;
+    }
+  }
+
+  .current-reading-unit-point {
+    font-size: var(--font-size-medium);
+    color: var(--font-color-secondary);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 5px 0;
+
+    .user-point {
+      color: var(--font-color-primary);
+    }
+  }
+
+  .progress {
+    width: 130px;
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      position: relative;
+      background-color: var(--line-color-primary);
+      border-radius: 100px;
+
+      .progress-bar-fill {
+        min-width: 30px;
+        height: 14px;
+        background-color: var(--line-color-light-blue);
+        border-radius: 100px;
+        position: absolute;
+        top: -2px;
+        left: 0;
+        z-index: 1;
+        transition: width 0.3s ease;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 3px;
+          right: 5px;
+          width: 15px;
+          height: 3px;
+          background-color: #f0fef5;
+          border-radius: 100px;
+        }
+      }
+    }
+  }
+`
+
+export const NotCompletedReadingUnitImageStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .not-completed-reading-unit-image-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+
+    .not-completed-reading-unit-image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 150px;
+      height: 150px;
+      background-color: rgba(0, 0, 0, 0.5);
+      background-image: url(${Assets.Icon.lockWhite.src});
+      background-size: 30px;
+      background-repeat: no-repeat;
+      background-position: center;
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
+      z-index: 100;
+      border-radius: 100px;
+    }
+
+    .not-completed-reading-unit-image {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 100px;
+      filter: grayscale(100%);
+      opacity: 0.5;
+    }
+  }
+`
+
+export const CalendarGridStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  .calendar-week-header {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .calendar-body {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 1px;
+    background-color: var(--color-gray-light);
+    border-top: 0.5px solid var(--line-color-primary);
+    border-bottom: 0.5px solid var(--line-color-primary);
+  }
+
+  .current-daily-goal {
+    font-size: var(--font-size-medium);
+    font-family: var(--font-family-secondary);
+    font-weight: 600;
+    padding: 15px 25px;
+    border-bottom: 1px solid var(--line-color-primary);
+
+    .text-gray {
+      font-family: var(--font-family-secondary);
+      font-weight: 600;
+      color: var(--font-color-secondary);
+    }
+  }
+`
+
+export const CalendarWeekdayStyle = styled.span<{
+  variant: 'sun' | 'sat' | 'weekday'
+}>`
+  padding: 10px 0;
+  background-color: var(--color-gray-light);
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  text-align: center;
+  color: ${({ variant }) =>
+    variant === 'sun'
+      ? 'var(--color-red-medium)'
+      : variant === 'sat'
+        ? 'var(--font-color-light-blue)'
+        : 'var(--font-color-secondary)'};
+`
+export const CalendarHeaderStyle = styled.div`
+  width: 100%;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--line-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  .goal-toggle {
+    width: fit-content;
+    display: flex;
+    background-color: #fff;
+    border: 1px solid var(--line-color-primary);
+    border-radius: 100px;
+    padding: 4px;
+    gap: 4px;
+  }
+
+  .toggle-button {
+    cursor: pointer;
+    flex: 1;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    border-radius: 100px;
+    color: var(--font-color-secondary);
+    padding-top: 2px;
+    transition: all 0.2s ease;
+
+    &.active {
+      background-color: var(--font-color-primary);
+      color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    &:hover:not(.active) {
+      color: var(--font-color-primary);
+    }
+  }
+  .left-group,
+  .right-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .comment {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: var(--font-size-medium);
+    font-weight: 700;
+
+    .title {
+      font-family: var(--font-family-secondary);
+      color: var(--font-color-primary);
+    }
+
+    .value {
+      font-family: var(--font-family-secondary);
+      color: var(--font-color-light-blue);
+
+      &.black {
+        color: var(--font-color-primary);
+      }
+    }
+
+    .icon {
+      width: 20px;
+      height: 4px;
+      border-radius: 100px;
+
+      &.blue {
+        background-color: var(--line-color-light-blue);
+      }
+      &.yellow {
+        background-color: #ffcb2c;
+      }
+    }
+  }
+`
+
+export const CalendarItemStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 70px;
+  gap: 2px;
+  background-color: #fff;
+  padding: 2px 0;
+  position: relative;
+
+  &.daily-goal-achievement-bg {
+    background-color: #edf9fc;
+  }
+
+  .day-number {
+    font-size: var(--font-size-small);
+    font-weight: 700;
+    font-family: var(--font-family-secondary);
+    color: var(--font-color-primary);
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    &.today {
+      color: #fff;
+      background-color: var(--color-red-medium);
+    }
+
+    &.other-month {
+      color: var(--font-color-secondary);
+
+      &.today {
+        color: #fff;
+      }
+    }
+  }
+
+  .content {
+    cursor: pointer;
+  }
+
+  .books-read,
+  .points {
+    font-size: var(--font-size-small);
+    font-family: var(--font-family-secondary);
+    color: var(--font-color-secondary);
+    text-align: center;
+
+    .point-unit {
+      font-size: var(--font-size-small);
+      font-family: var(--font-family-secondary);
+      color: var(--font-color-secondary);
+    }
+  }
+
+  .books-read.active {
+    color: var(--font-color-light-blue);
+    font-weight: 700;
+  }
+
+  .points.active {
+    color: var(--font-color-light-blue);
+    font-weight: 700;
+  }
+
+  .badge-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .daily-goal-achievement-line {
+    width: calc(100% + 1px);
+    height: 2px;
+    background-color: var(--line-color-light-blue);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+  }
+
+  .attendance-line {
+    width: calc(100% + 1px);
+    height: 2px;
+    background-color: #ffcb2c;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+`
+
+export const CalendarEventItemStyle = styled.div`
+  width: 100%;
+  padding: 20px 25px;
+  border-bottom: 1px solid var(--line-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+
+  .event-day {
+    padding-top: 5px;
+    font-size: var(--font-size-small);
+    color: var(--font-color-secondary);
+    min-width: 80px;
+  }
+
+  .event-message {
+    font-size: var(--font-size-medium);
+    font-family: var(--font-family-secondary);
+    font-weight: 600;
+  }
+`
+
+export const CalendarEventLoadMoreStyle = styled.button`
+  width: 100%;
+  padding: 16px;
+  background-color: var(--color-gray-light);
+  border: 1px solid var(--line-color-primary);
+  border-radius: 8px;
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-medium);
+  font-weight: 600;
+  color: var(--font-color-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--color-gray-medium);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+`
+
 // features > daily
 
 export const DailyRGBookItemStyle = styled.div<{
@@ -824,15 +1312,18 @@ export const DailyRGCourseStyle = styled.div<{
 }>`
   width: 100%;
   min-height: 77px;
-  background-color: ${({ bgColor }) => bgColor};
+  position: sticky;
+  top: 20px;
+  z-index: 800;
   border-radius: 20px;
+  background-color: ${({ bgColor }) => bgColor};
   background-image: url(${Assets.Icon.glossyPoint.src});
   background-size: 10px 10px;
   background-position: top 7px left 7px;
   background-repeat: no-repeat;
   display: grid;
   grid-template-columns: 1fr 80px;
-  position: relative;
+  box-shadow: -5px -8px 0 20px #fff;
 
   &::before {
     content: '';
@@ -910,6 +1401,19 @@ export const DailyRGLevelStyle = styled.div`
 `
 
 // features > level
+
+export const PrintVocabularyModalStyle = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1100;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 
 export const BookInfoModalStyle = styled.div`
   position: fixed;
@@ -1704,7 +2208,75 @@ export const LevelSectionStyle = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+  }
+
+  .series-pagination-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .pagination-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-gray-light);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background: var(--bg-color-secondary);
+      border-color: var(--line-color-secondary);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &.prev {
+      margin-right: 10px;
+    }
+
+    &.next {
+      margin-left: 10px;
+    }
+  }
+
+  .pagination-dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .pagination-dot {
+    min-width: 8px;
+    min-height: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: var(--line-color-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--line-color-secondary);
+    }
+
+    &.active {
+      background: var(--color-gray-strong);
+    }
   }
 `
 
@@ -1877,7 +2449,6 @@ export const RankCardStyle = styled.div`
   border: 1px solid var(--line-color-primary);
 
   .title-link {
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -1895,7 +2466,15 @@ export const RankCardStyle = styled.div`
   .rank {
     color: var(--font-color-light-blue);
     font-size: var(--font-size-xxlarge);
-    font-weight: bold;
+
+    &.arrow-down {
+      color: var(--font-color-secondary);
+      font-family: var(--font-family-secondary);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
   }
 `
 
@@ -1905,6 +2484,12 @@ export const RecentReviewListStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 
   .header {
     width: fit-content;
@@ -2489,6 +3074,7 @@ export const StudentInfoCardStyle = styled.div`
 
 export const StudentProfileCardStyle = styled.div`
   width: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   gap: 20px;

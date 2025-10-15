@@ -1,5 +1,7 @@
 'use client'
 
+import { Assets } from '@/8th/assets/asset-library'
+import Image from 'next/image'
 import React from 'react'
 import {
   CheckboxLabelStyle,
@@ -17,16 +19,19 @@ interface CustomCheckboxProps {
 
 export default function CustomCheckbox({
   id,
-  checked,
+  checked = false,
   onChange,
   label,
 }: CustomCheckboxProps) {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.checked)
+  const handleToggle = () => {
+    onChange(!checked)
   }
 
-  const handleClick = () => {
-    onChange(!checked)
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault()
+      handleToggle()
+    }
   }
 
   return (
@@ -34,24 +39,33 @@ export default function CustomCheckbox({
       <HiddenCheckboxStyle
         type="checkbox"
         id={id}
-        checked={checked || false}
-        onChange={handleChange}
+        checked={checked}
+        onChange={handleToggle}
       />
       <CheckboxStyle
-        checked={checked || false}
-        onClick={handleClick}
+        checked={checked}
+        onClick={handleToggle}
         role="checkbox"
         aria-checked={checked}
         tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === ' ' || e.key === 'Enter') {
-            e.preventDefault()
-            onChange(!checked)
-          }
-        }}>
-        {checked && '✓'}
+        onKeyDown={handleKeyDown}>
+        {checked && (
+          <Image
+            src={Assets.Icon.checkWhite}
+            alt="check"
+            width={20}
+            height={20}
+          />
+        )}
       </CheckboxStyle>
-      {label && <CheckboxLabelStyle htmlFor={id}>{label}</CheckboxLabelStyle>}
+      {label && (
+        <CheckboxLabelStyle
+          htmlFor={id}
+          onClick={handleToggle}
+          style={{ cursor: 'pointer' }}>
+          {label}
+        </CheckboxLabelStyle>
+      )}
     </BoxStyle>
   )
 }

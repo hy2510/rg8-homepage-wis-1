@@ -7,6 +7,7 @@ import BasicGridLayout from '@/8th/shared/ui/BasicGridLayout'
 export default function Page() {
   return (
     <BasicGridLayout>
+      <div>영어독서왕 베너</div>
       <SearchBar />
       <RecentlyViewed />
       <LeveledReading />

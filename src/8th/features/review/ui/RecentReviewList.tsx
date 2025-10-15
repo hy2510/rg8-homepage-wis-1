@@ -11,8 +11,11 @@ import ReviewBookItem from './ReviewBookItem'
 export default function RecentReviewList() {
   return (
     <RecentReviewListStyle>
-      <BoxStyle className="header" display="flex">
-        Recent Activity
+      <BoxStyle className="header-container">
+        <BoxStyle className="header" display="flex">
+          {/* Recent Activity */}
+          Study Results
+        </BoxStyle>
       </BoxStyle>
       {/* 도서가 있을 때 (15일 기준 3권까지 표시) */}
       <BoxStyle display="grid" gridTemplateColumns="repeat(1, 1fr)" gap={20}>
@@ -35,7 +38,7 @@ export default function RecentReviewList() {
         ))}
       </BoxStyle>
       {/* 도서가 없을 때 */}
-      <BoxStyle
+      {/* <BoxStyle
         display="flex"
         flexDirection="column"
         alignItems="center"
@@ -49,9 +52,9 @@ export default function RecentReviewList() {
           height={120}
         />
         <TextStyle fontFamily="sans" fontSize="small" fontColor="secondary">
-          최근 학습 기록이 없습니다.
+          최근 학습 기록은 없습니다.
         </TextStyle>
-      </BoxStyle>
+      </BoxStyle> */}
     </RecentReviewListStyle>
   )
 }

@@ -1,6 +1,8 @@
 import { ReadingUnitCardStyle } from '@/8th/features/FeaturesStyled'
 import { CommonTitleStyle, WidgetBoxStyle } from '@/8th/shared/SharedStyled'
 import Image from 'next/image'
+import { useState } from 'react'
+import ReadingUnitStoryModal from './ReadingUnitStoryModal'
 
 /**
  * 리딩유닛 카드
@@ -19,10 +21,14 @@ export default function ReadingUnitCard({
   friendProgress = 20,
   friendPoint = 100,
 }: ReadingUnitCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
     <WidgetBoxStyle>
       <ReadingUnitCardStyle>
-        <CommonTitleStyle>프렌즈 스토리</CommonTitleStyle>
+        <CommonTitleStyle onClick={() => setIsModalOpen(true)}>
+          프렌즈 스토리
+        </CommonTitleStyle>
         <div className="body">
           <div className="friend-name">
             <div className="text">{friendName}</div>
@@ -45,6 +51,9 @@ export default function ReadingUnitCard({
           </div>
         </div>
       </ReadingUnitCardStyle>
+      {isModalOpen && (
+        <ReadingUnitStoryModal onClose={() => setIsModalOpen(false)} />
+      )}
     </WidgetBoxStyle>
   )
 }

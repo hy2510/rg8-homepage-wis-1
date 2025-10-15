@@ -1,11 +1,10 @@
 'use client'
 
 import { ReviewBookItemStyle } from '@/8th/features/FeaturesStyled'
+import { ReviewMoreButton } from '@/8th/shared/ui/Buttons'
 import CustomCheckbox from '@/8th/shared/ui/CustomCheckbox'
-import DropdownMenu from '@/8th/shared/ui/Dropdowns'
 import { BoxStyle } from '@/8th/shared/ui/Misc'
 import Image from 'next/image'
-import { useState } from 'react'
 
 const getOrdinalSuffix = (num: number): string => {
   if (num === 1) return 'st'
@@ -35,6 +34,10 @@ interface ReviewBookItemProps {
   isExportMode?: boolean
   isSelected?: boolean
   onSelectionChange?: (selected: boolean) => void
+  onRetry?: (title: string) => void
+  onPrintReport?: (title: string) => void
+  onPrintVocabulary?: (title: string) => void
+  onPrintWorksheet?: (title: string) => void
 }
 
 export default function ReviewBookItem({
@@ -54,9 +57,11 @@ export default function ReviewBookItem({
   isExportMode = false,
   isSelected = false,
   onSelectionChange,
+  onRetry,
+  onPrintReport,
+  onPrintVocabulary,
+  onPrintWorksheet,
 }: ReviewBookItemProps) {
-  const [isReportMenuOpen, setIsReportMenuOpen] = useState(false)
-
   return (
     <ReviewBookItemStyle>
       <BoxStyle display="flex" alignItems="center" gap={20}>
@@ -133,47 +138,13 @@ export default function ReviewBookItem({
             </div>
           )}
         </BoxStyle>
-        <BoxStyle position="relative">
-          <BoxStyle
-            className="more-icon"
-            onClick={() => setIsReportMenuOpen(true)}
-          />
-          {isReportMenuOpen && (
-            <BoxStyle position="relative" zIndex={10}>
-              <DropdownMenu
-                items={[
-                  {
-                    text: 'Retry',
-                    onClick: () => {
-                      console.log('Retry clicked for:', title)
-                    },
-                    subText: '다시 보기',
-                  },
-                  {
-                    text: 'Print Report',
-                    onClick: () => {
-                      console.log('Print Report clicked for:', title)
-                    },
-                  },
-                  {
-                    text: 'Print Vocabulary',
-                    onClick: () => {
-                      console.log('Print Vocabulary clicked for:', title)
-                    },
-                  },
-                  {
-                    text: 'Print Worksheet',
-                    onClick: () => {
-                      console.log('Print Worksheet clicked for:', title)
-                    },
-                  },
-                ]}
-                isOpen={isReportMenuOpen}
-                onClose={() => setIsReportMenuOpen(false)}
-              />
-            </BoxStyle>
-          )}
-        </BoxStyle>
+        <ReviewMoreButton
+          title={title}
+          onRetry={onRetry}
+          onPrintReport={onPrintReport}
+          onPrintVocabulary={onPrintVocabulary}
+          onPrintWorksheet={onPrintWorksheet}
+        />
       </BoxStyle>
     </ReviewBookItemStyle>
   )
