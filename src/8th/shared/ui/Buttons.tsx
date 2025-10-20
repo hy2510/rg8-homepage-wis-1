@@ -19,7 +19,11 @@ export function StartButton({ onClick }: { onClick?: () => void }) {
   return <StartButtonStyle onClick={onClick}>Start!</StartButtonStyle>
 }
 
-export function ResourceDownloadButton() {
+export function ResourceDownloadButton({
+  setIsModalOpen,
+}: {
+  setIsModalOpen: (isModalOpen: boolean) => void
+}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isPrintVocabularyModalOpen, setIsPrintVocabularyModalOpen] =
     useState(false)
@@ -40,7 +44,7 @@ export function ResourceDownloadButton() {
           onClick={toggleDropdown}
           aria-label="Download options">
           <Image
-            src={Assets.Icon.downloadLightBlue}
+            src={Assets.Icon.moreVerticalGray}
             alt="download"
             width={24}
             height={24}
@@ -49,17 +53,24 @@ export function ResourceDownloadButton() {
         <DropdownMenu
           items={[
             {
-              text: 'Worksheet',
+              text: 'Book Info',
               onClick: () => {
-                console.log('Worksheet clicked')
+                setIsModalOpen(true)
                 closeDropdown()
               },
             },
             {
-              text: 'Vocabulary',
+              text: 'Print Vocabulary',
               onClick: () => {
                 console.log('Vocabulary clicked')
                 setIsPrintVocabularyModalOpen(true)
+                closeDropdown()
+              },
+            },
+            {
+              text: 'Print Worksheet',
+              onClick: () => {
+                console.log('Worksheet clicked')
                 closeDropdown()
               },
             },

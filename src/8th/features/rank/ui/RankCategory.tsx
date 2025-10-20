@@ -2,20 +2,21 @@
 
 import { TabBarStyle } from '@/8th/shared/SharedStyled'
 import { TextStyle } from '@/8th/shared/ui/Misc'
-import { useState } from 'react'
 
 export interface RankCategoryItem {
   label: string
   value: string
 }
 
-export default function RankCategory({ tabs }: { tabs: RankCategoryItem[] }) {
-  const [activeTab, setActiveTab] = useState(0)
-
-  const handleTabClick = (index: number) => {
-    setActiveTab(index)
-  }
-
+export default function RankCategory({
+  tabs,
+  selectedTab,
+  setSelectedTab,
+}: {
+  tabs: RankCategoryItem[]
+  selectedTab: string
+  setSelectedTab: (tab: string) => void
+}) {
   return (
     <TabBarStyle>
       {tabs &&
@@ -23,8 +24,8 @@ export default function RankCategory({ tabs }: { tabs: RankCategoryItem[] }) {
           <RankCategoryItem
             key={tab.value}
             label={tab.label}
-            active={activeTab === index}
-            onClick={() => handleTabClick(index)}
+            active={selectedTab === tab.value}
+            onClick={() => setSelectedTab(tab.value)}
           />
         ))}
     </TabBarStyle>

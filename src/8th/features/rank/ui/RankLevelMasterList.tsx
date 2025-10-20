@@ -1,6 +1,89 @@
+import RankLevelMasterItem from './RankLevelMasterItem'
+
 /**
  * 레벨마스터 리스트
  */
 export default function RankLevelMasterList() {
-  return <div>RankLevelMasterList</div>
+  return (
+    <div>
+      <RankLevelMasterItem
+        number={0}
+        level="-"
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        registrationDate="-"
+        isMe
+      />
+      <RankLevelMasterItem
+        number={1}
+        level="KA"
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        registrationDate="2025-01-01"
+      />
+      <RankLevelMasterItem
+        number={2}
+        level="KA"
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        registrationDate="2025-01-01"
+      />
+      <RankLevelMasterItem
+        number={3}
+        level="KA"
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        registrationDate="2025-01-01"
+      />
+      <RankLevelMasterItem
+        number={4}
+        level="KA"
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        registrationDate="2025-01-01"
+      />
+      <RankLevelMasterItem
+        number={5}
+        level="KA"
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        registrationDate="2025-01-01"
+      />
+      <RankLevelMasterItem
+        number={6}
+        level="KA"
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        registrationDate="2025-01-01"
+      />
+      <RankLevelMasterItem
+        number={7}
+        level="KA"
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        registrationDate="2025-01-01"
+      />
+      <RankLevelMasterItem
+        number={8}
+        level="KA"
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        registrationDate="2025-01-01"
+      />
+      <RankLevelMasterItem
+        number={9}
+        level="KA"
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        registrationDate="2025-01-01"
+      />
+      <RankLevelMasterItem
+        number={10}
+        level="KA"
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        registrationDate="2025-01-01"
+      />
+    </div>
+  )
 }

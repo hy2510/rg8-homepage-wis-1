@@ -3,7 +3,7 @@
 import { Assets } from '@/8th/assets/asset-library'
 import { StudentProfileCardStyle } from '@/8th/features/FeaturesStyled'
 import { WidgetBoxStyle } from '@/8th/shared/SharedStyled'
-import { BoxStyle } from '@/8th/shared/ui/Misc'
+import { BoxStyle, TextStyle } from '@/8th/shared/ui/Misc'
 import SITE_PATH from '@/app/site-path'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation'
 
 interface StudentProfileCardProps {
   studentName: string
+  studentLevel: string
   pointRank: number
   booksRead: number
   earnedPoints: string
@@ -23,6 +24,7 @@ interface StudentProfileCardProps {
 
 export default function StudentProfileCard({
   studentName = 'Rose',
+  studentLevel = 'KA',
   pointRank = 10,
   booksRead = 0,
   earnedPoints = '100.1',
@@ -34,7 +36,9 @@ export default function StudentProfileCard({
   return (
     <WidgetBoxStyle>
       <StudentProfileCardStyle>
-        <div className="header">
+        <div
+          className="header"
+          onClick={() => router.push(SITE_PATH.NW8.ACTIVITY)}>
           <div className="avatar">
             <Image
               src="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/dodo_09.png"
@@ -43,13 +47,19 @@ export default function StudentProfileCard({
               height={50}
             />
           </div>
-          <BoxStyle
-            display="flex"
-            alignItems="center"
-            gap={5}
-            onClick={() => router.push(SITE_PATH.NW8.RANKING)}>
-            <div className="rank">#{pointRank}</div>
-            <div className="name">{studentName}</div>
+          <BoxStyle display="flex" flexDirection="column" gap={3}>
+            <BoxStyle display="flex" alignItems="center" gap={5}>
+              {/* <div className="rank">#{pointRank}</div> */}
+              <div className="name">{studentName}</div>
+            </BoxStyle>
+            <TextStyle
+              fontSize="small"
+              fontFamily="sans"
+              fontColor="secondary"
+              fontWeight={800}
+              padding="0 0 0 2px">
+              Lv.{studentLevel} {pointRank > 1000 ? '' : '/ Rank ' + pointRank}
+            </TextStyle>
           </BoxStyle>
         </div>
         <div className="body">

@@ -63,6 +63,7 @@ export default function BookInfoModal({
 }: BookInfoModalProps) {
   const [addToDo, setAddToDo] = useState(false)
   const [addFavorite, setAddFavorite] = useState(false)
+  const [isCopied, setIsCopied] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPrintVocabularyModalOpen, setIsPrintVocabularyModalOpen] =
     useState(false)
@@ -114,7 +115,24 @@ export default function BookInfoModal({
                     flexDirection="column"
                     alignItems="flex-start">
                     <div className="book-code">{bookCode}</div>
-                    <div className="title">{title}</div>
+                    <div
+                      className="title"
+                      onClick={() => {
+                        navigator.clipboard
+                          .writeText(title)
+                          .then(() => {
+                            console.log('Title copied to clipboard:', title)
+                            setIsCopied(true)
+                            setTimeout(() => {
+                              setIsCopied(false)
+                            }, 1000)
+                          })
+                          .catch((err) => {
+                            console.error('Failed to copy title:', err)
+                          })
+                      }}>
+                      {isCopied ? 'Copied!' : title}
+                    </div>
                     <div className="author">by {author}</div>
                   </BoxStyle>
                   <BoxStyle className="buttons" display="flex" gap={10}>

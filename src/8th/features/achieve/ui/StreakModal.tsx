@@ -23,6 +23,7 @@ interface StreakData {
 
 interface StreakModalProps {
   isModalOpen?: boolean
+  todayStreak?: boolean
   currentUserStreak?: number
   onClose?: () => void
   earnedDates?: { [key: number]: string }
@@ -32,6 +33,7 @@ interface StreakModalProps {
  * 연속학습 모달
  */
 export default function StreakModal({
+  todayStreak = false,
   currentUserStreak = 0,
   onClose,
   earnedDates = {},
@@ -244,6 +246,7 @@ export default function StreakModal({
                 key={streak.id}
                 ref={streak.isProgress ? currentProgressRef : null}>
                 <StreakItem
+                  todayStreak={todayStreak}
                   isProgress={streak.isProgress}
                   getAward={streak.getAward}
                   streakDays={streak.streakDays}

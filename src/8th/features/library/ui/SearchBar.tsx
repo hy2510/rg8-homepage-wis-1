@@ -29,7 +29,7 @@ export default function SearchBar() {
 
   return (
     <SearchBarStyle>
-      <BoxStyle className="search-option">
+      {/* <BoxStyle className="search-option">
         <TextStyle fontSize="medium" fontColor="secondary">
           Title
         </TextStyle>
@@ -39,9 +39,10 @@ export default function SearchBar() {
           width={14}
           height={14}
         />
-      </BoxStyle>
+      </BoxStyle> */}
       <BoxStyle display="flex" gap={10}>
         <BoxStyle className="search-input">
+          <label htmlFor="search-input" />
           <input
             type="text"
             placeholder="검색하고 싶은 도서를 입력하세요."

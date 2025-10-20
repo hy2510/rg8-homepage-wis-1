@@ -1,6 +1,100 @@
+import RankHallOfFameItem from './RankHallOfFameItem'
+
 /**
  * 명예의전당 리스트
  */
 export default function RankHallOfFameList() {
-  return <div>RankHallOfFameList</div>
+  return (
+    <div>
+      <RankHallOfFameItem
+        rank={100}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        readingCount={100}
+        point={100}
+        registrationDate="2025-01-01"
+        isMe
+      />
+      <RankHallOfFameItem
+        rank={1}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        readingCount={100}
+        point={100}
+        registrationDate="2025-01-01"
+      />
+      <RankHallOfFameItem
+        rank={2}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        readingCount={100}
+        point={100}
+        registrationDate="2025-01-01"
+      />
+      <RankHallOfFameItem
+        rank={3}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        readingCount={100}
+        point={100}
+        registrationDate="2025-01-01"
+      />
+      <RankHallOfFameItem
+        rank={4}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        readingCount={100}
+        point={100}
+        registrationDate="2025-01-01"
+      />
+      <RankHallOfFameItem
+        rank={5}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        readingCount={100}
+        point={100}
+        registrationDate="2025-01-01"
+      />
+      <RankHallOfFameItem
+        rank={6}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        readingCount={100}
+        point={100}
+        registrationDate="2025-01-01"
+      />
+      <RankHallOfFameItem
+        rank={7}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        readingCount={100}
+        point={100}
+        registrationDate="2025-01-01"
+      />
+      <RankHallOfFameItem
+        rank={8}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        readingCount={100}
+        point={100}
+        registrationDate="2025-01-01"
+      />
+      <RankHallOfFameItem
+        rank={9}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        readingCount={100}
+        point={100}
+        registrationDate="2025-01-01"
+      />
+      <RankHallOfFameItem
+        rank={10}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        readingCount={100}
+        point={100}
+        registrationDate="2025-01-01"
+      />
+    </div>
+  )
 }

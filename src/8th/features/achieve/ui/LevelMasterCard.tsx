@@ -27,7 +27,7 @@ export default function LevelMasterCard({
   return (
     <LevelMasterCardStyle>
       <BoxStyle className="title-link">
-        <span>학습 레벨</span>
+        <span>나의 학습 레벨</span>
         {/* <Image
           src={Assets.Icon.arrowUpRightBlack}
           alt="arrow-up-right-black"

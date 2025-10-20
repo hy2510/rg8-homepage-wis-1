@@ -3,6 +3,15 @@
 import { Assets } from '@/8th/assets/asset-library'
 import styled from 'styled-components'
 
+// CSS Property for smooth gradient animation
+const gradientAnimationCSS = `
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+`
+
 // features > achieve
 
 export const ChallengeTrophyCardStyle = styled.div`
@@ -14,7 +23,6 @@ export const ChallengeTrophyCardStyle = styled.div`
   border: 1px solid var(--line-color-primary);
 
   .title-link {
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -29,21 +37,6 @@ export const ChallengeTrophyCardStyle = styled.div`
     width: 72px;
     height: auto;
   }
-
-  .challenge-award-name {
-    font-size: var(--font-size-medium);
-    font-family: var(--font-family-secondary);
-
-    span {
-      font-family: var(--font-family-secondary);
-      &:first-child {
-        font-weight: bold;
-      }
-      &:last-child {
-        color: var(--font-color-secondary);
-      }
-    }
-  }
 `
 
 export const DailyGoalCardStyle = styled.div`
@@ -54,65 +47,142 @@ export const DailyGoalCardStyle = styled.div`
     grid-template-columns: 1fr 100px;
     gap: 10px;
     align-items: center;
-  }
 
-  .comment {
-    font-size: var(--font-size-large);
-    font-weight: bold;
-    font-family: var(--font-family-secondary);
-    padding-left: 10px;
-  }
-
-  .progress {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .donut-progress {
-    position: relative;
-    width: 100px;
-    height: 100px;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 14px;
-      left: calc(50% - 1px);
-      width: 2px;
-      height: 2px;
-      background-color: #fff;
-      border-radius: 50%;
-      z-index: 10;
+    .comment {
+      font-size: var(--font-size-large);
+      font-weight: bold;
+      font-family: var(--font-family-secondary);
+      padding-left: 10px;
     }
-  }
 
-  .donut-chart {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+    .progress {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  .donut-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1em;
-    text-align: center;
+    .donut-progress {
+      position: relative;
+      width: 100px;
+      height: 100px;
 
-    .daily-progress {
-      color: var(--font-color-secondary);
-
-      &.active {
-        color: var(--font-color-primary);
+      &::after {
+        content: '';
+        position: absolute;
+        top: 14px;
+        left: calc(50% - 1px);
+        width: 2px;
+        height: 2px;
+        background-color: #fff;
+        border-radius: 50%;
+        z-index: 10;
       }
     }
 
-    .daily-goal {
-      color: var(--font-color-secondary);
+    .donut-chart {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .donut-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1em;
+      text-align: center;
+      gap: 5px;
+
+      .daily-progress {
+        color: var(--font-color-secondary);
+
+        &.active {
+          color: var(--font-color-primary);
+        }
+      }
+
+      .daily-goal {
+        color: var(--font-color-secondary);
+      }
+    }
+  }
+
+  .body-complete {
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    gap: 5px;
+    align-items: center;
+
+    .comment {
+      color: #b2720a;
+      padding-left: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      position: relative;
+      z-index: 1;
+
+      .comment-title {
+        font-size: var(--font-size-xlarge);
+        font-weight: bold;
+        font-family: var(--font-family-secondary);
+      }
+
+      .comment-text {
+        font-family: var(--font-family-secondary);
+        font-size: var(--font-size-medium);
+        font-weight: bold;
+        letter-spacing: -0.05em;
+      }
+
+      &.award {
+        color: #fff;
+      }
+    }
+
+    .complete {
+      width: 100px;
+      height: 100px;
+      font-size: var(--font-size-xlarge);
+      background-image: url(${Assets.Icon.Side.dailyGoalCompleteBg.src});
+      background-size: 80px;
+      background-repeat: no-repeat;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b2720a;
+      font-weight: bold;
+      font-family: var(--font-family-secondary);
+      position: relative;
+      z-index: 1;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(${Assets.Icon.Side.sparklingBg.src});
+        background-size: 125%;
+        background-repeat: no-repeat;
+        background-position: center;
+        animation: sparklingFloat 3s linear infinite;
+
+        @keyframes sparklingFloat {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.2;
+          }
+        }
+      }
     }
   }
 `
@@ -396,6 +466,19 @@ export const StreakStatusStyle = styled.div`
   justify-content: flex-end;
   gap: 20px;
 
+  .streak-status-ready {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .streak-status-ready-icon {
+    width: 50px;
+    height: 50px;
+  }
+
   .streak-progress {
     width: 100%;
     height: 24px;
@@ -407,9 +490,10 @@ export const StreakStatusStyle = styled.div`
     }
 
     .streak-progress-fill {
+      min-width: 24px;
       height: 100%;
       border-radius: 100px;
-      background-color: var(--color-gray-medium);
+      background-color: var(--color-gray-strong);
       background-image: url(${Assets.Icon.checkWhite.src});
       background-size: 24px;
       background-repeat: repeat-x;
@@ -417,25 +501,20 @@ export const StreakStatusStyle = styled.div`
       transition: width 1s ease-in-out;
 
       .streak-fire-icon {
-        position: absolute;
-        top: calc(50% - 15px);
-        right: -15px;
-        width: 30px;
-        height: 30px;
-        z-index: 1;
-        filter: grayscale(100%);
-        opacity: 0.8;
+        display: none;
       }
 
       &.active {
         background-color: var(--color-red-medium);
 
         .streak-fire-icon {
+          display: block;
+          position: absolute;
+          z-index: 1;
           top: calc(50% - 30px);
           right: -25px;
           width: 50px;
           height: 50px;
-          filter: grayscale(0);
           opacity: 1;
         }
       }
@@ -481,6 +560,17 @@ export const StreakItemStyle = styled.div<{ streakDays: string }>`
       width: 60px;
       height: 60px;
       z-index: 1;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translate(-50%, -50%) translateY(0px);
+      }
+      50% {
+        transform: translate(-50%, -50%) translateY(-8px);
+      }
     }
 
     .streak-award-gray-image {
@@ -502,13 +592,13 @@ export const StreakItemStyle = styled.div<{ streakDays: string }>`
       width: 100%;
       height: 10px;
       position: relative;
-      background-color: #ffd6d9;
+      background-color: var(--color-gray-medium);
       border-radius: 100px;
 
       .progress-bar-fill {
         min-width: 30px;
         height: 14px;
-        background-color: var(--color-red-medium);
+        background-color: var(--color-gray-strong);
         border-radius: 100px;
         position: absolute;
         top: -2px;
@@ -525,6 +615,14 @@ export const StreakItemStyle = styled.div<{ streakDays: string }>`
           height: 3px;
           background-color: #f0fef5;
           border-radius: 100px;
+        }
+      }
+
+      &.today-streak {
+        background-color: #ffd6d9;
+
+        .progress-bar-fill {
+          background-color: var(--color-red-medium);
         }
       }
     }
@@ -553,6 +651,38 @@ export const DailyGoalSettingStyle = styled.div`
     align-items: center;
     justify-content: space-between;
     gap: 30px;
+  }
+
+  .goal-method-dropdown {
+    width: fit-content;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid var(--line-color-primary);
+    border-radius: 10px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .goal-method-dropdown-item {
+      font-family: var(--font-family-secondary);
+      font-size: var(--font-size-medium);
+      font-weight: bold;
+      min-width: 150px;
+      width: fit-content;
+      padding: 15px 20px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--line-color-primary);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
   }
 
   .goal-method-item {
@@ -602,9 +732,12 @@ export const DailyGoalSettingStyle = styled.div`
   /* 텍스트 스타일 클래스들 */
   .section-title {
     font-family: var(--font-family-secondary);
-    color: var(--font-color-primary);
-    font-weight: 700;
-    font-size: var(--font-size-large);
+    color: var(--font-color-secondary);
+    font-weight: bold;
+    font-size: var(--font-size-medium);
+    border-bottom: 1px solid var(--line-color-primary);
+    padding-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   .goal-method-item-text {
@@ -1192,6 +1325,8 @@ export const DailyRGBookItemStyle = styled.div<{
   color?: string
   isPreK?: boolean
 }>`
+  ${gradientAnimationCSS}
+
   width: 100%;
   min-height: 150px;
   border-radius: 20px;
@@ -1204,6 +1339,49 @@ export const DailyRGBookItemStyle = styled.div<{
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  &.current-book {
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
+      z-index: -1;
+      padding: 3px;
+      border-radius: 22px;
+    }
+
+    &::after {
+      background-image: conic-gradient(
+        from var(--angle),
+        ${({ color }) => color}
+      );
+    }
+
+    &::before {
+      background-image: conic-gradient(
+        from var(--angle),
+        #ffca2b,
+        #ffffff,
+        #ffca2b
+      );
+      filter: blur(10px);
+      animation: 2s spin linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        --angle: 0deg;
+      }
+      to {
+        --angle: 360deg;
+      }
+    }
+  }
 
   .book-container {
     .book-number,
@@ -1254,7 +1432,6 @@ export const DailyRGBookItemStyle = styled.div<{
     }
 
     .thumbnail {
-      cursor: pointer;
       border-radius: 15px;
       background-color: var(--color-gray-strong);
 
@@ -1668,7 +1845,6 @@ export const BookItemStyle = styled.div<{ level: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
 
   .book-cover-container {
     cursor: pointer;
@@ -1687,7 +1863,7 @@ export const BookItemStyle = styled.div<{ level: string }>`
         height: auto;
         object-fit: cover;
         background-color: var(--color-gray-opacity-70);
-        border-radius: 15px;
+        border-radius: 15px 15px 0 0;
       }
 
       .check-box-position {
@@ -1754,6 +1930,39 @@ export const BookItemStyle = styled.div<{ level: string }>`
     }
   }
 
+  .book-code-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .book-code {
+      position: relative;
+      z-index: 1;
+      font-size: 0.6em;
+      color: #fff;
+      width: 100%;
+      padding: 5px 0;
+      text-align: center;
+      border-radius: 0 0 15px 15px;
+      background-color: rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .book-code-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      border-radius: 0 0 15px 15px;
+      background-size: 100%;
+      background-position: bottom center;
+      background-repeat: no-repeat;
+    }
+  }
+
   .book-info-container {
     width: 100%;
     height: 100%;
@@ -1761,6 +1970,7 @@ export const BookItemStyle = styled.div<{ level: string }>`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    margin-top: 10px;
 
     .wrapper {
       text-align: center;
@@ -2302,12 +2512,11 @@ export const RecentlyViewedStyle = styled.div`
 
 export const SearchBarStyle = styled.div`
   width: 100%;
-  height: 52px;
+  min-height: 52px;
   border: 1px solid var(--line-color-primary);
   border-radius: 100px;
-  display: grid;
-  grid-template-columns: fit-content(100px) 1fr;
-  align-items: center;
+  padding: 10px 20px;
+  padding-right: 0;
 
   .search-option {
     cursor: pointer;
@@ -2435,6 +2644,168 @@ export const ThemeItemStyle = styled.div`
 
   .title {
     color: var(--font-color-dark-blue);
+  }
+`
+
+export const ChallengeBoardStyle = styled.div`
+  width: 100%;
+  height: auto;
+  min-height: 120px;
+  border: 1px solid var(--line-color-primary);
+  border-radius: 20px;
+
+  .challenge-board-top {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    position: relative;
+    padding: 10px;
+
+    .challenge-board-symbol {
+      display: block;
+      width: 120px;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .challenge-board-title {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .challenge-board-arrow {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: calc(50% - 20px);
+      right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        display: block;
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+`
+
+export const ChallengeBoardGoalInfoStyle = styled.div`
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  border-top: 1px solid var(--line-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-light-blue-opacity-10);
+
+  .challenge-board-goal-edit-button {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      display: block;
+    }
+  }
+`
+
+export const ChallengeBoardProgressInfoStyle = styled.div`
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  min-height: 100px;
+  border-top: 1px solid var(--line-color-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`
+
+export const ChallengeBoardProgressItemStyle = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 5px;
+  }
+
+  .title-text {
+    font-size: var(--font-size-medium);
+    font-weight: 600;
+    font-family: var(--font-family-secondary);
+  }
+
+  .sub-text {
+    font-size: var(--font-size-small);
+    font-weight: 600;
+    font-family: var(--font-family-secondary);
+    color: var(--font-color-secondary);
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 10px;
+    position: relative;
+    background-color: var(--line-color-primary);
+    border-radius: 100px;
+
+    .progress-bar-fill {
+      min-width: 30px;
+      height: 14px;
+      background-color: var(--line-color-light-blue);
+      border-radius: 100px;
+      position: absolute;
+      top: -2px;
+      left: 0;
+      z-index: 1;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &.red {
+        background-color: var(--color-red-medium);
+      }
+
+      &.transparent {
+        background-color: transparent;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 3px;
+        right: 5px;
+        width: 15px;
+        height: 3px;
+        background-color: #f0fef5;
+        border-radius: 100px;
+      }
+    }
+
+    .progress-bar-fill-goal {
+      min-width: 30px;
+      height: 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      border-right: 2px solid #3c4b62;
+    }
   }
 `
 
@@ -3080,6 +3451,7 @@ export const StudentProfileCardStyle = styled.div`
   gap: 20px;
 
   .header {
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 10px;

@@ -21,7 +21,7 @@ export default function RankCard({ rank = 10 }: RankCardProps) {
   return (
     <RankCardStyle>
       <BoxStyle className="title-link">
-        <span>랭킹</span>
+        <span>독서 랭킹</span>
         {/* <Image
           src={Assets.Icon.arrowUpRightBlack}
           alt="arrow-up-right-black"

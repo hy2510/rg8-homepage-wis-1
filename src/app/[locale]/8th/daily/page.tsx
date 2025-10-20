@@ -51,6 +51,9 @@ export default function Page() {
     // 현재 책으로 스크롤
     scrollToCurrentBook()
   }, [currentBookId])
+
+  const [themeColor] = useState<string>('#B535DC')
+
   return (
     <BasicGridLayout>
       <DailyRGLevel />
@@ -64,7 +67,7 @@ export default function Page() {
           bookCount={10}
           total={26}
           isCurrent={true}
-          bgColor="#b535dc"
+          bgColor={themeColor}
           progressColor="#ffca2b"
         />
         {/* 동적으로 책 목록 렌더링 */}
@@ -80,6 +83,7 @@ export default function Page() {
             isCompleted={book.isCompleted}
             isPreK={book.isPreK}
             onComplete={() => completeBook(book.id)}
+            color={themeColor}
           />
         ))}
       </BoxStyle>

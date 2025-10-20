@@ -59,7 +59,7 @@ const DailyRGBookItem = forwardRef<HTMLDivElement, DailyRGBookItemProps>(
     return (
       <DailyRGBookItemStyle
         ref={ref}
-        // className={isCurrent ? animation : ''}
+        className={isCurrent ? 'current-book' : ''}
         isPreK={isPreK}
         isCurrent={isCurrent}
         isCompleted={isCompleted}
@@ -76,7 +76,7 @@ const DailyRGBookItem = forwardRef<HTMLDivElement, DailyRGBookItemProps>(
           ) : (
             <div className="book-number">{bookNumber}</div>
           )}
-          <div className="thumbnail" onClick={() => setIsModalOpen(true)}>
+          <div className="thumbnail">
             <Image
               src={imgUrl || ''}
               alt="thumbnail"
@@ -107,7 +107,7 @@ const DailyRGBookItem = forwardRef<HTMLDivElement, DailyRGBookItemProps>(
             {isCurrent && <StartButton onClick={onComplete} />}
           </BoxStyle>
         </BoxStyle>
-        <ResourceDownloadButton />
+        <ResourceDownloadButton setIsModalOpen={setIsModalOpen} />
         {isModalOpen && (
           <BookInfoModal
             onClickClose={() => setIsModalOpen(false)}

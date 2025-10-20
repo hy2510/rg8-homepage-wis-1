@@ -13,6 +13,7 @@ import BookInfoModal from './BookInfoModal'
 
 interface BookItemProps {
   title?: string
+  bookCode?: string
   point?: string
   imgSrc?: string
   isLoading?: boolean
@@ -24,6 +25,7 @@ interface BookItemProps {
 }
 
 export default function BookItem({
+  bookCode = 'EB-KA-001',
   title = "Alligator's Apples",
   point = '3.2',
   imgSrc = 'https://wcfresource.a1edu.com/newsystem/image/br/covernew1/eb-ka-001.jpg',
@@ -36,6 +38,7 @@ export default function BookItem({
 }: BookItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
+  const [isCopied, setIsCopied] = useState(false)
 
   if (isLoading) {
     return (
@@ -127,9 +130,30 @@ export default function BookItem({
             )}
           </div>
         </div>
-        <div className="book-info-container">
+        <div className="book-code-container">
+          <div className="book-code">{bookCode}</div>
+          <div
+            className="book-code-bg"
+            style={{ backgroundImage: `url(${imgSrc})` }}></div>
+        </div>
+        <div
+          className="book-info-container"
+          onClick={() => {
+            navigator.clipboard
+              .writeText(title)
+              .then(() => {
+                console.log('Title copied to clipboard:', title)
+                setIsCopied(true)
+                setTimeout(() => {
+                  setIsCopied(false)
+                }, 1000)
+              })
+              .catch((err) => {
+                console.error('Failed to copy title:', err)
+              })
+          }}>
           <div className="wrapper">
-            <span className="title">{title}</span>
+            <span className="title">{isCopied ? 'Copied!' : title}</span>
             {point !== '0' && (
               <>
                 <span className="dot">•</span>

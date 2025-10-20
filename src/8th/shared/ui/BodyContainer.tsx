@@ -4,6 +4,7 @@ import {
   BodyContainerStyle,
   ContentsWrapperStyle,
 } from '@/8th/shared/SharedStyled'
+import FooterMenu from './FooterMenu'
 
 /**
  * 기본 바디 컨테이너
@@ -16,6 +17,7 @@ export default function BodyContainer({
   return (
     <BodyContainerStyle>
       <ContentsWrapperStyle>{children}</ContentsWrapperStyle>
+      <FooterMenu />
     </BodyContainerStyle>
   )
 }

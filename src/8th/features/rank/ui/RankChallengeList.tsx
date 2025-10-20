@@ -1,6 +1,100 @@
+import RankChallengeItem from './RankChallengeItem'
+
 /**
  * 영어독서왕 리스트
  */
 export default function RankChallengeList() {
-  return <div>RankChallengeList</div>
+  return (
+    <div>
+      <RankChallengeItem
+        rank={1}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        studyDays={10}
+        readingCount={100}
+        point={100}
+        isMe
+      />
+      <RankChallengeItem
+        rank={1}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        studyDays={10}
+        readingCount={100}
+        point={100}
+      />
+      <RankChallengeItem
+        rank={2}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        studyDays={10}
+        readingCount={100}
+        point={100}
+      />
+      <RankChallengeItem
+        rank={3}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        studyDays={10}
+        readingCount={100}
+        point={100}
+      />
+      <RankChallengeItem
+        rank={4}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        studyDays={10}
+        readingCount={100}
+        point={100}
+      />
+      <RankChallengeItem
+        rank={5}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        studyDays={10}
+        readingCount={100}
+        point={100}
+      />
+      <RankChallengeItem
+        rank={6}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        studyDays={10}
+        readingCount={100}
+        point={100}
+      />
+      <RankChallengeItem
+        rank={7}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        studyDays={10}
+        readingCount={100}
+        point={100}
+      />
+      <RankChallengeItem
+        rank={8}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        studyDays={10}
+        readingCount={100}
+        point={100}
+      />
+      <RankChallengeItem
+        rank={9}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        studyDays={10}
+        readingCount={100}
+        point={100}
+      />
+      <RankChallengeItem
+        rank={10}
+        avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
+        name="홍길동"
+        studyDays={10}
+        readingCount={100}
+        point={100}
+      />
+    </div>
+  )
 }

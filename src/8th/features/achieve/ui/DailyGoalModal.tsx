@@ -36,6 +36,8 @@ export default function DailyGoalModal({ onClose }: DailyGoalModalProps) {
   const [isDailyGoalSettingVisible, setIsDailyGoalSettingVisible] =
     useState(false)
   const [dailyInProgress, setDailyInProgress] = useState(126)
+  const [selectedMethod, setSelectedMethod] = useState('points')
+  const [goalCount, setGoalCount] = useState(3)
 
   // 일일 목표 아이템 데이터
   const dailyGoalItems: DailyGoalItemData[] = [
@@ -339,6 +341,16 @@ export default function DailyGoalModal({ onClose }: DailyGoalModalProps) {
     setIsDailyGoalSettingVisible(!isDailyGoalSettingVisible)
   }
 
+  const getGoalText = () => {
+    return selectedMethod === 'points'
+      ? `하루 ${goalCount}P 획득`
+      : `하루 ${goalCount}권 학습`
+  }
+
+  const getMaxCount = () => {
+    return selectedMethod === 'points' ? 150 : 10
+  }
+
   // getAward가 false인 아이템들 중 첫 번째 아이템인지 확인
   const isFirstFalseAwardItem = (index: number, getAward: boolean) => {
     if (getAward) return false
@@ -380,7 +392,7 @@ export default function DailyGoalModal({ onClose }: DailyGoalModalProps) {
                   fontFamily="sans"
                   fontColor="lightBlue"
                   fontWeight="bold">
-                  하루 3권씩 학습 완료하기
+                  {getGoalText()}
                 </TextStyle>
                 <Image
                   src={
@@ -393,7 +405,15 @@ export default function DailyGoalModal({ onClose }: DailyGoalModalProps) {
                   height={16}
                 />
               </BoxStyle>
-              {isDailyGoalSettingVisible && <DailyGoalSetting />}
+              {isDailyGoalSettingVisible && (
+                <DailyGoalSetting
+                  onMethodChange={setSelectedMethod}
+                  onCountChange={setGoalCount}
+                  maxCount={getMaxCount()}
+                  initialMethod={selectedMethod}
+                  initialCount={goalCount}
+                />
+              )}
               <Image
                 src={Assets.Icon.arrowDownGray}
                 alt=""

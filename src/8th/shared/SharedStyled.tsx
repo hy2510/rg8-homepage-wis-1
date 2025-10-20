@@ -139,7 +139,7 @@ export const StartButtonStyle = styled.button`
 
 export const ResourceDownloadButtonStyle = styled.button`
   position: relative;
-  padding-right: 20px;
+  padding-right: 10px;
 
   .download-button-trigger {
     background: none;
@@ -1015,9 +1015,9 @@ export const DivideStyle = styled.div`
   padding: 10px;
 `
 
-export const DivideLineStyle = styled.div`
+export const DivideLineStyle = styled.div<{ borderWidth?: string }>`
   width: 100%;
-  height: 2px;
+  height: ${({ borderWidth }) => (borderWidth ? `${borderWidth}px` : '2px')};
   background-color: var(--color-gray-medium);
   border-radius: 100px;
 `
@@ -1128,6 +1128,19 @@ export const ModalBodyStyle = styled.div<{
         }
       }
   `}
+`
+
+export const ModalFooterStyle = styled.div`
+  width: 100%;
+  height: 80px;
+  padding: 20px;
+  border-top: 1px solid var(--line-color-primary);
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 1;
 `
 
 export const MiniModalContainerStyle = styled.div`
@@ -1256,34 +1269,457 @@ export const PagenationItemStyle = styled.div`
   }
 `
 
-export const WidgetBoxStyle = styled.div`
+export const WidgetBoxStyle = styled.div<{
+  getAward?: boolean
+  todayGoal?: boolean
+}>`
   width: 100%;
   min-height: fit-content;
-  height: fit-content;
-  background-color: #fff;
+  background-color: ${({ getAward, todayGoal }) =>
+    getAward ? '#3C4B62' : todayGoal ? '#FFCA2B' : '#fff'};
   border-radius: 20px;
   padding: 20px;
   border: 1px solid var(--line-color-primary);
   overflow: hidden;
+  background-image: url(${Assets.Icon.glossyPoint.src});
+  background-size: 10px 10px;
+  background-position: top 7px left 7px;
+  background-repeat: no-repeat;
+  position: relative;
+
+  ${({ todayGoal }) =>
+    todayGoal &&
+    `
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background-image: url(${Assets.Image.GlossyBgWidget.src});
+      background-size: contain;
+      background-position: top 0 left 0;
+      background-repeat: no-repeat;
+      animation: var(--animation-glass-complete);
+      z-index: 0;
+    }
+  `}
+
+  ${({ getAward }) =>
+    getAward &&
+    `
+    &::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 20%;
+      width: 6px;
+      height: 6px;
+      background: #ffd700;
+      border-radius: 50% 0;
+      animation: petal1 4s linear infinite;
+      box-shadow: 0 0 6px #ffd700;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 60%;
+      width: 4px;
+      height: 4px;
+      background: #ff6b6b;
+      border-radius: 50% 0;
+      animation: petal2 3.5s linear infinite;
+      box-shadow: 0 0 4px #ff6b6b;
+    }
+
+    /* 추가 꽃가루들 */
+    .petal3 {
+      position: absolute;
+      top: -10px;
+      left: 40%;
+      width: 5px;
+      height: 5px;
+      background: #ffed4e;
+      border-radius: 50% 0;
+      animation: petal3 3.8s linear infinite;
+      box-shadow: 0 0 5px #ffed4e;
+    }
+
+    .petal4 {
+      position: absolute;
+      top: -10px;
+      left: 80%;
+      width: 3px;
+      height: 3px;
+      background: #ff9ff3;
+      border-radius: 50% 0;
+      animation: petal4 4.2s linear infinite;
+      box-shadow: 0 0 3px #ff9ff3;
+    }
+
+    .petal5 {
+      position: absolute;
+      top: -10px;
+      left: 10%;
+      width: 4px;
+      height: 4px;
+      background: #54a0ff;
+      border-radius: 50% 0;
+      animation: petal5 3.2s linear infinite;
+      box-shadow: 0 0 4px #54a0ff;
+    }
+
+    .petal6 {
+      position: absolute;
+      top: -10px;
+      left: 70%;
+      width: 5px;
+      height: 5px;
+      background: #5f27cd;
+      border-radius: 50% 0;
+      animation: petal6 4.5s linear infinite;
+      box-shadow: 0 0 5px #5f27cd;
+    }
+
+    .petal7 {
+      position: absolute;
+      top: -10px;
+      left: 15%;
+      width: 4px;
+      height: 4px;
+      background: #ff6348;
+      border-radius: 50% 0;
+      animation: petal7 3.7s linear infinite;
+      box-shadow: 0 0 4px #ff6348;
+    }
+
+    .petal8 {
+      position: absolute;
+      top: -10px;
+      left: 35%;
+      width: 3px;
+      height: 3px;
+      background: #2ed573;
+      border-radius: 50% 0;
+      animation: petal8 4.1s linear infinite;
+      box-shadow: 0 0 3px #2ed573;
+    }
+
+    .petal9 {
+      position: absolute;
+      top: -10px;
+      left: 55%;
+      width: 6px;
+      height: 6px;
+      background: #ffa502;
+      border-radius: 50% 0;
+      animation: petal9 3.9s linear infinite;
+      box-shadow: 0 0 6px #ffa502;
+    }
+
+    .petal10 {
+      position: absolute;
+      top: -10px;
+      left: 75%;
+      width: 4px;
+      height: 4px;
+      background: #ff3838;
+      border-radius: 50% 0;
+      animation: petal10 4.3s linear infinite;
+      box-shadow: 0 0 4px #ff3838;
+    }
+
+    .petal11 {
+      position: absolute;
+      top: -10px;
+      left: 5%;
+      width: 5px;
+      height: 5px;
+      background: #3742fa;
+      border-radius: 50% 0;
+      animation: petal11 3.6s linear infinite;
+      box-shadow: 0 0 5px #3742fa;
+    }
+
+    .petal12 {
+      position: absolute;
+      top: -10px;
+      left: 25%;
+      width: 3px;
+      height: 3px;
+      background: #ff6b9d;
+      border-radius: 50% 0;
+      animation: petal12 4.4s linear infinite;
+      box-shadow: 0 0 3px #ff6b9d;
+    }
+
+    .petal13 {
+      position: absolute;
+      top: -10px;
+      left: 45%;
+      width: 4px;
+      height: 4px;
+      background: #ff9ff3;
+      border-radius: 50% 0;
+      animation: petal13 3.4s linear infinite;
+      box-shadow: 0 0 4px #ff9ff3;
+    }
+
+    .petal14 {
+      position: absolute;
+      top: -10px;
+      left: 85%;
+      width: 5px;
+      height: 5px;
+      background: #ffd32a;
+      border-radius: 50% 0;
+      animation: petal14 4.0s linear infinite;
+      box-shadow: 0 0 5px #ffd32a;
+    }
+
+    @keyframes petal1 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(80px) translateX(20px);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(160px) translateX(-10px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes petal2 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(90px) translateX(-15px);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(180px) translateX(25px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes petal3 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(70px) translateX(10px);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(140px) translateX(-20px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes petal4 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(100px) translateX(-25px);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(200px) translateX(15px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes petal5 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(85px) translateX(30px);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(170px) translateX(-5px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes petal6 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(75px) translateX(-10px);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(150px) translateX(35px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes petal7 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(95px) translateX(25px);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(190px) translateX(-15px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes petal8 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(65px) translateX(-20px);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(130px) translateX(30px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes petal9 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(85px) translateX(15px);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(170px) translateX(-25px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes petal10 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(110px) translateX(-30px);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(220px) translateX(20px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes petal11 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(80px) translateX(35px);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(160px) translateX(-10px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes petal12 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(70px) translateX(-15px);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(140px) translateX(40px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes petal13 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(90px) translateX(20px);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(180px) translateX(-35px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes petal14 {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(75px) translateX(-5px);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(150px) translateX(25px);
+        opacity: 0;
+      }
+    }
+  `}
 `
 
-export const CommonTitleStyle = styled.div`
-  cursor: pointer;
+export const CommonTitleStyle = styled.div<{
+  getAward?: boolean
+  todayGoal?: boolean
+  noLink?: boolean
+}>`
+  cursor: ${({ noLink }) => (noLink ? 'default' : 'pointer')};
   width: fit-content;
   font-size: var(--font-size-large);
   font-weight: bold;
   font-family: var(--font-family-secondary);
-  color: var(--font-color-primary);
+  color: ${({ getAward, todayGoal }) =>
+    getAward ? '#fff' : todayGoal ? '#B2720A' : 'var(--font-color-primary)'};
   position: relative;
 
   &::before {
     content: '';
+    display: ${({ noLink }) => (noLink ? 'none' : 'block')};
     position: absolute;
     top: calc(50% - 6px - 1px);
     left: calc(100% + 5px);
     width: 12px;
     height: 12px;
-    background-image: url(${Assets.Icon.arrowUpRightBlack.src});
+    background-image: ${({ getAward, todayGoal }) =>
+      getAward
+        ? `url(${Assets.Icon.arrowUpRightGray.src})`
+        : todayGoal
+          ? `url(${Assets.Icon.arrowUpRightBrown.src})`
+          : `url(${Assets.Icon.arrowUpRightBlack.src})`};
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -1324,5 +1760,63 @@ export const SelectBoxStyle = styled.div<{
     background-size: 14px;
     padding-right: 20px;
     min-width: 40px;
+  }
+`
+
+export const AwardImageStyle = styled.div`
+  min-width: 100px;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+`
+
+export const AwardBgStyle = styled.div`
+  min-width: 120px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  z-index: 1;
+  background-image: url(${Assets.Icon.Side.sparklingBg.src});
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: sparklingFloat 2s ease-in-out infinite;
+
+  @keyframes sparklingFloat {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+  }
+`
+
+export const FooterMenuStyle = styled.div`
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+  border-top: 1px solid var(--line-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+
+  .menu-item {
+    cursor: pointer;
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    color: var(--font-color-secondary);
   }
 `

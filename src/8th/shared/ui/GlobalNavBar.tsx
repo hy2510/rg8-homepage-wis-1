@@ -17,24 +17,41 @@ export default function GlobalNavBar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const pathname = usePathname()
   const NW8 = SITE_PATH.NW8
-
-  const dropdownItems = [
-    { text: 'Level Test', onClick: () => console.log('Level Test clicked') },
-    { text: 'Try Again', onClick: () => console.log('Try Again clicked') },
-    { text: 'Setting', onClick: () => console.log('Setting clicked') },
-    {
-      text: 'Workbook Units',
-      onClick: () => console.log('Workbook Units clicked'),
-    },
-    {
-      text: 'Workbook MP3',
-      onClick: () => console.log('Workbook MP3 clicked'),
-    },
-  ]
+  const router = useRouter()
 
   const handleCalendarClick = () => {
     window.dispatchEvent(new CustomEvent('openCalendarModal'))
   }
+
+  const handleLevelTestClick = () => {
+    window.dispatchEvent(new CustomEvent('openLevelTestModal'))
+  }
+
+  const dropdownItems = [
+    { text: 'Level Test', onClick: handleLevelTestClick },
+    { text: 'Try Again', onClick: () => router.push(NW8.TRYAGAIN) },
+    { text: 'Setting', onClick: () => router.push(NW8.SETTING) },
+    {
+      text: 'Workbook Units',
+      onClick: () => router.push(NW8.EB_WORKBOOK),
+    },
+    {
+      text: 'PK Workbook MP3',
+      onClick: () =>
+        window.open(
+          'https://util.readinggate.com/Library/DodoABCWorkSheetMP3Info',
+          '_blank',
+        ),
+    },
+    {
+      text: 'PK Classic Workbook MP3',
+      onClick: () =>
+        window.open(
+          'https://wcfresource.a1edu.com/NewSystem/AppMobile/webview/randing/prek_workbook_mp3/',
+          '_blank',
+        ),
+    },
+  ]
 
   return (
     <GlobalNavBarStyle>

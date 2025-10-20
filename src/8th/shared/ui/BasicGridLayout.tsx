@@ -3,7 +3,10 @@
 import CalendarModal from '@/8th/features/achieve/ui/CalendarModal'
 import DailyGoalCard from '@/8th/features/achieve/ui/DailyGoalCard'
 import ReadingUnitCard from '@/8th/features/achieve/ui/ReadingUnitCard'
-import StreakCard from '@/8th/features/achieve/ui/StreakCard'
+import StreakCard, {
+  StreakCardClassic,
+} from '@/8th/features/achieve/ui/StreakCard'
+import LevelTestInfoModal from '@/8th/features/student/ui/LevelTestInfoModal'
 import StudentProfileCard from '@/8th/features/student/ui/StudentProfileCard'
 import {
   BasicGridLayoutStyle,
@@ -30,16 +33,24 @@ export default function BasicGridLayout({
 
 export function RightContainer({ children }: { children?: React.ReactNode }) {
   const [isCalendarModalOpen, setIsCalendarModalOpen] = useState(false)
+  const [isLevelTestModalOpen, setIsLevelTestModalOpen] = useState(false)
+  const [isStreakAwardMode] = useState<boolean>(true)
 
   useEffect(() => {
     const handleOpenCalendarModal = () => {
       setIsCalendarModalOpen(true)
     }
 
+    const handleOpenLevelTestModal = () => {
+      setIsLevelTestModalOpen(true)
+    }
+
     window.addEventListener('openCalendarModal', handleOpenCalendarModal)
+    window.addEventListener('openLevelTestModal', handleOpenLevelTestModal)
 
     return () => {
       window.removeEventListener('openCalendarModal', handleOpenCalendarModal)
+      window.removeEventListener('openLevelTestModal', handleOpenLevelTestModal)
     }
   }, [])
 
@@ -47,29 +58,40 @@ export function RightContainer({ children }: { children?: React.ReactNode }) {
     setIsCalendarModalOpen(false)
   }
 
+  const handleCloseLevelTestModal = () => {
+    setIsLevelTestModalOpen(false)
+  }
+
   return (
     <RightContainerStyle>
       <StudentProfileCard
         studentName="하이도도"
+        studentLevel="KA"
         pointRank={10}
         booksRead={40000}
         earnedPoints="9999.9"
         toDoCount={10}
         favoriteCount={10}
       />
-      <StreakCard
-        streakCount={130}
-        totalCount={140}
-        earnedDates={{
-          20: '2022.09.23',
-          40: '2023.09.23',
-          60: '2024.09.23',
-          80: '2025.01.23',
-          100: '2025.03.23',
-          120: '2025.04.23',
-        }}
-      />
-      <DailyGoalCard dailyProgress={2} dailyGoal={3} />
+      {isStreakAwardMode ? (
+        <StreakCard
+          todayStreak={true}
+          streakCount={40}
+          awardCount={40}
+          earnedDates={{
+            20: '2022.09.23',
+            40: '2023.09.23',
+            60: '2024.09.23',
+            80: '2025.01.23',
+            100: '2025.03.23',
+            120: '2025.04.23',
+            140: '2025.05.23',
+          }}
+        />
+      ) : (
+        <StreakCardClassic />
+      )}
+      <DailyGoalCard dailyProgress={3} dailyGoal={3} totalDailyGoals={50} />
       <ReadingUnitCard
         friendName="MILLO"
         friendThumbnail="https://wcfresource.a1edu.com/newsystem/image/character/dodofriends/blanc-003.png"
@@ -79,6 +101,10 @@ export function RightContainer({ children }: { children?: React.ReactNode }) {
       {children}
       {isCalendarModalOpen && (
         <CalendarModal onCloseModal={handleCloseCalendarModal} />
+      )}
+
+      {isLevelTestModalOpen && (
+        <LevelTestInfoModal onCloseModal={handleCloseLevelTestModal} />
       )}
     </RightContainerStyle>
   )

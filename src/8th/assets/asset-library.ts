@@ -91,11 +91,13 @@ import emptyResults from './images/empty-results.svg'
 import GlossyBgBigWhite from './images/glossy-bg-big-white.svg'
 import GlossyBgSmallWhite from './images/glossy-bg-small-white.svg'
 import GlossyBgSmall from './images/glossy-bg-small.svg'
+import GlossyBgWidget from './images/glossy-bg-widget.svg'
 import GlossyBg from './images/glossy-bg.svg'
 import arrowDownGray from './images/icons/arrow-down-gray.svg'
 import arrowLeftGray from './images/icons/arrow-left-gray.svg'
 import arrowRightBlack from './images/icons/arrow-right-black.svg'
 import arrowUpRightBlack from './images/icons/arrow-up-right-black.svg'
+import arrowUpRightBrown from './images/icons/arrow-up-right-brown.svg'
 import arrowUpRightGray from './images/icons/arrow-up-right-gray.svg'
 import checkLightBlue from './images/icons/check-light-blue.svg'
 import checkWhite from './images/icons/check-white.svg'
@@ -115,6 +117,7 @@ import counterPlus from './images/icons/counter-plus.png'
 import deleteWhite from './images/icons/delete-white.svg'
 import deleteBlack from './images/icons/delete.svg'
 import downloadLightBlue from './images/icons/download-light-blue.svg'
+import EditGray from './images/icons/edit-gray.svg'
 import glossyPoint2 from './images/icons/glossy-point-2.png'
 import glossyPointSmall from './images/icons/glossy-point-small.svg'
 import glossyPoint from './images/icons/glossy-point.svg'
@@ -137,9 +140,12 @@ import plusGreen from './images/icons/plus-green.png'
 import searchBlack from './images/icons/search-black.svg'
 import shadow from './images/icons/shadow.svg'
 import booksRead from './images/icons/side/books-read.png'
+import dailyGoalCompleteBg from './images/icons/side/daily-goal-complete-bg.svg'
 import earnedPoints from './images/icons/side/earned-points.png'
 import favorite from './images/icons/side/favorite.png'
+import sparklingBg from './images/icons/side/sparkling-bg.png'
 import streakFire from './images/icons/side/streak-fire.png'
+import streakReady from './images/icons/side/streak-ready.png'
 import toDo from './images/icons/side/to-do.png'
 import checkMarkGoldTwin from './images/icons/study/check-mark-gold-twin.png'
 import checkMarkGold from './images/icons/study/check-mark-gold.png'
@@ -176,6 +182,7 @@ export const Assets = {
     GlossyBgSmall: GlossyBgSmall,
     GlossyBgSmallWhite: GlossyBgSmallWhite,
     DailyRGCourseCompleted: DailyRGCourseCompleted,
+    GlossyBgWidget: GlossyBgWidget,
     Cloud1: Cloud1,
     Cloud2: Cloud2,
     emptyResults: emptyResults,
@@ -185,6 +192,7 @@ export const Assets = {
     arrowLeftGray: arrowLeftGray,
     arrowRightBlack: arrowRightBlack,
     arrowUpRightBlack: arrowUpRightBlack,
+    arrowUpRightBrown: arrowUpRightBrown,
     arrowUpRightGray: arrowUpRightGray,
     checkLightBlue: checkLightBlue,
     checkWhite: checkWhite,
@@ -198,6 +206,7 @@ export const Assets = {
     counterMinus: counterMinus,
     counterPlus: counterPlus,
     downloadLightBlue: downloadLightBlue,
+    EditGray: EditGray,
     glossyPointSmall: glossyPointSmall,
     glossyPoint: glossyPoint,
     glossyPoint2: glossyPoint2,
@@ -227,8 +236,11 @@ export const Assets = {
       booksRead: booksRead,
       earnedPoints: earnedPoints,
       favorite: favorite,
+      sparklingBg: sparklingBg,
       streakFire: streakFire,
+      streakReady: streakReady,
       toDo: toDo,
+      dailyGoalCompleteBg: dailyGoalCompleteBg,
     },
     Study: {
       checkMarkGoldTwin: checkMarkGoldTwin,

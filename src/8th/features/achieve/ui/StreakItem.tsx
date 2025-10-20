@@ -10,6 +10,7 @@ import { StreakItemStyle } from '../../FeaturesStyled'
  */
 
 interface StreakItemProps {
+  todayStreak?: boolean
   isProgress: boolean
   getAward: boolean
   streakDays?: string
@@ -21,6 +22,7 @@ interface StreakItemProps {
 }
 
 export default function StreakItem({
+  todayStreak = false,
   isProgress,
   getAward,
   streakDays,
@@ -56,13 +58,15 @@ export default function StreakItem({
           gap={10}>
           {/* 이미지는 연속학습 중, 연속학습 끊김, 연속학습 달성 3가지 케이스가 있음 */}
           <BoxStyle className="container">
-            <Image
-              src={Assets.Icon.Side.streakFire}
-              alt="Streak Award"
-              width={60}
-              height={60}
-              className="streak-fire-icon"
-            />
+            {todayStreak && (
+              <Image
+                src={Assets.Icon.Side.streakFire}
+                alt="Streak Award"
+                width={60}
+                height={60}
+                className="streak-fire-icon"
+              />
+            )}
             <Image
               src={streakDays || ''}
               alt="Streak Award"
@@ -71,7 +75,8 @@ export default function StreakItem({
               className="streak-award-gray-image"
             />
             <div className="progress">
-              <div className="progress-bar">
+              <div
+                className={`progress-bar ${todayStreak ? 'today-streak' : ''}`}>
                 <div
                   className="progress-bar-fill"
                   style={{
@@ -81,7 +86,14 @@ export default function StreakItem({
             </div>
           </BoxStyle>
           <TextStyle fontFamily="sans" fontColor="secondary" fontWeight="bold">
-            {currentUserStreak}/{totalDays} Days in a Row
+            <TextStyle
+              type="span"
+              fontFamily="sans"
+              fontColor={`${todayStreak ? '#ff374b' : 'secondary'}`}
+              fontWeight="bold">
+              {currentUserStreak}
+            </TextStyle>
+            /{totalDays} Days in a Row
           </TextStyle>
         </BoxStyle>
       ) : (
