@@ -35,9 +35,9 @@ export default function RankMonthlyItem({
         backgroundColor={isMe ? '#EDFAFE' : 'transparent'}
         borderRadius={15}
         padding="10px">
-        <BoxStyle display="flex" alignItems="center" gap={5}>
+        <BoxStyle display="flex" alignItems="center" gap={5} width="60%">
           <BoxStyle
-            width="50px"
+            width="40px"
             display="flex"
             alignItems="center"
             justifyContent="center">
@@ -103,17 +103,27 @@ export default function RankMonthlyItem({
           flexDirection="column"
           justifyContent="center"
           alignItems="flex-end"
-          gap={5}>
-          <BoxStyle display="flex" alignItems="center" gap={5} padding="0 10px">
-            <TextStyle fontFamily="sans" fontSize="small" fontColor="secondary">
-              {isMe && 'Books Read, Earned Points'}
-            </TextStyle>
-          </BoxStyle>
-          <BoxStyle display="flex" alignItems="center" gap={5} padding="0 10px">
-            <TextStyle fontColor="primary" fontFamily="sans">
+          gap={5}
+          width="40%">
+          <BoxStyle
+            display="flex"
+            flexWrap="wrap"
+            alignItems="center"
+            justifyContent="flex-end"
+            gap={5}
+            padding="0 10px">
+            <TextStyle
+              fontColor="primary"
+              fontFamily="sans"
+              fontSize="medium"
+              textAlign="right">
               {readingCount},
             </TextStyle>
-            <TextStyle fontColor="primary" fontFamily="sans">
+            <TextStyle
+              fontColor="primary"
+              fontFamily="sans"
+              fontSize="medium"
+              textAlign="right">
               +{point}P
             </TextStyle>
           </BoxStyle>

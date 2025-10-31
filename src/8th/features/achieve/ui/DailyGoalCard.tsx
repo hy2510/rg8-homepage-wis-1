@@ -10,7 +10,7 @@ import {
 } from '@/8th/shared/SharedStyled'
 import { BoxStyle } from '@/8th/shared/ui/Misc'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import DailyGoalModal from './DailyGoalModal'
 
 // 일일 목표 어워드 이미지 데이터
@@ -105,6 +105,21 @@ function DailyGoalProgress({
   dailyProgress,
   dailyGoal,
 }: DailyGoalProgressProps) {
+  const [displayedDash, setDisplayedDash] = useState(0)
+
+  const targetDash = Math.max(
+    0,
+    Math.min(220, (dailyProgress / dailyGoal) * 220),
+  )
+
+  useEffect(() => {
+    setDisplayedDash(0)
+    const id = setTimeout(() => {
+      setDisplayedDash(targetDash)
+    }, 1000)
+    return () => clearTimeout(id)
+  }, [targetDash])
+
   return (
     <div className="body">
       {/* 일일 목표가 학습 권수인 경우 */}
@@ -145,10 +160,11 @@ function DailyGoalProgress({
               fill="transparent"
               stroke="var(--color-red-medium)"
               strokeWidth="6"
-              strokeDasharray={`${(dailyProgress / dailyGoal) * 220} 220`}
+              strokeDasharray={`${displayedDash} 220`}
               strokeDashoffset="0"
               transform="rotate(-90 50 50)"
               strokeLinecap="round"
+              style={{ transition: 'stroke-dasharray 1.5s ease-in-out' }}
             />
           </svg>
           {/* 일일 목표가 학습 권수인 경우 */}

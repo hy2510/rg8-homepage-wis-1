@@ -20,7 +20,7 @@ export default function StudyStatusView({
     <StudyStatusViewStyle>
       <BoxStyle display="flex" gap={10}>
         <TextStyle fontFamily="sans" type="span" fontSize="medium">
-          • 남은 학습 기간:
+          남은 학습 기간:
         </TextStyle>
         <TextStyle
           fontFamily="sans"
@@ -37,7 +37,7 @@ export default function StudyStatusView({
       </BoxStyle>
       <BoxStyle display="flex" gap={10}>
         <TextStyle fontFamily="sans" type="span" fontSize="medium">
-          • 학습 만료일:
+          학습 만료일:
         </TextStyle>
         <TextStyle
           fontFamily="sans"

@@ -53,10 +53,8 @@ export default function StudentProfileCard({
               <div className="name">{studentName}</div>
             </BoxStyle>
             <TextStyle
-              fontSize="small"
-              fontFamily="sans"
-              fontColor="secondary"
-              fontWeight={800}
+              fontSize="0.75em"
+              fontColor="lightBlue"
               padding="0 0 0 2px">
               Lv.{studentLevel} {pointRank > 1000 ? '' : '/ Rank ' + pointRank}
             </TextStyle>

@@ -11,7 +11,7 @@ import {
 } from '@/8th/shared/SharedStyled'
 import { BoxStyle, TextStyle } from '@/8th/shared/ui/Misc'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import StreakModal from './StreakModal'
 
 interface StreakCardProps {
@@ -122,6 +122,7 @@ function StreakStatus({
   awardCount,
 }: StreakStatusProps) {
   const hasAward = streakCount === awardCount && streakCount > 0
+  const [displayedWidth, setDisplayedWidth] = useState(0)
 
   const getAwardImage = () => {
     const awardImages = [
@@ -148,6 +149,7 @@ function StreakStatus({
 
   const renderAwardStatus = () => (
     <BoxStyle
+      width="100%"
       display="grid"
       gridTemplateColumns="1fr 100px"
       alignItems="center"
@@ -156,7 +158,7 @@ function StreakStatus({
         fontFamily="sans"
         fontColor="#fff"
         fontWeight="bold"
-        fontSize="xlarge"
+        fontSize="large"
         padding="0 0 0 5px">
         Great job! {awardCount}-Day Streak!
       </TextStyle>
@@ -193,12 +195,38 @@ function StreakStatus({
       Math.min(100, ((streakCount - awardCount + 20) / 20) * 100),
     )
 
+    useEffect(() => {
+      setDisplayedWidth(0)
+      const id = setTimeout(() => {
+        setDisplayedWidth(progressWidth)
+      }, 1000)
+      return () => clearTimeout(id)
+    }, [progressWidth])
+
     return (
-      <>
+      <BoxStyle
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        gap={10}
+        width="100%">
+        <TextStyle
+          fontSize="small"
+          fontColor="secondary"
+          fontFamily="sans"
+          margin="0 0 20px 0"
+          width="100%">
+          {isStreak
+            ? '잘했어요! 내일도 이어가세요!'
+            : '오늘도 어제처럼 학습을 이어가세요!'}
+        </TextStyle>
         <div className={`streak-progress ${isStreak ? 'active' : ''}`}>
           <div
             className={`streak-progress-fill ${isStreak ? 'active' : ''}`}
-            style={{ width: `${progressWidth}%` }}>
+            style={{
+              width: `${displayedWidth}%`,
+              transition: `width 1.5s ease-in-out`,
+            }}>
             <Image
               src={Assets.Icon.Side.streakFire}
               alt=""
@@ -210,9 +238,9 @@ function StreakStatus({
         </div>
         <div className={`streak-progress-text ${isStreak ? 'active' : ''}`}>
           {streakCount}
-          <span>/{awardCount} Days in a Row</span>
+          <span>/{awardCount} Days</span>
         </div>
-      </>
+      </BoxStyle>
     )
   }
 

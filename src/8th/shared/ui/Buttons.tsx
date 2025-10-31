@@ -1,5 +1,6 @@
 'use client'
 
+import { useMediaQuery } from '@/8th/MediaQueries'
 import { Assets } from '@/8th/assets/asset-library'
 import PrintVocabularyModal from '@/8th/features/library/ui/PrintVocabularyModal'
 import Image from 'next/image'
@@ -15,14 +16,31 @@ import { BoxStyle } from './Misc'
 
 // 공통적으로 자주 사용되는 버튼 모음
 
-export function StartButton({ onClick }: { onClick?: () => void }) {
-  return <StartButtonStyle onClick={onClick}>Start!</StartButtonStyle>
+export function StartButton({
+  onClick,
+  isMobile,
+  className,
+}: {
+  onClick?: () => void
+  isMobile?: boolean
+  className?: string
+}) {
+  return (
+    <StartButtonStyle
+      className={className}
+      onClick={onClick}
+      isMobile={isMobile}>
+      Start!
+    </StartButtonStyle>
+  )
 }
 
 export function ResourceDownloadButton({
   setIsModalOpen,
+  isMobile,
 }: {
   setIsModalOpen: (isModalOpen: boolean) => void
+  isMobile?: boolean
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isPrintVocabularyModalOpen, setIsPrintVocabularyModalOpen] =
@@ -36,9 +54,12 @@ export function ResourceDownloadButton({
     setIsDropdownOpen(false)
   }
 
+  const isGnbBottomTablet = useMediaQuery('(max-width: 1200px)')
+  const isGnbBottomMobile = useMediaQuery('(max-width: 480px)')
+
   return (
     <>
-      <ResourceDownloadButtonStyle>
+      <ResourceDownloadButtonStyle isMobile={isMobile}>
         <button
           className="download-button-trigger"
           onClick={toggleDropdown}
@@ -77,6 +98,13 @@ export function ResourceDownloadButton({
           ]}
           isOpen={isDropdownOpen}
           onClose={closeDropdown}
+          position={
+            isGnbBottomMobile
+              ? 'leftCenter'
+              : isGnbBottomTablet
+                ? 'leftCenter'
+                : 'rightCenter'
+          }
         />
       </ResourceDownloadButtonStyle>
       {isPrintVocabularyModalOpen && (
@@ -153,7 +181,7 @@ export function MoreHorizontalButton() {
         ]}
         isOpen={isDropdownOpen}
         onClose={() => setIsDropdownOpen(false)}
-        position="right"
+        position={'topRight'}
       />
     </MoreHorizontalButtonStyle>
   )
@@ -177,6 +205,7 @@ export function ReviewMoreButton({
   const [isReportMenuOpen, setIsReportMenuOpen] = useState(false)
   const [isPrintVocabularyModalOpen, setIsPrintVocabularyModalOpen] =
     useState(false)
+  const isGnbBottomTablet = useMediaQuery('(max-width: 1200px)')
 
   return (
     <>
@@ -187,6 +216,7 @@ export function ReviewMoreButton({
         />
         {isReportMenuOpen && (
           <DropdownMenu
+            position={isGnbBottomTablet ? 'leftCenter' : 'rightCenter'}
             items={[
               {
                 text: 'Retry',

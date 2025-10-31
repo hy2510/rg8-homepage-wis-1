@@ -78,7 +78,11 @@ function ActionBarBottom({
           </TextStyle>
         )}
       </BoxStyle>
-      <BoxStyle display="flex" alignItems="center" gap={10}>
+      <BoxStyle
+        display="flex"
+        alignItems="center"
+        gap={10}
+        margin={'0 0 0 auto'}>
         <RoundedFullButton viewSmall onClick={onCancel}>
           cancel
         </RoundedFullButton>
@@ -152,25 +156,21 @@ function ActionBarBottomPeriodSearch() {
   return (
     <ActionBarContainerStyle isBottom isPeriodSearch>
       <BoxStyle display="flex" flexDirection="column" gap={10}>
-        <BoxStyle display="flex" width="fit-content" gap={10}>
-          <RoundedFullButton
-            viewSmall
-            tabs
-            active={activeTab === 'period'}
+        <div className="tab-button-container">
+          <div
+            className={`tab-button ${activeTab === 'period' ? 'active' : ''}`}
             onClick={() => handleTabClick('period')}>
             기간으로 검색
-          </RoundedFullButton>
-          <RoundedFullButton
-            viewSmall
-            tabs
-            active={activeTab === 'title'}
+          </div>
+          <div
+            className={`tab-button ${activeTab === 'title' ? 'active' : ''}`}
             onClick={() => handleTabClick('title')}>
             타이틀로 검색
-          </RoundedFullButton>
-        </BoxStyle>
+          </div>
+        </div>
         {/* 기간으로 검색 - 자동 날짜 선택 */}
         {activeTab === 'period' && (
-          <BoxStyle display="flex" gap={10} padding="0 10px">
+          <BoxStyle display="flex" gap={20} padding="8px">
             {['오늘', '최근 7일', '최근 15일', '최근 30일'].map((item) => (
               <div
                 key={item}
@@ -181,41 +181,49 @@ function ActionBarBottomPeriodSearch() {
                   fontWeight="bold"
                   fontColor={selectedPeriod === item ? 'primary' : 'secondary'}
                   fontFamily="sans">
-                  • {item}
+                  {item}
                 </TextStyle>
               </div>
             ))}
           </BoxStyle>
         )}
         {/* 기간으로 검색 - 날짜 직접 입력 */}
-        <BoxStyle display="flex" alignItems="center" gap={10}>
+        <BoxStyle display="flex" alignItems="center" gap={10} width="100%">
           {activeTab === 'period' && (
-            <BoxStyle display="flex" flexDirection="column" gap={10}>
-              <BoxStyle display="flex" alignItems="center" gap={10}>
-                <BoxStyle display="flex" alignItems="center" gap={10}>
-                  <input
-                    type="date"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                  />
-                </BoxStyle>
-                <TextStyle fontSize="medium">~</TextStyle>
-                <BoxStyle display="flex" alignItems="center" gap={10}>
-                  <input
-                    type="date"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                  />
-                </BoxStyle>
+            <BoxStyle display="flex" alignItems="center" gap={5} width="100%">
+              <BoxStyle
+                display="flex"
+                alignItems="center"
+                gap={10}
+                width="100%">
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </BoxStyle>
+              <TextStyle fontSize="medium">~</TextStyle>
+              <BoxStyle
+                display="flex"
+                alignItems="center"
+                gap={10}
+                width="100%">
+                <input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
               </BoxStyle>
             </BoxStyle>
           )}
           {/* 타이틀로 검색 */}
           {activeTab === 'title' && (
-            <BoxStyle display="flex" alignItems="center" gap={10}>
-              <BoxStyle display="flex" alignItems="center" gap={10}>
-                <input type="text" placeholder="도서 제목을 입력하세요" />
-              </BoxStyle>
+            <BoxStyle display="flex" alignItems="center" gap={10} width="100%">
+              <input
+                type="text"
+                placeholder="도서 제목을 입력하세요"
+                className="title-search"
+              />
             </BoxStyle>
           )}
           {/* 검색 버튼 */}
@@ -253,7 +261,7 @@ export function DailyRgResultActionBar({
         flexDirection="column"
         alignItems="flex-start"
         gap={5}>
-        <TextStyle fontSize="xxlarge">{title}</TextStyle>
+        <TextStyle fontSize="xlarge">{title}</TextStyle>
         <TextStyle fontSize="medium" fontColor="secondary" padding="3px 0 0 0">
           {bookCount}/{totalCount} Books Read
         </TextStyle>
@@ -554,16 +562,21 @@ export function ReviewActionBar({
         <BoxStyle
           display="flex"
           alignItems="center"
-          gap={10}
+          gap={20}
+          padding="3px 0 3px 0">
+          <DropdownButtonSmall {...getDropdownProps('log')} />
+          <DropdownButtonSmall {...getDropdownProps('exportReports')} />
+        </BoxStyle>
+        <div className="mobile-divider" />
+        <BoxStyle
+          display="flex"
+          alignItems="center"
+          gap={5}
           cursor="pointer"
           onClick={handlePeriodSearchToggle}>
-          <TextStyle
-            fontSize="large"
-            fontFamily="sans"
-            fontWeight="bolder"
-            padding="0 0 2px 0">
-            {displayText}
-          </TextStyle>
+          <div className="period-search-text">
+            Period · <span className="value">{displayText}</span>
+          </div>
           <Image
             src={Assets.Icon.chevronRightGray}
             alt="arrow-down"
@@ -574,10 +587,6 @@ export function ReviewActionBar({
               transition: 'transform 0.1s ease-in-out',
             }}
           />
-        </BoxStyle>
-        <BoxStyle display="flex" alignItems="center" gap={20}>
-          <DropdownButtonSmall {...getDropdownProps('log')} />
-          <DropdownButtonSmall {...getDropdownProps('exportReports')} />
         </BoxStyle>
       </ActionBarContainerStyle>
       {isPeriodSearchOpen && <ActionBarBottomPeriodSearch />}

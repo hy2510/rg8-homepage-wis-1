@@ -45,7 +45,7 @@ export default function LevelMasterItem({
     <LevelMasterItemStyle>
       {isComplete && (
         <BoxStyle
-          className={`container ${isCurrent ? 'current' : ''} complete`}
+          className={`level-master-item-container ${isCurrent ? 'current' : ''} complete`}
           onClick={handleClick}>
           <Image src={imgSrc} alt="Award Challenge" width={100} height={100} />
           <BoxStyle className={`check-mark ${isCurrent ? 'current' : ''}`} />
@@ -53,7 +53,7 @@ export default function LevelMasterItem({
       )}
       {!isComplete && (
         <BoxStyle
-          className={`container ${isCurrent ? 'current' : ''}`}
+          className={`level-master-item-container ${isCurrent ? 'current' : ''}`}
           onClick={handleClick}>
           <TextStyle className={`level ${isCurrent ? 'current' : ''}`}>
             {level}

@@ -1,3 +1,4 @@
+import { TextStyle } from '@/8th/shared/ui/Misc'
 import RankChallengeItem from './RankChallengeItem'
 
 /**
@@ -6,6 +7,14 @@ import RankChallengeItem from './RankChallengeItem'
 export default function RankChallengeList() {
   return (
     <div>
+      <TextStyle
+        fontFamily="sans"
+        fontSize="small"
+        fontColor="secondary"
+        textAlign="right"
+        margin="0 20px 10px auto">
+        · Study Days · Books Read · Earned Points
+      </TextStyle>
       <RankChallengeItem
         rank={1}
         avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"

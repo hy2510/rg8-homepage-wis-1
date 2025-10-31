@@ -1,7 +1,7 @@
 import { ReadingUnitCardStyle } from '@/8th/features/FeaturesStyled'
 import { CommonTitleStyle, WidgetBoxStyle } from '@/8th/shared/SharedStyled'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ReadingUnitStoryModal from './ReadingUnitStoryModal'
 
 /**
@@ -22,6 +22,20 @@ export default function ReadingUnitCard({
   friendPoint = 100,
 }: ReadingUnitCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [displayedWidth, setDisplayedWidth] = useState(0)
+
+  const targetWidth = Math.max(
+    0,
+    Math.min(100, (friendProgress / friendPoint) * 100),
+  )
+
+  useEffect(() => {
+    setDisplayedWidth(0)
+    const id = setTimeout(() => {
+      setDisplayedWidth(targetWidth)
+    }, 1000)
+    return () => clearTimeout(id)
+  }, [targetWidth])
 
   return (
     <WidgetBoxStyle>
@@ -41,12 +55,13 @@ export default function ReadingUnitCard({
               <div
                 className="progress-bar-fill"
                 style={{
-                  width: `${(friendProgress / friendPoint) * 100}%`,
+                  width: `${displayedWidth}%`,
+                  transition: 'width 1.5s ease-in-out',
                 }}></div>
             </div>
             <div className="progress-text">
-              <div className="progress-text-value">{friendProgress}</div>
-              <div className="progress-text-point">/{friendPoint}P</div>
+              {/* <div className="progress-text-value">{friendProgress}</div> */}
+              <div className="progress-text-point">{friendPoint}P</div>
             </div>
           </div>
         </div>

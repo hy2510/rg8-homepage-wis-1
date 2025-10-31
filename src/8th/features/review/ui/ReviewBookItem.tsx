@@ -1,5 +1,6 @@
 'use client'
 
+import { useMediaQuery } from '@/8th/MediaQueries'
 import { ReviewBookItemStyle } from '@/8th/features/FeaturesStyled'
 import { ReviewMoreButton } from '@/8th/shared/ui/Buttons'
 import CustomCheckbox from '@/8th/shared/ui/CustomCheckbox'
@@ -62,16 +63,23 @@ export default function ReviewBookItem({
   onPrintVocabulary,
   onPrintWorksheet,
 }: ReviewBookItemProps) {
+  const isMobile = useMediaQuery('(max-width: 768px)')
+
   return (
     <ReviewBookItemStyle>
-      <BoxStyle display="flex" alignItems="center" gap={20}>
+      <BoxStyle
+        display="flex"
+        alignItems="center"
+        gap={isMobile ? 15 : 20}
+        flexDirection={isMobile ? 'column' : 'row'}
+        width={isMobile ? '100%' : 'auto'}>
         <BoxStyle className="book-cover">
           <Image src={coverImage} alt="book-cover" width={100} height={136} />
           {isExportMode && (
             <BoxStyle
               position="absolute"
-              top={'28px'}
-              left={'8px'}
+              top={isMobile ? '8px' : '28px'}
+              left={isMobile ? '24px' : '8px'}
               zIndex={1}
               className="animate__animated animate__bounce">
               <CustomCheckbox
@@ -82,18 +90,13 @@ export default function ReviewBookItem({
             </BoxStyle>
           )}
         </BoxStyle>
-        <BoxStyle
-          display="flex"
-          flexDirection="column"
-          alignItems="flex-start"
-          gap={10}
-          flexWrap="nowrap">
+        <BoxStyle className="review-book-info-container">
           <BoxStyle
             display="flex"
             flexDirection="column"
             alignItems="flex-start"
             gap={10}>
-            <div>
+            <div style={{ paddingLeft: isMobile ? '5px' : '0' }}>
               <div className="book-code">{bookCode}</div>
               <div className="book-title">{title}</div>
             </div>
@@ -118,7 +121,7 @@ export default function ReviewBookItem({
           </BoxStyle>
         </BoxStyle>
       </BoxStyle>
-      <BoxStyle display="flex" alignItems="center" gap={10}>
+      <BoxStyle className="mobile-review-more-button-container">
         <BoxStyle
           display="flex"
           alignItems="flex-end"
@@ -127,7 +130,7 @@ export default function ReviewBookItem({
           <BoxStyle className="study-results">
             <span>
               {passMark}
-              {passMark === 'PASS' && ' / ' + passCount}
+              {passMark === 'PASS' && ' · ' + passCount}
               {passMark === 'PASS' && getOrdinalSuffix(passCount || 0)}
             </span>
             <span>{studyDate}</span>

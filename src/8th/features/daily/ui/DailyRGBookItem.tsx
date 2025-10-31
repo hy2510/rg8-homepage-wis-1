@@ -1,8 +1,8 @@
 import { DailyRGBookItemStyle } from '@/8th/features/FeaturesStyled'
+import { DisplayBlockStyle, DisplayNoneStyle } from '@/8th/shared/SharedStyled'
 import { ResourceDownloadButton, StartButton } from '@/8th/shared/ui/Buttons'
-import { BoxStyle } from '@/8th/shared/ui/Misc'
 import Image from 'next/image'
-import { forwardRef, useEffect, useState } from 'react'
+import { forwardRef, useState } from 'react'
 import BookInfoModal from '../../library/ui/BookInfoModal'
 
 /**
@@ -36,25 +36,19 @@ const DailyRGBookItem = forwardRef<HTMLDivElement, DailyRGBookItemProps>(
     },
     ref,
   ) => {
-    const [animation, setAnimation] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
 
-    useEffect(() => {
-      if (!isCurrent) return
+    const renderCompletedMark = () => {
+      if (isCompleted === 1) return <div className="completed-mark" />
+      if (isCompleted >= 2) return <div className="completed-mark-twin" />
+      return <div className="book-number">{bookNumber}</div>
+    }
 
-      const startAnimation = () => {
-        setAnimation('animate__animated animate__bounce')
-        setTimeout(() => setAnimation(''), 1000)
-      }
-
-      const timer = setTimeout(() => {
-        startAnimation()
-        const interval = setInterval(startAnimation, 10000)
-        return () => clearInterval(interval)
-      }, 10000)
-
-      return () => clearTimeout(timer)
-    }, [isCurrent])
+    const getPointText = () => {
+      if (isCompleted === 0) return `${point}P`
+      if (isCompleted === 1) return `${(point / 2).toFixed(1)}P`
+      return 'Good Job 👍'
+    }
 
     return (
       <DailyRGBookItemStyle
@@ -64,19 +58,12 @@ const DailyRGBookItem = forwardRef<HTMLDivElement, DailyRGBookItemProps>(
         isCurrent={isCurrent}
         isCompleted={isCompleted}
         color={color}>
-        <BoxStyle
-          className="book-container"
-          display="flex"
-          alignItems="center"
-          gap={30}>
-          {isCompleted === 1 ? (
-            <div className="completed-mark" />
-          ) : isCompleted >= 2 ? (
-            <div className="completed-mark-twin" />
-          ) : (
-            <div className="book-number">{bookNumber}</div>
-          )}
-          <div className="thumbnail">
+        <div
+          className={`book-container ${
+            isPreK ? 'mobile-prek-container' : 'mobile-book-container'
+          }`}>
+          {renderCompletedMark()}
+          <div className={isPreK ? 'prek-thumbnail' : 'book-cover'}>
             <Image
               src={imgUrl || ''}
               alt="thumbnail"
@@ -84,30 +71,39 @@ const DailyRGBookItem = forwardRef<HTMLDivElement, DailyRGBookItemProps>(
               height={100}
             />
           </div>
-          <BoxStyle
-            display="flex"
-            flexDirection="column"
-            alignItems="flex-start"
-            gap={10}>
-            <BoxStyle
-              className="title-box"
-              display="flex"
-              flexWrap="wrap"
-              gap={5}>
-              <span className="title">{title}</span>
-              <span className="dot">•</span>
-              <span className={`point ${isCompleted >= 2 ? 'good-job' : ''}`}>
-                {isCompleted === 0
-                  ? point + 'P'
-                  : isCompleted === 1
-                    ? (point / 2).toFixed(1) + 'P'
-                    : 'Good Job 👍'}
-              </span>
-            </BoxStyle>
-            {isCurrent && <StartButton onClick={onComplete} />}
-          </BoxStyle>
-        </BoxStyle>
-        <ResourceDownloadButton setIsModalOpen={setIsModalOpen} />
+          <div className="title-container">
+            <div className="title-box">
+              <div className="title">{title}</div>
+              {/* <span className="dot">•</span> */}
+              <div className={`point ${isCompleted >= 2 ? 'good-job' : ''}`}>
+                {getPointText()}
+              </div>
+            </div>
+            <DisplayBlockStyle showOnPhone>
+              <ResourceDownloadButton
+                setIsModalOpen={setIsModalOpen}
+                isMobile
+              />
+            </DisplayBlockStyle>
+            <DisplayNoneStyle hideOnPhone>
+              {isCurrent && (
+                <StartButton onClick={onComplete} className="animated" />
+              )}
+            </DisplayNoneStyle>
+          </div>
+        </div>
+        <DisplayNoneStyle hideOnPhone>
+          <ResourceDownloadButton setIsModalOpen={setIsModalOpen} />
+        </DisplayNoneStyle>
+        <DisplayBlockStyle showOnPhone style={{ width: '100%' }}>
+          {isCurrent && (
+            <StartButton
+              onClick={onComplete}
+              isMobile
+              className="mobile-animated"
+            />
+          )}
+        </DisplayBlockStyle>
         {isModalOpen && (
           <BookInfoModal
             onClickClose={() => setIsModalOpen(false)}

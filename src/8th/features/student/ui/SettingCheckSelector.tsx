@@ -1,3 +1,4 @@
+import { SettingCheckSelectorStyle } from '@/8th/features/FeaturesStyled'
 import CustomCheckbox from '@/8th/shared/ui/CustomCheckbox'
 import { BoxStyle } from '@/8th/shared/ui/Misc'
 import React, { useEffect, useState } from 'react'
@@ -42,18 +43,16 @@ export default function SettingCheckSelector({
   }
 
   return (
-    <BoxStyle width="100%" padding="20px">
-      <BoxStyle display="flex" gap={20}>
-        {options.map((option) => (
-          <CustomCheckbox
-            key={option.id}
-            id={option.id}
-            checked={checkedValues[option.id] || false}
-            onChange={(checked) => handleChange(option.id, checked)}
-            label={option.label}
-          />
-        ))}
-      </BoxStyle>
-    </BoxStyle>
+    <SettingCheckSelectorStyle>
+      {options.map((option) => (
+        <CustomCheckbox
+          key={option.id}
+          id={option.id}
+          checked={checkedValues[option.id] || false}
+          onChange={(checked) => handleChange(option.id, checked)}
+          label={option.label}
+        />
+      ))}
+    </SettingCheckSelectorStyle>
   )
 }

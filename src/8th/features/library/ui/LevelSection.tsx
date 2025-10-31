@@ -1,10 +1,11 @@
 'use client'
 
+import { useMediaQuery } from '@/8th/MediaQueries'
 import { Assets } from '@/8th/assets/asset-library'
 import { LevelSectionStyle } from '@/8th/features/FeaturesStyled'
 import { BoxStyle, Divide, Gap } from '@/8th/shared/ui/Misc'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import LevelItem from './LevelItem'
 import levelSectionData from './LevelSection.json'
 import SeriesItem from './SeriesItem'
@@ -126,18 +127,40 @@ export default function LeveledReading() {
     new Set(['Level K to 1']),
   )
   const [currentPage, setCurrentPage] = useState<{ [key: string]: number }>({})
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const toggleSection = (sectionName: string) => {
-    setOpenSections((prev) => {
-      const newSet = new Set(prev)
-      if (newSet.has(sectionName)) {
-        newSet.delete(sectionName)
+    const isCurrentlyOpen = openSections.has(sectionName)
+
+    if (isCurrentlyOpen) {
+      // 이미 열려있는 경우 닫기만
+      setOpenSections(new Set())
+    } else {
+      // 열려있는 다른 것을 먼저 닫기
+      if (openSections.size > 0) {
+        setOpenSections(new Set())
+
+        // 닫힌 후 스크롤
+        setTimeout(() => {
+          if (containerRef.current) {
+            const rect = containerRef.current.getBoundingClientRect()
+            const currentScrollTop =
+              window.pageYOffset || document.documentElement.scrollTop
+            const targetPosition = currentScrollTop + rect.top - 90
+
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth',
+            })
+
+            setOpenSections(new Set([sectionName]))
+          }
+        }, 100)
       } else {
-        newSet.clear()
-        newSet.add(sectionName)
+        // 열려있는 것이 없으면 바로 펼치기
+        setOpenSections(new Set([sectionName]))
       }
-      return newSet
-    })
+    }
   }
 
   const isSectionOpen = (sectionName: string) => openSections.has(sectionName)
@@ -158,6 +181,7 @@ export default function LeveledReading() {
 
   const renderAccordionSection = (section: (typeof ACCORDION_SECTIONS)[0]) => {
     const isOpen = isSectionOpen(section.id)
+    const isMobile = useMediaQuery('(max-width: 480px)')
 
     return (
       <div key={section.id}>
@@ -186,12 +210,12 @@ export default function LeveledReading() {
         <div className={`accordion-body ${isOpen ? 'open' : ''}`}>
           {section.id !== 'Level PK' && section.id !== 'Level PK Classic' && (
             <>
-              <Gap size={30} />
+              <Gap size={isMobile ? 20 : 25} />
               <Divide title="By Level" />
-              <Gap size={30} />
+              <Gap size={isMobile ? 20 : 25} />
             </>
           )}
-          {section.id === 'Level PK Classic' && <Gap size={30} />}
+          {section.id === 'Level PK Classic' && <Gap size={25} />}
           {section.id === 'Level PK' && <LevelSectionPk section={section} />}
           {section.id !== 'Level PK' && (
             <div className="level-container">
@@ -212,9 +236,9 @@ export default function LeveledReading() {
           )}
           {section.id !== 'Level PK' && section.id !== 'Level PK Classic' && (
             <>
-              <Gap size={30} />
+              <Gap size={isMobile ? 20 : 25} />
               <Divide title="By Series" />
-              <Gap size={30} />
+              <Gap size={isMobile ? 20 : 25} />
               <SeriesPagination
                 sectionId={section.id}
                 totalItems={SERIES_TEMPLATES.length}
@@ -225,20 +249,20 @@ export default function LeveledReading() {
               />
             </>
           )}
-          <Gap size={30} />
+          <Gap size={isMobile ? 20 : 25} />
         </div>
       </div>
     )
   }
 
   return (
-    <LevelSectionStyle>
+    <LevelSectionStyle ref={containerRef}>
       <BoxStyle className="title" display="flex" alignItems="center" gap={10}>
         <Image
           src={Assets.Icon.Study.leveledReading}
           alt="leveled-reading"
-          width={32}
-          height={32}
+          width={28}
+          height={28}
         />
         <span>Reading Levels</span>
       </BoxStyle>
@@ -291,9 +315,9 @@ function LevelSectionPk({
     <>
       {pkCategories.map((category) => (
         <div key={category.title}>
-          <Gap size={30} />
+          <Gap size={25} />
           <Divide title={category.title} />
-          <Gap size={30} />
+          <Gap size={25} />
           <div className="level-container">
             {category.levels.map(renderLevelItem)}
           </div>
@@ -330,6 +354,7 @@ function SeriesPagination({
 }: SeriesPaginationProps) {
   const currentPage = getCurrentPage(sectionId)
   const totalPages = getTotalPages(totalItems)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   // 프로토타입용 시리즈 데이터 생성
   const generateSeriesItems = (totalItems: number): SeriesItem[] => {
@@ -349,24 +374,43 @@ function SeriesPagination({
 
   const paginatedItems = getPaginatedItems(seriesItems, sectionId)
 
+  const scrollToContainer = () => {
+    setTimeout(() => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect()
+        const currentScrollTop =
+          window.pageYOffset || document.documentElement.scrollTop
+        const targetPosition = currentScrollTop + rect.top - 100
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth',
+        })
+      }
+    }, 100)
+  }
+
   const handlePrevPage = () => {
     if (currentPage > 0) {
       setCurrentPageForSection(sectionId, currentPage - 1)
+      scrollToContainer()
     }
   }
 
   const handleNextPage = () => {
     if (currentPage < totalPages - 1) {
       setCurrentPageForSection(sectionId, currentPage + 1)
+      scrollToContainer()
     }
   }
 
   const handlePageClick = (page: number) => {
     setCurrentPageForSection(sectionId, page)
+    scrollToContainer()
   }
 
   return (
-    <div className="series-pagination-container">
+    <div className="series-pagination-container" ref={containerRef}>
       <div className="series-container">
         {paginatedItems.map((item) => (
           <SeriesItem

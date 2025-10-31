@@ -1,5 +1,6 @@
 'use client'
 
+import { useMediaQuery } from '@/8th/MediaQueries'
 import {
   BookInfoButtonsStyle,
   BookInfoDetailItemStyle,
@@ -15,7 +16,7 @@ import {
   ModalHeaderStyle,
 } from '@/8th/shared/SharedStyled'
 import { MoreHorizontalButton, StartButton } from '@/8th/shared/ui/Buttons'
-import { BoxStyle } from '@/8th/shared/ui/Misc'
+import { BoxStyle, useLockBodyScroll } from '@/8th/shared/ui/Misc'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import PrintVocabularyModal from './PrintVocabularyModal'
@@ -64,15 +65,22 @@ export default function BookInfoModal({
   const [addToDo, setAddToDo] = useState(false)
   const [addFavorite, setAddFavorite] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
+  const [showVideoControls, setShowVideoControls] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPrintVocabularyModalOpen, setIsPrintVocabularyModalOpen] =
     useState(false)
 
+  // 모달이 열렸을 때 body 스크롤 막기
+  useLockBodyScroll()
+
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.volume = 0.5
+      videoRef.current.volume = 0
+      videoRef.current.muted = true
     }
   }, [videoSrc])
+
+  const isMobile = useMediaQuery('(max-width: 480px)')
 
   return (
     <>
@@ -82,18 +90,13 @@ export default function BookInfoModal({
             <div className="title">Book Info</div>
             <div className="btn-close" onClick={onClickClose} />
           </ModalHeaderStyle>
-          <ModalBodyStyle>
+          <ModalBodyStyle bookInfoBody>
             <BookInfoMainBannerStyle bookCover={imgSrc || ''}>
-              <BoxStyle className="wrapper" display="flex" gap={20}>
+              <BoxStyle
+                className="wrapper"
+                display="flex"
+                gap={isMobile ? 10 : 20}>
                 <div className="book-cover">
-                  {/* <div className="movie-play-button">
-                  <Image
-                    src={Assets.Icon.playRed}
-                    alt="badge"
-                    width={40}
-                    height={40}
-                  />
-                </div> */}
                   <Image
                     src={imgSrc || ''}
                     alt="book"
@@ -147,21 +150,32 @@ export default function BookInfoModal({
                 width="100%"
                 margin="0 0 20px 0"
                 borderRadius={20}
-                overflow="hidden">
-                <video
-                  ref={videoRef}
-                  src={videoSrc}
-                  controls
-                  autoPlay
-                  loop
-                  controlsList="nodownload nofullscreen noremoteplayback"
-                  onContextMenu={(e) => e.preventDefault()}
-                  style={{
-                    display: 'block',
-                    width: '100%',
-                    height: 'auto',
-                  }}
-                />
+                overflow="hidden"
+                position="relative">
+                <div
+                  onMouseEnter={() => setShowVideoControls(true)}
+                  onMouseLeave={() => setShowVideoControls(false)}
+                  onClick={() => setShowVideoControls(true)}>
+                  <video
+                    ref={videoRef}
+                    src={videoSrc}
+                    controls={showVideoControls}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    controlsList="nodownload nofullscreen noremoteplayback"
+                    onContextMenu={(e) => e.preventDefault()}
+                    disablePictureInPicture
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      height: 'auto',
+                      objectFit: 'contain',
+                    }}
+                  />
+                </div>
               </BoxStyle>
             )}
             <BookInfoSummaryStyle>

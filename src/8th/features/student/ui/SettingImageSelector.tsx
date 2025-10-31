@@ -1,5 +1,6 @@
 'use client'
 
+import { useMediaQuery } from '@/8th/MediaQueries'
 import { Assets } from '@/8th/assets/asset-library'
 import {
   SettingImageSelectorAvatarContainer,
@@ -58,6 +59,8 @@ export default function SettingImageSelector({
     }
   }
 
+  const isMobile = useMediaQuery('(max-width: 480px)')
+
   return (
     <SettingImageSelectorStyle>
       <SettingImageSelectorNavigationButton
@@ -79,6 +82,7 @@ export default function SettingImageSelector({
             avatar={avatar}
             isSelected={value === avatar.id}
             onClick={() => handleAvatarSelect(avatar.id)}
+            imageSize={isMobile ? 100 : 120}
           />
         ))}
       </SettingImageSelectorAvatarContainer>

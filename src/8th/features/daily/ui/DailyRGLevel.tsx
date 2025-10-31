@@ -18,8 +18,8 @@ export default function DailyRGLevel() {
 
   return (
     <DailyRGLevelStyle onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-      <TextStyle fontSize="xxlarge">Stage</TextStyle>
-      <TextStyle fontSize="xxlarge">{selectedStage}</TextStyle>
+      <TextStyle fontSize="xlarge">Stage</TextStyle>
+      <TextStyle fontSize="xlarge">{selectedStage}</TextStyle>
       <Image
         src={Assets.Icon.chevronDownGray}
         alt="chevron-down"

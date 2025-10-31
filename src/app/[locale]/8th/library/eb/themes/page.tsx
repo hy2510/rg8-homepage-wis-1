@@ -1,5 +1,6 @@
 'use client'
 
+import { useMediaQuery } from '@/8th/MediaQueries'
 import ThemeItem from '@/8th/features/library/ui/ThemeItem'
 import BasicGridLayout from '@/8th/shared/ui/BasicGridLayout'
 import { BoxStyle } from '@/8th/shared/ui/Misc'
@@ -19,6 +20,8 @@ export default function Page() {
   const router = useRouter()
 
   const themes = sampleThemes
+
+  const isMobile = useMediaQuery('(max-width: 480px)')
 
   const [isLoading, setIsLoading] = useState(true)
 
@@ -52,7 +55,10 @@ export default function Page() {
         title="Themes"
         onBack={() => router.push(SITE_PATH.NW8.EB)}
       />
-      <BoxStyle display="grid" gridTemplateColumns="repeat(2, 1fr)" gap={20}>
+      <BoxStyle
+        display="grid"
+        gridTemplateColumns={isMobile ? 'repeat(1, 1fr)' : 'repeat(2, 1fr)'}
+        gap={10}>
         {isLoading ? (
           <div>Loading themes...</div>
         ) : (

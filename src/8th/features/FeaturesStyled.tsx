@@ -2,6 +2,7 @@
 
 import { Assets } from '@/8th/assets/asset-library'
 import styled from 'styled-components'
+import { labtopL, labtopS, phone, tabletS } from '../MediaQueries'
 
 // CSS Property for smooth gradient animation
 const gradientAnimationCSS = `
@@ -16,8 +17,7 @@ const gradientAnimationCSS = `
 
 export const ChallengeTrophyCardStyle = styled.div`
   width: 100%;
-  max-width: 310px;
-  min-height: 150px;
+  min-height: 80px;
   padding: 20px;
   border-radius: 20px;
   border: 1px solid var(--line-color-primary);
@@ -126,7 +126,7 @@ export const DailyGoalCardStyle = styled.div`
       z-index: 1;
 
       .comment-title {
-        font-size: var(--font-size-xlarge);
+        font-size: var(--font-size-large);
         font-weight: bold;
         font-family: var(--font-family-secondary);
       }
@@ -189,8 +189,8 @@ export const DailyGoalCardStyle = styled.div`
 
 export const LevelMasterCardStyle = styled.div`
   width: 100%;
-  max-width: 150px;
-  min-height: 150px;
+  min-width: 140px;
+  min-height: 80px;
   padding: 20px;
   border-radius: 20px;
   border: 1px solid var(--line-color-primary);
@@ -218,7 +218,7 @@ export const LevelMasterCardStyle = styled.div`
 
   .earn-points {
     color: var(--font-color-secondary);
-    font-size: var(--font-size-medium);
+    font-size: var(--font-size-small);
   }
 `
 
@@ -228,7 +228,7 @@ export const LevelMasterItemStyle = styled.div`
   align-items: center;
   gap: 10px;
 
-  .container {
+  .level-master-item-container {
     cursor: pointer;
     width: 100px;
     height: 100px;
@@ -240,6 +240,7 @@ export const LevelMasterItemStyle = styled.div`
     background-color: #fff;
     border: 1px solid var(--line-color-primary);
     position: relative;
+    padding: 15px;
 
     &.current {
       border: 1px solid var(--line-color-light-blue);
@@ -493,7 +494,7 @@ export const StreakStatusStyle = styled.div`
       min-width: 24px;
       height: 100%;
       border-radius: 100px;
-      background-color: var(--color-gray-strong);
+      background-color: #fbce2a;
       background-image: url(${Assets.Icon.checkWhite.src});
       background-size: 24px;
       background-repeat: repeat-x;
@@ -523,7 +524,7 @@ export const StreakStatusStyle = styled.div`
 
   .streak-progress-text {
     width: 100%;
-    font-size: var(--font-size-medium);
+    font-size: var(--font-size-small);
     color: var(--font-color-secondary);
     display: flex;
     align-items: center;
@@ -747,18 +748,20 @@ export const DailyGoalSettingStyle = styled.div`
     font-weight: bold;
   }
 
-  .cancel-button {
-    font-family: var(--font-family-secondary);
-    color: var(--font-color-secondary);
-    font-weight: bold;
+  .cancel-button,
+  .save-button {
+    font-family: var(--font-family-rg-b);
+    font-size: 0.9em;
+    letter-spacing: 0.01em;
     cursor: pointer;
   }
 
+  .cancel-button {
+    color: var(--font-color-secondary);
+  }
+
   .save-button {
-    font-family: var(--font-family-secondary);
     color: var(--font-color-light-blue);
-    font-weight: bold;
-    cursor: pointer;
   }
 
   .count-text {
@@ -1066,6 +1069,10 @@ export const CalendarGridStyle = styled.div`
     padding: 15px 25px;
     border-bottom: 1px solid var(--line-color-primary);
 
+    ${phone(`
+      padding: 10px 20px;
+    `)}
+
     .text-gray {
       font-family: var(--font-family-secondary);
       font-weight: 600;
@@ -1098,6 +1105,10 @@ export const CalendarHeaderStyle = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+
+  ${phone(`
+    padding: 10px;
+  `)}
 
   .goal-toggle {
     width: fit-content;
@@ -1136,6 +1147,30 @@ export const CalendarHeaderStyle = styled.div`
     display: flex;
     align-items: center;
     gap: 15px;
+  }
+
+  .left-group {
+    ${phone(`
+      gap: 10px;
+      padding-left: 5px;
+    `)}
+  }
+
+  .right-group {
+    ${phone(`
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      background-color: #fff;
+      padding: 10px;
+      border-top: 1px solid var(--line-color-primary);
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    `)}
   }
 
   .comment {
@@ -1281,6 +1316,12 @@ export const CalendarEventItemStyle = styled.div`
   justify-content: flex-start;
   gap: 10px;
 
+  ${phone(`
+    &:nth-last-child(1) {
+      padding-bottom: 50px;
+    }
+  `)}
+
   .event-day {
     padding-top: 5px;
     font-size: var(--font-size-small);
@@ -1317,7 +1358,22 @@ export const CalendarEventLoadMoreStyle = styled.button`
   }
 `
 
+export const SettingCheckSelectorStyle = styled.div`
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+`
+
 // features > daily
+
+export const DailyRGCourseListStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 export const DailyRGBookItemStyle = styled.div<{
   isCurrent?: boolean
@@ -1333,12 +1389,20 @@ export const DailyRGBookItemStyle = styled.div<{
   border: 1px solid var(--line-color-primary);
   box-shadow: 0 3px 0 0 var(--line-color-primary);
   padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 3px;
   background-color: ${({ isCurrent, isCompleted = 0 }) =>
     isCurrent || isCompleted >= 1 ? '#fff' : '#a2b1c410'};
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  ${phone(`
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  `)}
 
   &.current-book {
     &::before,
@@ -1362,7 +1426,7 @@ export const DailyRGBookItemStyle = styled.div<{
       );
     }
 
-    &::before {
+    /* &::before {
       background-image: conic-gradient(
         from var(--angle),
         #ffca2b,
@@ -1371,7 +1435,7 @@ export const DailyRGBookItemStyle = styled.div<{
       );
       filter: blur(10px);
       animation: 2s spin linear infinite;
-    }
+    } */
 
     @keyframes spin {
       from {
@@ -1384,6 +1448,25 @@ export const DailyRGBookItemStyle = styled.div<{
   }
 
   .book-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    &.mobile-prek-container {
+      ${phone(`
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 5px;
+      `)}
+    }
+
+    &.mobile-book-container {
+      ${phone(`
+        gap: 10px;
+      `)}
+    }
+
     .book-number,
     .completed-mark,
     .completed-mark-twin {
@@ -1431,14 +1514,15 @@ export const DailyRGBookItemStyle = styled.div<{
       height: 40px;
     }
 
-    .thumbnail {
+    .prek-thumbnail {
       border-radius: 15px;
       background-color: var(--color-gray-strong);
 
       img {
         display: block;
         width: 100%;
-        max-width: ${({ isPreK }) => (isPreK ? '260px' : '125px')};
+        max-width: 260px;
+        min-height: 100px;
         height: auto;
         border-radius: 15px;
         background-color: var(--color-gray-medium);
@@ -1446,39 +1530,131 @@ export const DailyRGBookItemStyle = styled.div<{
           isCurrent || isCompleted ? 'none' : 'grayscale(100%)'};
         opacity: ${({ isCurrent, isCompleted }) =>
           isCurrent || isCompleted ? 1 : 0.6};
+
+        ${phone(`
+          max-width: 100%;
+          min-height: 150px;
+        `)}
+      }
+    }
+
+    .book-cover {
+      border-radius: 15px;
+      background-color: var(--color-gray-strong);
+
+      img {
+        display: block;
+        width: 100%;
+        max-width: 125px;
+        height: auto;
+        border-radius: 15px;
+        background-color: var(--color-gray-medium);
+        filter: ${({ isCurrent, isCompleted }) =>
+          isCurrent || isCompleted ? 'none' : 'grayscale(100%)'};
+        opacity: ${({ isCurrent, isCompleted }) =>
+          isCurrent || isCompleted ? 1 : 0.6};
+
+        ${phone(`
+          border-radius: 10px;
+          min-width: 105px;
+        `)}
       }
     }
   }
 
-  .title-box {
-    padding-left: 3px;
-    max-width: 380px;
+  .title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
 
-    .title {
-      color: ${({ isCurrent, isCompleted }) =>
-        isCurrent || isCompleted
-          ? 'var(--font-color-primary)'
-          : 'var(--color-gray-strong)'};
-      font-size: var(--font-size-large);
-      font-weight: 500;
-    }
+    ${phone(`
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding-left: 5px;
+      gap: 0;
+    `)}
 
-    .dot {
-      color: var(--font-color-secondary);
-      font-size: var(--font-size-medium);
-    }
+    .title-box {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 5px;
+      padding-left: 3px;
+      max-width: 380px;
 
-    .point {
-      color: ${({ isCurrent, isCompleted }) =>
-        isCurrent || isCompleted
-          ? 'var(--font-color-light-blue)'
-          : 'var(--color-gray-strong)'};
-      font-size: var(--font-size-medium);
+      ${phone(`
+        padding: 10px;
+        padding-right: 0;
+      `)}
 
-      &.good-job {
+      .title {
+        color: ${({ isCurrent, isCompleted }) =>
+          isCurrent || isCompleted
+            ? 'var(--font-color-primary)'
+            : 'var(--color-gray-strong)'};
+        font-size: 1.1em;
+        font-family: var(--font-family-rg-b);
+        font-weight: 600;
+        letter-spacing: 0.01em;
+      }
+
+      .dot {
         color: var(--font-color-secondary);
+        font-size: var(--font-size-medium);
+      }
+
+      .point {
+        color: ${({ isCurrent, isCompleted }) =>
+          isCurrent || isCompleted
+            ? 'var(--font-color-light-blue)'
+            : 'var(--color-gray-strong)'};
+        font-size: var(--font-size-small);
+
+        &.good-job {
+          color: var(--font-color-secondary);
+        }
       }
     }
+
+    .mobile-resource-download-container {
+      display: none;
+
+      ${phone(`
+        display: block;
+      `)}
+    }
+  }
+`
+
+export const DailyRGCourseContainerStyle = styled.div`
+  padding-top: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 800;
+  background-color: #fff;
+
+  ${labtopS(`
+    top: 65px;
+  `)}
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -20px;
+    right: -20px;
+    bottom: -5px;
+    background-color: #fff;
+    z-index: 0;
+
+    ${labtopS(`
+      left: -10px;
+      right: -10px;
+    `)}
   }
 `
 
@@ -1487,11 +1663,9 @@ export const DailyRGCourseStyle = styled.div<{
   bgColor?: string
   progressColor?: string
 }>`
+  overflow: hidden;
   width: 100%;
   min-height: 77px;
-  position: sticky;
-  top: 20px;
-  z-index: 800;
   border-radius: 20px;
   background-color: ${({ bgColor }) => bgColor};
   background-image: url(${Assets.Icon.glossyPoint.src});
@@ -1500,7 +1674,16 @@ export const DailyRGCourseStyle = styled.div<{
   background-repeat: no-repeat;
   display: grid;
   grid-template-columns: 1fr 80px;
-  box-shadow: -5px -8px 0 20px #fff;
+  position: relative;
+
+  .course-title {
+    position: relative;
+    z-index: 2;
+  }
+
+  ${labtopS(`
+    grid-template-columns: 1fr 70px;
+  `)}
 
   &::before {
     content: '';
@@ -1526,12 +1709,20 @@ export const ProgressBarContainerStyle = styled.div`
   align-items: flex-start;
   justify-content: center;
   gap: 10px;
+
+  ${labtopS(`
+    padding: 10px 0 10px 20px;
+  `)}
 `
 
 export const ProgressBarStyle = styled.div`
   width: calc(100% - 30px);
   height: 14px;
   position: relative;
+
+  ${labtopS(`
+    width: calc(100% - 20px);
+  `)}
 
   &::after {
     content: '';
@@ -1575,6 +1766,51 @@ export const DailyRGLevelStyle = styled.div`
   display: flex;
   gap: 10px;
   position: relative;
+  padding-left: 10px;
+
+  ${labtopL(`
+    padding-top: 10px;
+  `)}
+
+  ${phone(`
+    padding-top: 5px;
+  `)}
+`
+export const QuickJumpButtonStyle = styled.button<{ isVisible: boolean }>`
+  cursor: pointer;
+  position: fixed;
+  left: 50%;
+  bottom: 90px;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 3px solid var(--line-color-light-blue);
+  font-size: 28px;
+  z-index: 801;
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+  visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
+  animation: ${({ isVisible }) =>
+    isVisible ? 'float 2s ease-in-out infinite' : 'none'};
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0px);
+    }
+    50% {
+      transform: translateX(-50%) translateY(-10px);
+    }
+  }
+
+  &:hover {
+    animation-play-state: paused;
+    transform: translateX(-50%) translateY(-5px) scale(1.05);
+  }
 `
 
 // features > level
@@ -1607,14 +1843,14 @@ export const BookInfoModalStyle = styled.div`
 
 export const BookInfoMainBannerStyle = styled.div<{ bookCover: string }>`
   width: 100%;
-  min-height: 220px;
+  min-height: 100px;
   background-image: url(${({ bookCover }) => bookCover});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 20px;
   overflow: hidden;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 
   .wrapper {
     background-color: rgba(0, 0, 0, 0.5);
@@ -1628,8 +1864,10 @@ export const BookInfoMainBannerStyle = styled.div<{ bookCover: string }>`
     overflow: hidden;
 
     .book-cover {
-      width: 140px;
-      min-height: 200px;
+      width: 100%;
+      min-width: 80px;
+      max-width: 150px;
+      min-height: 100px;
       position: relative;
       display: flex;
       align-items: center;
@@ -1674,6 +1912,10 @@ export const BookInfoMainBannerStyle = styled.div<{ bookCover: string }>`
       padding-top: 10px;
       color: #fff;
 
+      ${phone(`
+        padding-left: 3px;
+      `)}
+
       .book-code {
         font-size: var(--font-size-small);
         font-family: var(--font-family-secondary);
@@ -1684,10 +1926,18 @@ export const BookInfoMainBannerStyle = styled.div<{ bookCover: string }>`
       .title {
         font-size: var(--font-size-large);
         margin-bottom: 10px;
+
+        ${phone(`
+          font-size: 1em;
+        `)}
       }
 
       .author {
         font-size: var(--font-size-medium);
+
+        ${phone(`
+          font-size: var(--font-size-small);
+        `)}
       }
     }
 
@@ -1703,6 +1953,12 @@ export const BookInfoButtonsStyle = styled.div`
   font-size: var(--font-size-medium);
   color: var(--font-color-light-blue);
 
+  ${phone(`
+    min-height: 40px;
+    overflow-x: scroll;
+    margin-bottom: 30px;
+  `)}
+
   .btn {
     cursor: pointer;
     width: fit-content;
@@ -1716,6 +1972,10 @@ export const BookInfoButtonsStyle = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
+
+    ${phone(`
+      min-width: fit-content;
+    `)}
 
     &.to-do {
       background-image: url(${Assets.Icon.Side.toDo.src});
@@ -1849,7 +2109,8 @@ export const BookItemStyle = styled.div<{ level: string }>`
   .book-cover-container {
     cursor: pointer;
     width: 100%;
-    height: 240px;
+    min-width: 100px;
+    min-height: 120px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -1861,7 +2122,6 @@ export const BookItemStyle = styled.div<{ level: string }>`
         display: block;
         width: 100%;
         height: auto;
-        object-fit: cover;
         background-color: var(--color-gray-opacity-70);
         border-radius: 15px 15px 0 0;
       }
@@ -1944,9 +2204,9 @@ export const BookItemStyle = styled.div<{ level: string }>`
       padding: 5px 0;
       text-align: center;
       border-radius: 0 0 15px 15px;
-      background-color: rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background-color: rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(100px);
+      -webkit-backdrop-filter: blur(100px);
     }
 
     .book-code-bg {
@@ -1972,12 +2232,28 @@ export const BookItemStyle = styled.div<{ level: string }>`
     justify-content: flex-start;
     margin-top: 10px;
 
+    ${phone(`
+      margin-top: 5px;
+      align-items: flex-start;
+    `)}
+
     .wrapper {
-      text-align: center;
+      text-align: left;
+      padding-left: 5px;
+      width: 100%;
 
       .title {
-        font-size: var(--font-size-small);
+        font-family: var(--font-family-rg-b);
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        font-size: 0.85em;
         color: var(--font-color-primary);
+        margin: 5px 0;
+
+        ${phone(`
+          font-weight: 600;
+          font-size: 0.8em;
+        `)}
       }
 
       .title-skeleton {
@@ -1995,14 +2271,8 @@ export const BookItemStyle = styled.div<{ level: string }>`
         margin: 0 auto;
       }
 
-      .dot {
-        font-size: 0.7em;
-        color: var(--font-color-secondary);
-        padding: 0 3px;
-      }
-
       .point {
-        font-size: var(--font-size-small);
+        font-size: 0.75em;
         color: var(--font-color-light-blue);
       }
 
@@ -2082,6 +2352,24 @@ export const BookListStyle = styled.div`
   grid-template-columns: repeat(4, 1fr);
   align-items: flex-start;
   gap: 20px 10px;
+
+  ${labtopS(`
+    grid-template-columns: repeat(5, 1fr);
+  `)}
+
+  ${tabletS(`
+    grid-template-columns: repeat(4, 1fr);
+  `)}
+
+  ${phone(`
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px 5px;
+  `)}
+
+  @media (max-width: 350px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px 5px;
+  }
 `
 
 export const BookListEmptyStateStyle = styled.div`
@@ -2100,11 +2388,18 @@ export const BookListEmptyStateStyle = styled.div`
 export const CollectionsStyled = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 25px;
+
+  ${phone(`
+    gap: 20px;
+  `)}
 
   .title {
     font-size: var(--font-size-large);
     color: var(--font-color-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   color: var(--font-color-primary);
@@ -2199,11 +2494,29 @@ export const LevelItemStyle = styled.div<{
       bottom: 20px;
       z-index: 3;
 
+      ${tabletS(`
+        padding: 10px;
+        padding-bottom: 5px;
+        right: 15px;
+        bottom: 15px;
+        border-radius: 12px;
+        backdrop-filter: blur(100px);
+        -webkit-backdrop-filter: blur(100px);
+      `)}
+
       .level {
         font-size: 2.5em;
         font-weight: 500;
         color: ${({ fontColor }) => fontColor};
         margin-bottom: 3px;
+
+        ${tabletS(`
+          font-size: 2.2em;
+        `)}
+
+        ${phone(`
+          font-size: 2em;
+        `)}
       }
 
       .more-books {
@@ -2263,6 +2576,15 @@ export const LevelPkItemStyle = styled.div<{
     align-items: flex-start;
     justify-content: center;
 
+    ${labtopS(`
+      height: 100%;
+      padding: 12px;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 10px;
+    `)}
+
     .thumbnail-image {
       width: 100%;
       height: auto;
@@ -2273,6 +2595,10 @@ export const LevelPkItemStyle = styled.div<{
       position: relative;
       z-index: 2;
       filter: contrast(1.025);
+
+      ${labtopS(`
+        transform: rotate(0);
+      `)}
 
       &.sub {
         border: none;
@@ -2289,6 +2615,24 @@ export const LevelPkItemStyle = styled.div<{
       border-radius: 15px;
       background-color: rgba(0, 0, 0, 0.2);
       transform: rotate(-12deg);
+
+      ${labtopS(`
+        display: none;
+      `)}
+    }
+
+    .mobile-title {
+      display: none;
+      font-size: 1em;
+      color: ${({ fontColor }) => fontColor};
+      width: 100%;
+      text-align: center;
+      margin-bottom: 5px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+      ${labtopS(`
+        display: block;
+      `)}
     }
   }
 
@@ -2297,6 +2641,10 @@ export const LevelPkItemStyle = styled.div<{
     width: 100%;
     height: 160px;
     position: absolute;
+
+    ${labtopS(`
+      display: none;
+    `)}
 
     .title {
       width: 100%;
@@ -2314,7 +2662,6 @@ export const LevelPkItemStyle = styled.div<{
 
   .study-count {
     font-size: var(--font-size-small);
-    font-weight: 500;
     color: var(--font-color-secondary);
     text-align: center;
   }
@@ -2330,11 +2677,19 @@ export const LevelPkItemStyle = styled.div<{
 export const LevelSectionStyle = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 25px;
+
+  ${phone(`
+    gap: 20px;
+  `)}
 
   .title {
-    font-size: var(--font-size-xlarge);
+    font-size: var(--font-size-large);
     color: var(--font-color-primary);
+
+    ${labtopS(`
+      font-size: 1.05em;
+    `)}
   }
 
   .accordion-container {
@@ -2359,11 +2714,15 @@ export const LevelSectionStyle = styled.div`
     top: 0;
     z-index: 100;
 
+    ${phone(`
+      padding: 15px;
+    `)}
+
     &.open {
       background-color: #edfafe;
 
       .accordion-title {
-        color: var(--font-color-dark-blue);
+        color: var(--font-color-light-blue);
       }
     }
 
@@ -2419,6 +2778,11 @@ export const LevelSectionStyle = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 20px 10px;
     margin-bottom: 10px;
+
+    ${phone(`
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px 5px;
+    `)}
   }
 
   .series-pagination-container {
@@ -2493,7 +2857,11 @@ export const LevelSectionStyle = styled.div`
 export const RecentlyViewedStyle = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 25px;
+
+  ${phone(`
+    gap: 20px;
+  `)}
 
   .list {
     transition: opacity 0.3s ease-in-out;
@@ -2643,7 +3011,11 @@ export const ThemeItemStyle = styled.div`
   }
 
   .title {
-    color: var(--font-color-dark-blue);
+    color: var(--font-color-primary);
+    font-size: var(--font-size-medium);
+    font-family: var(--font-family-rg-b);
+    font-weight: 600;
+    letter-spacing: 0.01em;
   }
 `
 
@@ -2653,6 +3025,11 @@ export const ChallengeBoardStyle = styled.div`
   min-height: 120px;
   border: 1px solid var(--line-color-primary);
   border-radius: 20px;
+  gap: 10px;
+
+  ${phone(`
+    min-height: 80px;
+  `)}
 
   .challenge-board-top {
     cursor: pointer;
@@ -2663,17 +3040,30 @@ export const ChallengeBoardStyle = styled.div`
     position: relative;
     padding: 10px;
 
+    ${phone(`
+      gap: 10px;
+    `)}
+
     .challenge-board-symbol {
       display: block;
       width: 120px;
       height: auto;
       object-fit: cover;
+
+      ${phone(`
+        width: 80px;
+      `)}
     }
 
     .challenge-board-title {
+      width: calc(100% - 180px);
       display: flex;
       flex-direction: column;
       gap: 5px;
+
+      ${phone(`
+        width: calc(100% - 110px);
+      `)}
     }
 
     .challenge-board-arrow {
@@ -2686,10 +3076,22 @@ export const ChallengeBoardStyle = styled.div`
       align-items: center;
       justify-content: center;
 
+      ${phone(`
+        width: 30px;
+        height: 30px;
+        top: calc(50% - 15px);
+        right: 0;
+      `)}
+
       img {
         display: block;
         width: 24px;
         height: 24px;
+
+        ${phone(`
+          width: 20px;
+          height: 20px;
+        `)}
       }
     }
   }
@@ -2813,8 +3215,8 @@ export const ChallengeBoardProgressItemStyle = styled.div`
 
 export const RankCardStyle = styled.div`
   width: 100%;
-  max-width: 150px;
-  min-height: 150px;
+  min-width: 140px;
+  min-height: 80px;
   padding: 20px;
   border-radius: 20px;
   border: 1px solid var(--line-color-primary);
@@ -2864,7 +3266,7 @@ export const RecentReviewListStyle = styled.div`
 
   .header {
     width: fit-content;
-    font-size: var(--font-size-xlarge);
+    font-size: var(--font-size-large);
 
     img {
       display: block;
@@ -2887,6 +3289,12 @@ export const ReviewBookItemStyle = styled.div`
   justify-content: space-between;
   gap: 10px;
   font-size: 0.9em;
+  position: relative;
+
+  ${tabletS(`
+    width: 100%;
+    flex-direction: column;
+  `)}
 
   .book-cover {
     width: 100px;
@@ -2896,13 +3304,38 @@ export const ReviewBookItemStyle = styled.div`
     align-items: flex-end;
     position: relative;
 
+    ${tabletS(`
+      width: 100%;
+      height: auto;
+      min-height: 100px;
+      transform: none;
+      padding-left: 20px;
+    `)}
+
     img {
       width: 100%;
+      max-width: 100px;
       height: auto;
       object-fit: cover;
       border-radius: 15px;
       background-color: var(--color-gray-opacity-70);
     }
+  }
+
+  .review-book-info-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+
+    ${tabletS(`
+      width: calc(100% - 20px);
+      background-color: var(--color-gray-light);
+      padding: 10px;
+      border-radius: 15px;
+    `)}
   }
 
   .book-code {
@@ -2915,6 +3348,9 @@ export const ReviewBookItemStyle = styled.div`
 
   .book-title {
     font-size: var(--font-size-large);
+    font-family: var(--font-family-rg-b);
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 
   .total-score {
@@ -2935,6 +3371,12 @@ export const ReviewBookItemStyle = styled.div`
     border-right: none;
     padding: 5px 8px;
     font-size: var(--font-size-small);
+    background-color: #fff;
+
+    ${tabletS(`
+      padding: 3px 6px;
+      font-size: 0.75em;
+    `)}
 
     &:first-child {
       border-radius: 5px 0 0 5px;
@@ -2957,6 +3399,18 @@ export const ReviewBookItemStyle = styled.div`
         color: var(--font-color-primary);
       }
     }
+  }
+
+  .mobile-review-more-button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    ${tabletS(`
+      position: absolute;
+      bottom: calc(50% + 5px);
+      right: 0;
+    `)}
   }
 
   .study-results {
@@ -2990,6 +3444,7 @@ export const ReviewBookItemStyle = styled.div`
     min-height: 25px;
     position: relative;
     z-index: 1;
+    overflow: hidden;
 
     span {
       position: relative;
@@ -3099,9 +3554,9 @@ export const SettingHeaderStyle = styled.div`
 
   .btn {
     cursor: pointer;
-    font-family: var(--font-family-secondary);
-    font-size: var(--font-size-medium);
-    font-weight: 700;
+    font-family: var(--font-family-rg-b);
+    font-size: 0.9em;
+    letter-spacing: 0.01em;
 
     &.save {
       color: var(--font-color-light-blue);
@@ -3126,6 +3581,10 @@ export const SettingImageSelectorStyle = styled.div`
   position: relative;
   padding: 20px 0;
   margin-bottom: 20px;
+
+  ${phone(`
+    gap: 10px;
+  `)}
 `
 
 export const SettingImageSelectorNavigationButton = styled.button`
@@ -3152,6 +3611,13 @@ export const SettingImageSelectorAvatarContainer = styled.div`
   display: flex;
   gap: 10px;
   width: 100%;
+
+  ${phone(`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    gap: 10px 5px;
+  `)}
 `
 
 export const SettingImageSelectorPageIndicator = styled.div`
@@ -3207,10 +3673,11 @@ export const SettingImageSelectorAvatarItemStyle = styled.div<{
   .avatar-image {
     transition: all 0.2s ease;
     position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 110px;
-    height: 110px;
+    top: calc(50% + 5px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: ${({ imageSize }) => imageSize}px;
+    height: ${({ imageSize }) => imageSize}px;
     object-fit: cover;
   }
 
@@ -3235,6 +3702,11 @@ export const SettingRadioSelectorStyle = styled.div`
   padding: 20px;
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
+
+  ${phone(`
+    gap: 10px 20px;
+  `)}
 `
 
 export const RadioSelectorItemStyle = styled.div`
@@ -3293,7 +3765,7 @@ export const RadioLabelStyle = styled.div`
 export const StudentEditCardStyle = styled.div`
   width: 100%;
   border: 1px solid var(--line-color-primary);
-  border-radius: 20px;
+  border-radius: 15px;
   padding: 20px;
   font-family: var(--font-family-secondary);
   position: relative;
@@ -3334,9 +3806,9 @@ export const StudentEditCardButtonContainer = styled.div`
 
 export const StudentEditCardButton = styled.div`
   cursor: pointer;
-  font-family: var(--font-family-secondary);
-  font-size: var(--font-size-medium);
-  font-weight: 700;
+  font-family: var(--font-family-rg-b);
+  font-size: 0.9em;
+  letter-spacing: 0.01em;
 
   &.edit,
   &.save {
@@ -3362,6 +3834,10 @@ export const StudentInfoCardStyle = styled.div`
   position: relative;
   overflow: hidden;
 
+  ${tabletS(`
+    padding: 0;
+  `)}
+
   &::before {
     content: '';
     position: absolute;
@@ -3386,6 +3862,16 @@ export const StudentInfoCardStyle = styled.div`
     display: flex;
     align-items: flex-end;
 
+    ${tabletS(`
+      margin-top: 20px;
+      position: relative;
+      height: 130px;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      overflow: hidden;
+    `)}
+
     .main-character {
       position: absolute;
       top: 0;
@@ -3408,6 +3894,7 @@ export const StudentInfoCardStyle = styled.div`
   .info-container {
     width: calc(100% - 280px);
     height: 100%;
+    min-height: 100px;
     padding-left: 280px;
     position: relative;
     z-index: 3;
@@ -3416,10 +3903,25 @@ export const StudentInfoCardStyle = styled.div`
     justify-content: space-between;
     align-items: flex-start;
 
+    ${tabletS(`
+      width: 100%;
+      padding: 20px 0;
+      padding-bottom: 30px;
+      margin: 0 auto;
+      align-items: center;
+      gap: 10px;
+      background-color: #fff;
+    `)}
+
     .user-name {
       font-family: var(--font-family-secondary);
       font-size: var(--font-size-xlarge);
       font-weight: bold;
+
+      ${tabletS(`
+        width: 100%;
+        text-align: center;
+      `)}
     }
 
     .user-id,
@@ -3429,6 +3931,16 @@ export const StudentInfoCardStyle = styled.div`
       font-weight: 700;
       font-size: var(--font-size-small);
       color: var(--font-color-secondary);
+      margin-bottom: 5px;
+
+      ${tabletS(`
+        width: 100%;
+        text-align: center;
+      `)}
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
 
     .buttons {
@@ -3488,9 +4000,12 @@ export const StudentProfileCardStyle = styled.div`
   .body {
     display: grid;
     grid-template-columns: 1fr 100px;
-    gap: 10px;
+    gap: 5px;
 
     .label {
+      font-family: var(--font-family-rg-b);
+      letter-spacing: 0.01em;
+      font-weight: 600;
       font-size: var(--font-size-medium);
       color: var(--font-color-secondary);
       display: flex;
@@ -3503,7 +4018,6 @@ export const StudentProfileCardStyle = styled.div`
       align-items: center;
       justify-content: flex-end;
       font-size: var(--font-size-medium);
-      font-weight: 600;
 
       &.link {
         cursor: pointer;
@@ -3520,5 +4034,5 @@ export const StudyStatusViewStyle = styled.div`
   gap: 5px;
   padding: 25px;
   background-color: var(--color-gray-light);
-  border-radius: 20px;
+  border-radius: 15px;
 `

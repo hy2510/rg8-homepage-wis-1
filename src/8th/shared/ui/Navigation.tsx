@@ -30,10 +30,10 @@ export function SubPageNavHeader({
         <Image src={iconSrc} alt="simbol" width={30} height={30} />
       )}
       {title && (
-        <TextStyle fontSize="var(--font-size-xlarge)">{title}</TextStyle>
+        <TextStyle fontSize="var(--font-size-large)">{title}</TextStyle>
       )}
       {subTitle && (
-        <TextStyle fontSize="var(--font-size-xlarge)" fontColor="secondary">
+        <TextStyle fontSize="var(--font-size-large)" fontColor="secondary">
           {subTitle}
         </TextStyle>
       )}

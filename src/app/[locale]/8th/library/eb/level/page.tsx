@@ -2,6 +2,7 @@
 
 import BookList, { Book } from '@/8th/features/library/ui/BookList'
 import BasicGridLayout from '@/8th/shared/ui/BasicGridLayout'
+import { Gap } from '@/8th/shared/ui/Misc'
 import { SubPageNavHeader } from '@/8th/shared/ui/Navigation'
 import { sampleBooksData } from '@/app/[locale]/8th/library/sampleBooks'
 import SITE_PATH from '@/app/site-path'
@@ -63,7 +64,7 @@ export default function Page() {
     <BasicGridLayout>
       <SubPageNavHeader
         title={'Level ' + levelTitle.toUpperCase()}
-        subTitle={title}
+        subTitle={title ? ' · ' + title : title}
         onBack={() => router.push(SITE_PATH.NW8.EB)}
       />
       <BookList books={currentBooks} isLoading={isLoading} />

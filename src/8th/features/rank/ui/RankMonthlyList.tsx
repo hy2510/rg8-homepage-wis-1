@@ -1,3 +1,4 @@
+import { TextStyle } from '@/8th/shared/ui/Misc'
 import RankMonthlyItem from './RankMonthlyItem'
 
 /**
@@ -6,6 +7,14 @@ import RankMonthlyItem from './RankMonthlyItem'
 export default function RankMonthlyList() {
   return (
     <div>
+      <TextStyle
+        fontFamily="sans"
+        fontSize="small"
+        fontColor="secondary"
+        textAlign="right"
+        margin="0 20px 10px auto">
+        · Books Read · Earned Points
+      </TextStyle>
       <RankMonthlyItem
         rank={999}
         avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"

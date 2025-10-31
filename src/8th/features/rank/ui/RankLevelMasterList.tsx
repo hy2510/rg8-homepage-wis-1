@@ -1,3 +1,4 @@
+import { TextStyle } from '@/8th/shared/ui/Misc'
 import RankLevelMasterItem from './RankLevelMasterItem'
 
 /**
@@ -6,6 +7,14 @@ import RankLevelMasterItem from './RankLevelMasterItem'
 export default function RankLevelMasterList() {
   return (
     <div>
+      <TextStyle
+        fontFamily="sans"
+        fontSize="small"
+        fontColor="secondary"
+        textAlign="right"
+        margin="0 20px 10px auto">
+        · Level Master · Registration Date
+      </TextStyle>
       <RankLevelMasterItem
         number={0}
         level="-"

@@ -179,6 +179,7 @@ export default function LevelItem({
           className={`thumbnail-image ${type === 'study' ? '' : 'sub'}`}
         />
         {type === 'study' && <div className="thumbnail-shadow" />}
+        <div className="mobile-title">{title}</div>
       </div>
       <div className="title-container">
         <div className="title">{title}</div>
@@ -186,6 +187,7 @@ export default function LevelItem({
       <div className="study-count">
         <span>{completed}</span>
         <span>/{total}</span>
+        <span> Activities</span>
       </div>
       {isRecentlyViewed && (
         <div className="delete-button">
@@ -220,7 +222,7 @@ export default function LevelItem({
       <div className="level-container">
         <div className="wrapper">
           <div className="level">{level.toUpperCase()}</div>
-          <div className="more-books">
+          {/* <div className="more-books">
             <span>more</span>
             <Image
               src={Assets.Icon.chevronRightWhite}
@@ -228,12 +230,14 @@ export default function LevelItem({
               width={16}
               height={16}
             />
-          </div>
+          </div> */}
         </div>
       </div>
+
       <div className="study-count">
         <span>{completed}</span>
         <span>/{total}</span>
+        <span> Books Read</span>
       </div>
       {/* {isRecentlyViewed && (
         <div className="delete-button">

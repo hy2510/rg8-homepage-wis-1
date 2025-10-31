@@ -1,5 +1,6 @@
 'use client'
 
+import { useMediaQuery } from '@/8th/MediaQueries'
 import { Assets } from '@/8th/assets/asset-library'
 import { ChallengeBoardEditMenu } from '@/8th/shared/ui/Dropdowns'
 import { BoxStyle, TextStyle } from '@/8th/shared/ui/Misc'
@@ -49,6 +50,8 @@ export default function ChallengeBoard() {
     }
   }
 
+  const isMobile = useMediaQuery('(max-width: 480px)')
+
   return (
     <ChallengeBoardStyle>
       <BoxStyle className="challenge-board-top" onClick={handleToggle}>
@@ -60,11 +63,14 @@ export default function ChallengeBoard() {
           className="challenge-board-symbol"
         />
         <BoxStyle className="challenge-board-title">
-          <TextStyle fontSize="large" fontWeight="bold" fontFamily="sans">
+          <TextStyle
+            fontSize={isMobile ? '1em' : 'large'}
+            fontWeight="bold"
+            fontFamily="sans">
             {CHALLENGE_TITLE} 진행중
           </TextStyle>
           <TextStyle
-            fontSize="medium"
+            fontSize={isMobile ? '0.9em' : 'medium'}
             fontWeight="bold"
             fontFamily="sans"
             fontColor="secondary">
@@ -155,6 +161,7 @@ function GoalInfo() {
           onClose={() => setIsDropdownOpen(false)}
           showArrow={false}
           viewGrid={false}
+          position={'bottomRight'}
         />
       </BoxStyle>
     </ChallengeBoardGoalInfoStyle>
@@ -163,9 +170,14 @@ function GoalInfo() {
 
 // 참여 현황 컴포넌트
 function ProgressInfo() {
+  const isMobile = useMediaQuery('(max-width: 480px)')
+
   return (
     <ChallengeBoardProgressInfoStyle>
-      <BoxStyle display="flex" gap={20}>
+      <BoxStyle
+        display="flex"
+        gap={20}
+        flexDirection={isMobile ? 'column' : 'row'}>
         <ProgressItem
           title="획득한 포인트"
           progressType="earned-point"

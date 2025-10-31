@@ -93,7 +93,7 @@ export default function StreakItem({
               fontWeight="bold">
               {currentUserStreak}
             </TextStyle>
-            /{totalDays} Days in a Row
+            /{totalDays} Days
           </TextStyle>
         </BoxStyle>
       ) : (

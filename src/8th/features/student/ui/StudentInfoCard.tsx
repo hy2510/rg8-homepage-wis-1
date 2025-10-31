@@ -1,5 +1,6 @@
 'use client'
 
+import { useMediaQuery } from '@/8th/MediaQueries'
 import { StudentInfoCardStyle } from '@/8th/features/FeaturesStyled'
 import { BoxStyle } from '@/8th/shared/ui/Misc'
 import SITE_PATH from '@/app/site-path'
@@ -57,7 +58,7 @@ export default function StudentInfoCard({
             flexDirection="column"
             alignItems="flex-start">
             <div className="user-id">{id}</div>
-            <div className="sign-up-date">{signUpDate}</div>
+            {/* <div className="sign-up-date">{signUpDate}</div> */}
             <div className="customer-group-name">{customerGroupName}</div>
           </BoxStyle>
         </BoxStyle>

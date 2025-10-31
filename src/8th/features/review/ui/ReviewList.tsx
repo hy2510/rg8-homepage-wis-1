@@ -90,9 +90,10 @@ export default function ReviewList() {
       <BoxStyle
         display="flex"
         alignItems="center"
-        justifyContent="flex-end"
+        justifyContent="flex-start"
         width="fit-content"
-        gap={10}>
+        gap={5}
+        overflowX="auto">
         <RoundedFullButton
           viewSmall
           tabs

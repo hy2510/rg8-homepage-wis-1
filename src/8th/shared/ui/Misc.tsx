@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import {
   BoxStyled,
   DivideLineStyle,
@@ -134,7 +135,7 @@ export function BoxStyle({
   minHeight?: string
   maxHeight?: string
   border?: string
-  borderRadius?: number
+  borderRadius?: string | number
   borderTopLeftRadius?: number
   borderTopRightRadius?: number
   borderBottomLeftRadius?: number
@@ -310,7 +311,13 @@ export function BoxStyle({
       minHeight={minHeight}
       maxHeight={maxHeight}
       border={border}
-      borderRadius={borderRadius}
+      borderRadius={
+        borderRadius
+          ? typeof borderRadius === 'number'
+            ? borderRadius
+            : parseInt(borderRadius)
+          : undefined
+      }
       borderTopLeftRadius={borderTopLeftRadius}
       borderTopRightRadius={borderTopRightRadius}
       borderBottomLeftRadius={borderBottomLeftRadius}
@@ -420,6 +427,7 @@ export function TextStyle({
   type = 'div',
   onClick,
   fontFamily = 'round',
+  textAlign,
 }: {
   children: React.ReactNode
   className?: string
@@ -443,9 +451,10 @@ export function TextStyle({
     | 'darkBlue'
     | 'lightBlue'
     | string
-  fontFamily?: 'round' | 'sans'
+  fontFamily?: 'round' | 'sans' | 'rg-b'
   type?: 'div' | 'span'
   onClick?: () => void
+  textAlign?: 'left' | 'right' | 'center' | 'justify' | 'start' | 'end'
 }) {
   return (
     <>
@@ -460,7 +469,8 @@ export function TextStyle({
           fontWeight={fontWeight}
           fontColor={fontColor}
           fontFamily={fontFamily}
-          onClick={onClick}>
+          onClick={onClick}
+          textAlign={textAlign}>
           {children}
         </TextDivStyled>
       ) : (
@@ -474,7 +484,8 @@ export function TextStyle({
           fontWeight={fontWeight}
           fontColor={fontColor}
           fontFamily={fontFamily}
-          onClick={onClick}>
+          onClick={onClick}
+          textAlign={textAlign}>
           {children}
         </TextSpanStyled>
       )}
@@ -564,4 +575,46 @@ export function StreakLine() {
       />
     </BoxStyle>
   )
+}
+
+/**
+ * 모달이 열렸을 때 body 스크롤을 막는 커스텀 훅
+ * @param isLocked - true일 때만 스크롤을 막음 (기본값: true)
+ */
+export function useLockBodyScroll(isLocked: boolean = true) {
+  useEffect(() => {
+    if (!isLocked) {
+      return
+    }
+
+    // 현재 스크롤 위치 저장
+    const scrollY = window.scrollY
+
+    // 원래 스타일 저장
+    const originalStyle = window.getComputedStyle(document.body).overflow
+    const originalPosition = document.body.style.position
+    const originalTop = document.body.style.top
+    const originalWidth = document.body.style.width
+
+    // 스크롤 막기
+    document.body.style.overflow = 'hidden'
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.width = '100%'
+
+    // 모바일 iOS 대응
+    document.body.style.touchAction = 'none'
+
+    return () => {
+      // 원래 스타일 복원
+      document.body.style.overflow = originalStyle
+      document.body.style.position = originalPosition
+      document.body.style.top = originalTop
+      document.body.style.width = originalWidth
+      document.body.style.touchAction = 'auto'
+
+      // 스크롤 위치 복원
+      window.scrollTo(0, scrollY)
+    }
+  }, [isLocked])
 }

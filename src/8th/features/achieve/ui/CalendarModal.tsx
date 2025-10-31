@@ -4,6 +4,7 @@ import {
   ModalContainerStyle,
   ModalHeaderStyle,
 } from '@/8th/shared/SharedStyled'
+import { useLockBodyScroll } from '@/8th/shared/ui/Misc'
 import Image from 'next/image'
 import { useState } from 'react'
 import { BookInfoModalStyle } from '../../FeaturesStyled'
@@ -19,6 +20,9 @@ interface CalendarModalProps {
 
 export default function CalendarModal({ onCloseModal }: CalendarModalProps) {
   const [currentDate, setCurrentDate] = useState(new Date()) // 현재 날짜로 초기화
+
+  // 모달이 열렸을 때 body 스크롤 막기
+  useLockBodyScroll()
 
   const handlePrevMonth = () => {
     setCurrentDate(

@@ -3,7 +3,6 @@
 import BookList from '@/8th/features/library/ui/BookList'
 import BasicGridLayout from '@/8th/shared/ui/BasicGridLayout'
 import { SubPageNavHeader } from '@/8th/shared/ui/Navigation'
-import SITE_PATH from '@/app/site-path'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { sampleSearchBooks } from '../../sampleBooks'
@@ -43,10 +42,7 @@ export default function Page() {
 
   return (
     <BasicGridLayout>
-      <SubPageNavHeader
-        title="Search Result"
-        onBack={() => router.push(SITE_PATH.NW8.EB)}
-      />
+      <SubPageNavHeader title="Search Result" onBack={() => router.back()} />
       <BookList
         books={books}
         isLoading={isLoading}

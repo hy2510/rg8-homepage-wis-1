@@ -48,7 +48,7 @@ function RankCategoryItem({
       fontColor={active ? 'primary' : 'secondary'}
       fontSize="medium"
       fontWeight={700}>
-      • {label}
+      {label}
     </TextStyle>
   )
 }

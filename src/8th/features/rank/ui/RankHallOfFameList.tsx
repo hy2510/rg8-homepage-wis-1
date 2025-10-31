@@ -1,3 +1,4 @@
+import { TextStyle } from '@/8th/shared/ui/Misc'
 import RankHallOfFameItem from './RankHallOfFameItem'
 
 /**
@@ -6,12 +7,20 @@ import RankHallOfFameItem from './RankHallOfFameItem'
 export default function RankHallOfFameList() {
   return (
     <div>
+      <TextStyle
+        fontFamily="sans"
+        fontSize="small"
+        fontColor="secondary"
+        textAlign="right"
+        margin="0 20px 10px auto">
+        · Books Read · Earned Points · Registration Date
+      </TextStyle>
       <RankHallOfFameItem
         rank={100}
         avatar="https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/avatar04_rk_1.png"
         name="홍길동"
-        readingCount={100}
-        point={100}
+        readingCount={5000}
+        point={100000}
         registrationDate="2025-01-01"
         isMe
       />

@@ -2,6 +2,7 @@
 
 import { Assets } from '@/8th/assets/asset-library'
 import { BookItemStyle } from '@/8th/features/FeaturesStyled'
+import { DisplayNoneStyle } from '@/8th/shared/SharedStyled'
 import CustomCheckbox from '@/8th/shared/ui/CustomCheckbox'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -138,28 +139,30 @@ export default function BookItem({
         </div>
         <div
           className="book-info-container"
-          onClick={() => {
-            navigator.clipboard
-              .writeText(title)
-              .then(() => {
-                console.log('Title copied to clipboard:', title)
-                setIsCopied(true)
-                setTimeout(() => {
-                  setIsCopied(false)
-                }, 1000)
-              })
-              .catch((err) => {
-                console.error('Failed to copy title:', err)
-              })
+          onClick={(e) => {
+            e.stopPropagation()
+
+            if (!title) return
+
+            try {
+              const textarea = document.createElement('textarea')
+              textarea.value = title
+              textarea.style.position = 'fixed'
+              textarea.style.left = '-999999px'
+              document.body.appendChild(textarea)
+              textarea.select()
+              document.execCommand('copy')
+              document.body.removeChild(textarea)
+
+              setIsCopied(true)
+              setTimeout(() => setIsCopied(false), 2000)
+            } catch (err) {
+              console.error('Failed to copy:', err)
+            }
           }}>
           <div className="wrapper">
-            <span className="title">{isCopied ? 'Copied!' : title}</span>
-            {point !== '0' && (
-              <>
-                <span className="dot">•</span>
-                <span className="point">{point}P</span>
-              </>
-            )}
+            <div className="title">{isCopied ? 'Copied!' : title}</div>
+            {point !== '0' && <div className="point"> {point}P</div>}
           </div>
         </div>
       </BookItemStyle>

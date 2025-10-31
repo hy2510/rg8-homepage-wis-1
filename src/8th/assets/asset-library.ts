@@ -93,9 +93,11 @@ import GlossyBgSmallWhite from './images/glossy-bg-small-white.svg'
 import GlossyBgSmall from './images/glossy-bg-small.svg'
 import GlossyBgWidget from './images/glossy-bg-widget.svg'
 import GlossyBg from './images/glossy-bg.svg'
+import arrowDownBlue from './images/icons/arrow-down-blue.svg'
 import arrowDownGray from './images/icons/arrow-down-gray.svg'
 import arrowLeftGray from './images/icons/arrow-left-gray.svg'
 import arrowRightBlack from './images/icons/arrow-right-black.svg'
+import arrowUpBlue from './images/icons/arrow-up-blue.svg'
 import arrowUpRightBlack from './images/icons/arrow-up-right-black.svg'
 import arrowUpRightBrown from './images/icons/arrow-up-right-brown.svg'
 import arrowUpRightGray from './images/icons/arrow-up-right-gray.svg'
@@ -189,11 +191,13 @@ export const Assets = {
   },
   Icon: {
     arrowDownGray: arrowDownGray,
+    arrowDownBlue: arrowDownBlue,
     arrowLeftGray: arrowLeftGray,
     arrowRightBlack: arrowRightBlack,
     arrowUpRightBlack: arrowUpRightBlack,
     arrowUpRightBrown: arrowUpRightBrown,
     arrowUpRightGray: arrowUpRightGray,
+    arrowUpBlue: arrowUpBlue,
     checkLightBlue: checkLightBlue,
     checkWhite: checkWhite,
     chevronDownBlue: chevronDownBlue,

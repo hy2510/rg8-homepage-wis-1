@@ -7,7 +7,7 @@ import {
 } from '@/8th/features/FeaturesStyled'
 import ActionBar, { TodoActionBar } from '@/8th/shared/ui/ActionBar'
 import { RoundedFullButton } from '@/8th/shared/ui/Buttons'
-import { BoxStyle, TextStyle } from '@/8th/shared/ui/Misc'
+import { BoxStyle, Gap, TextStyle } from '@/8th/shared/ui/Misc'
 import Pagenation from '@/8th/shared/ui/Pagenation'
 import { ReactNode, useState } from 'react'
 import BookItem from './BookItem'
@@ -146,12 +146,10 @@ export default function BookList({
       {/* 날짜가 있는 도서들을 날짜별로 그룹화하여 표시 */}
       {sortedDates.map((date) => (
         <BookListDateGroupStyle key={date}>
-          <TextStyle
-            fontSize="medium"
-            fontColor="secondary"
-            padding="0 0 10px 10px ">
+          <TextStyle fontSize="medium" fontColor="secondary">
             +{date}
           </TextStyle>
+          <Gap size={25} />
           <BookListStyle>
             {groupedBooks[date].map((book) => (
               <BookItem

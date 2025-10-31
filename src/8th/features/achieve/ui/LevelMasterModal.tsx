@@ -66,7 +66,7 @@ export default function LevelMasterModal({
   // 레벨 클릭 핸들러
   const handleLevelClick = (level: string) => {
     const confirmMessage = `학습 레벨을 ${level}로 변경하시겠습니까?
-(이 설정은 E-BOOK과 BOOK QUIZ의 기본 열람 레벨로 적용됩니다.)`
+(이 설정은 DAILY RG와 E-BOOK, BOOK QUIZ의 기본 레벨로 적용됩니다.)`
     if (window.confirm(confirmMessage)) {
       setCurrentLevel(level)
     }

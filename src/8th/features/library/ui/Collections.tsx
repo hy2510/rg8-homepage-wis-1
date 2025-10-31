@@ -1,5 +1,6 @@
 'use client'
 
+import { useMediaQuery } from '@/8th/MediaQueries'
 import { Assets } from '@/8th/assets/asset-library'
 import {
   CollectionItemStyled,
@@ -16,6 +17,7 @@ interface CollectionsProps {
 
 export default function Collections({ bookInfo = 'eb' }: CollectionsProps) {
   const router = useRouter()
+  const isMobile = useMediaQuery('(max-width: 480px)')
 
   return (
     <CollectionsStyled>
@@ -23,12 +25,15 @@ export default function Collections({ bookInfo = 'eb' }: CollectionsProps) {
         <Image
           alt="collections"
           src={Assets.Icon.Study.collections}
-          width={32}
-          height={32}
+          width={28}
+          height={28}
         />
-        <span className="title">Collections</span>
+        <span>Collections</span>
       </BoxStyle>
-      <BoxStyle display="grid" gridTemplateColumns="repeat(2, 1fr)" gap={20}>
+      <BoxStyle
+        display="grid"
+        gridTemplateColumns={isMobile ? 'repeat(1, 1fr)' : 'repeat(2, 1fr)'}
+        gap={isMobile ? 10 : 15}>
         {bookInfo === 'eb' && (
           <>
             <CollectionItem

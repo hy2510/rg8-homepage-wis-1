@@ -1,9 +1,10 @@
 'use client'
 
+import { DailyRGCourseListStyle } from '@/8th/features/FeaturesStyled'
 import DailyRGBookItem from '@/8th/features/daily/ui/DailyRGBookItem'
 import { DailyRgResultActionBar } from '@/8th/shared/ui/ActionBar'
 import BasicGridLayout from '@/8th/shared/ui/BasicGridLayout'
-import { BoxStyle } from '@/8th/shared/ui/Misc'
+import { Gap } from '@/8th/shared/ui/Misc'
 import { BackNavHeader } from '@/8th/shared/ui/Navigation'
 import Pagenation from '@/8th/shared/ui/Pagenation'
 import SITE_PATH from '@/app/site-path'
@@ -49,14 +50,15 @@ export default function Page() {
   const router = useRouter()
 
   return (
-    <BasicGridLayout>
+    <BasicGridLayout leftContainerGap={5}>
       <BackNavHeader onBack={() => router.push(SITE_PATH.NW8.DAILY_RG)} />
+      <Gap size={15} />
       <DailyRgResultActionBar
         title={title}
         bookCount={Number(bookCount)}
         totalCount={Number(totalCount)}
       />
-      <BoxStyle display="flex" flexDirection="column" gap={20}>
+      <DailyRGCourseListStyle>
         {sampleDailyRgResultList.map((book) => (
           <DailyRGBookItem
             key={book.id}
@@ -68,7 +70,7 @@ export default function Page() {
             isCompleted={book.isCompleted}
           />
         ))}
-      </BoxStyle>
+      </DailyRGCourseListStyle>
       <Pagenation />
     </BasicGridLayout>
   )

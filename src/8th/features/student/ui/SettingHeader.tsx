@@ -39,7 +39,7 @@ export default function SettingHeader({
   return (
     <SettingHeaderStyle>
       <div className="title">{title}</div>
-      <BoxStyle display="flex" gap={20}>
+      <BoxStyle display="flex" gap={10}>
         {onEdit ? (
           <>
             <div className="btn save" onClick={handleSave}>

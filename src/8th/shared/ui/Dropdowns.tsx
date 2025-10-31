@@ -1,5 +1,6 @@
 'use client'
 
+import { useMediaQuery } from '@/8th/MediaQueries'
 import { Assets } from '@/8th/assets/asset-library'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
@@ -8,6 +9,7 @@ import {
   DropdownButtonSmallContainerStyle,
   DropdownButtonSmallStyle,
   DropdownContainerStyle,
+  DropdownContainerStyleProps,
   DropdownItemStyle,
   DropdownSmallItemStyle,
   DropdownSmallMenuStyle,
@@ -20,7 +22,8 @@ import { BoxStyle, TextStyle } from './Misc'
  * 드롭다운 메뉴
  */
 
-interface DropdownMenuProps {
+interface DropdownMenuProps
+  extends Pick<DropdownContainerStyleProps, 'position' | 'viewGrid'> {
   items: {
     text: string
     subText?: string
@@ -28,9 +31,7 @@ interface DropdownMenuProps {
   }[]
   isOpen?: boolean
   onClose?: () => void
-  position?: 'right' | 'bottom'
   showArrow?: boolean
-  viewGrid?: boolean
   currentStage?: number
 }
 
@@ -38,7 +39,7 @@ export default function DropdownMenu({
   items,
   isOpen = false,
   onClose,
-  position = 'bottom',
+  position = 'bottomLeft',
   showArrow = true,
   viewGrid = false,
   currentStage,
@@ -109,7 +110,8 @@ export default function DropdownMenu({
   )
 }
 
-interface ChallengeBoardEditMenuProps {
+interface ChallengeBoardEditMenuProps
+  extends Pick<DropdownContainerStyleProps, 'position' | 'viewGrid'> {
   items: {
     text?: string
     subText?: string
@@ -117,9 +119,7 @@ interface ChallengeBoardEditMenuProps {
   }[]
   isOpen?: boolean
   onClose?: () => void
-  position?: 'right' | 'bottom'
   showArrow?: boolean
-  viewGrid?: boolean
   currentStage?: number
 }
 
@@ -127,7 +127,7 @@ export function ChallengeBoardEditMenu({
   items,
   isOpen = false,
   onClose,
-  position = 'bottom',
+  position = 'bottomLeft',
   showArrow = true,
   viewGrid = false,
   currentStage,
@@ -221,7 +221,7 @@ export function DropdownButtonSmall({
   onGroup1Change,
   group0SelectedValue,
   group1SelectedValue = '모든 장르',
-  fontFamily = 'round',
+  fontFamily = 'sans',
   fontColor = 'secondary',
   fontSize = 'medium',
 }: DropdownButtonSmallProps) {
@@ -376,6 +376,8 @@ export function DropdownButtonSmall({
     )
   }
 
+  const isMobile = useMediaQuery('(max-width: 480px)')
+
   return (
     <DropdownButtonSmallContainerStyle ref={dropdownRef}>
       <DropdownButtonSmallStyle onClick={() => setIsOpen(!isOpen)}>
@@ -401,7 +403,7 @@ export function DropdownButtonSmall({
         </div>
       </DropdownButtonSmallStyle>
       {isOpen && (
-        <DropdownSmallMenuStyle>
+        <DropdownSmallMenuStyle isMobile={isMobile}>
           {isStatusDropdown ? renderStatusDropdown() : renderRegularDropdown()}
         </DropdownSmallMenuStyle>
       )}

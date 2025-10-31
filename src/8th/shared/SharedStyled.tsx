@@ -2,6 +2,58 @@
 
 import { Assets } from '@/8th/assets/asset-library'
 import styled from 'styled-components'
+import {
+  displayBlockLabtopL,
+  displayBlockLabtopS,
+  displayBlockPc,
+  displayBlockPhone,
+  displayBlockTabletL,
+  displayBlockTabletS,
+  displayNoneLabtopL,
+  displayNoneLabtopS,
+  displayNonePc,
+  displayNonePhone,
+  displayNoneTabletL,
+  displayNoneTabletS,
+  labtopL,
+  labtopS,
+  phone,
+} from '../MediaQueries'
+
+// Display None을 위한 스타일 컴포넌트
+export const DisplayNoneStyle = styled.div<{
+  hideOnLabtopL?: boolean
+  hideOnLabtopS?: boolean
+  hideOnTabletL?: boolean
+  hideOnTabletS?: boolean
+  hideOnPhone?: boolean
+  hideOnPc?: boolean
+}>`
+  ${({ hideOnLabtopL }) => hideOnLabtopL && displayNoneLabtopL('')}
+  ${({ hideOnLabtopS }) => hideOnLabtopS && displayNoneLabtopS('')}
+  ${({ hideOnTabletL }) => hideOnTabletL && displayNoneTabletL('')}
+  ${({ hideOnTabletS }) => hideOnTabletS && displayNoneTabletS('')}
+  ${({ hideOnPhone }) => hideOnPhone && displayNonePhone('')}
+  ${({ hideOnPc }) => hideOnPc && displayNonePc('')}
+`
+
+// Display Block을 위한 스타일 컴포넌트
+export const DisplayBlockStyle = styled.div<{
+  showOnLabtopL?: boolean
+  showOnLabtopS?: boolean
+  showOnTabletL?: boolean
+  showOnTabletS?: boolean
+  showOnPhone?: boolean
+  showOnPc?: boolean
+}>`
+  display: none; /* 기본적으로 숨김 */
+  ${({ showOnLabtopL }) => showOnLabtopL && displayBlockLabtopL('')}
+  ${({ showOnLabtopS }) => showOnLabtopS && displayBlockLabtopS('')}
+  ${({ showOnTabletL }) => showOnTabletL && displayBlockTabletL('')}
+  ${({ showOnTabletS }) => showOnTabletS && displayBlockTabletS('')}
+  ${({ showOnPhone }) => showOnPhone && displayBlockPhone('')}
+  ${({ showOnPc }) => showOnPc && displayBlockPc('')}
+`
 
 export const ActionBarHeaderStyle = styled.div`
   font-size: var(--font-size-large);
@@ -29,24 +81,112 @@ export const ActionBarContainerStyle = styled.div<{
     isPeriodSearch ? 'var(--color-gray-light)' : 'transparent'};
   font-size: ${({ isBottom }) =>
     isBottom ? '16px' : 'var(--font-size-medium)'};
-  /* 모바일 대응 */
-  /* position: ${({ isBottom }) => (isBottom ? 'fixed' : 'static')};
-  bottom: ${({ isBottom }) => (isBottom ? '0' : 'auto')};
-  left: ${({ isBottom }) => (isBottom ? '0' : 'auto')};
-  right: ${({ isBottom }) => (isBottom ? '0' : 'auto')};
-  z-index: ${({ isBottom }) => (isBottom ? '1000' : 'auto')};
-  background-color: ${({ isBottom }) => (isBottom ? '#fff' : 'transparent')};
-  box-shadow: ${({ isBottom }) =>
-    isBottom ? '0 -4px 12px rgba(0, 0, 0, 0.1)' : 'none'}; */
+
+  ${phone(`
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 15px 10px;
+`)}
+
+  ${({ isBottom, isPeriodSearch }) =>
+    isBottom &&
+    !isPeriodSearch &&
+    phone(`
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    z-index: 1000;
+    border-top: 1px solid var(--line-color-primary);
+    font-size: 1em !important;
+  `)}
 
   input {
+    width: 100%;
+    max-width: calc(50vw - 50px);
+    height: 40px;
     padding: 8px 12px;
     border: 1px solid var(--line-color-primary);
-    border-radius: 8px;
+    border-radius: 12px;
+    color: var(--font-color-secondary);
     font-size: 14px;
     font-weight: 600;
     font-family: var(--font-family-secondary);
+    font-size: var(--font-size-small);
     background-color: #fff;
+
+    @media (max-width: 340px) {
+      &::-webkit-calendar-picker-indicator {
+        display: none;
+        -webkit-appearance: none;
+      }
+
+      &[type='date'],
+      &[type='datetime-local'],
+      &[type='time'] {
+        &::-webkit-calendar-picker-indicator {
+          display: none;
+          -webkit-appearance: none;
+        }
+      }
+    }
+
+    &.title-search {
+      min-width: 200px;
+      max-width: 500px;
+    }
+  }
+
+  .mobile-divider {
+    ${phone(`
+      width: 100%;
+      height: 1px;
+      border-bottom: 1px dotted var(--line-color-primary);
+    `)}
+  }
+
+  .period-search-text {
+    font-family: var(--font-family-rg-b);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+
+    .value {
+      font-family: var(--font-family-secondary);
+      font-size: 14px;
+      font-weight: 800;
+    }
+  }
+
+  .tab-button-container {
+    display: flex;
+    background-color: #fff;
+    width: fit-content;
+    border-radius: 12px;
+    padding: 3px;
+
+    .tab-button {
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-family: var(--font-family-secondary);
+      font-size: var(--font-size-small);
+      font-weight: 600;
+      background-color: #fff;
+      color: var(--font-color-secondary);
+
+      &.active {
+        background-color: var(--color-gray-light);
+        border-radius: 10px;
+        padding: 8px 12px;
+        color: var(--font-color-primary);
+      }
+    }
   }
 `
 
@@ -59,32 +199,124 @@ export const DailyRgResultActionBarStyle = styled.div`
   border-top: 1px solid var(--line-color-primary);
   border-bottom: 1px solid var(--line-color-primary);
   font-size: var(--font-size-medium);
+
+  ${phone(`
+    padding: 15px 10px;
+  `)}
 `
 
 export const BasicGridLayoutStyle = styled.div`
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 1fr minmax(0, 320px);
   gap: 50px;
   position: relative;
   padding: 20px 0;
+  width: 100%;
+  max-width: 100%;
+
+  ${labtopL(`
+    gap: 30px;
+  `)}
+
+  ${labtopS(`
+    width: 100%;
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0 15px;
+  `)}
+
+  .right-container-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 900;
+  }
 `
 
-export const LeftContainerStyle = styled.div`
+export const MobileTopPlaceholderStyle = styled.div`
+  height: 0;
+
+  ${labtopS(`
+    height: 65px;
+  `)}
+`
+
+export const LeftContainerStyle = styled.div<{ leftContainerGap?: number }>`
   display: flex;
   flex-direction: column;
   grid-column: 1;
-  gap: 30px;
+  gap: ${({ leftContainerGap }) => leftContainerGap || 30}px;
+
+  .left-container-title-box {
+    display: none;
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .menu {
+      display: none;
+
+      ${labtopS(`
+        display: flex;
+        align-items: center;
+      `)}
+    }
+
+    ${labtopL(`
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: var(--font-size-xlarge);
+      color: var(--font-color-primary);
+      letter-spacing: -0.05em;
+      align-items: center;
+      gap: 10px;
+      
+    `)}
+
+    ${labtopS(`
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      z-index: 900;
+      font-size: var(--font-size-large);
+      color: var(--font-color-primary);
+      letter-spacing: -0.05em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--line-color-primary);
+      padding: 0 15px;
+      background-color: #fff;
+    `)}
+
+    img {
+      display: block;
+    }
+  }
 `
 
 export const RightContainerStyle = styled.div`
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
+  min-width: 0;
   height: fit-content;
   display: flex;
   flex-direction: column;
   gap: 20px;
   position: sticky;
   top: 20px;
-  z-index: 900;
+  z-index: 901;
   max-height: calc(100vh - 40px);
   overflow-y: auto;
 
@@ -95,12 +327,58 @@ export const RightContainerStyle = styled.div`
   & {
     scrollbar-width: none;
   }
+
+  ${labtopS(`
+    display: none;
+
+    &.active {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+      height: 100vh;
+      position: fixed;
+      max-height: none;
+      right: 0;
+      top: 0;
+      padding: 15px;
+      background-color: #fff;
+    }
+  `)}
+
+  .right-container-close-button {
+    display: none;
+
+    ${labtopS(`
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 901;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: var(--color-gray-light);
+    `)}
+  }
 `
 
 export const BodyContainerStyle = styled.div`
   padding-left: 288px;
   min-height: 100vh;
-  min-width: 100vw;
+  min-width: 100%;
+  max-width: 100%;
+
+  ${labtopL(`
+    padding-left: 80px;
+  `)}
+
+  ${labtopS(`
+    padding: 0;
+  `)}
 `
 
 export const ContentsWrapperStyle = styled.div`
@@ -111,35 +389,78 @@ export const ContentsWrapperStyle = styled.div`
   padding: 30px 0;
 `
 
-export const StartButtonStyle = styled.button`
+export const StartButtonStyle = styled.button<{ isMobile?: boolean }>`
   cursor: pointer;
   border-radius: 12px;
   background: var(--color-red-medium);
   box-shadow: 0 3px 0 0 var(--color-red-medium-shadow);
-  background-image: url('${Assets.Image.GlossyBgSmall.src}');
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  background-position: center right 5px;
-  width: 100px;
-  min-height: 46px;
+  width: ${({ isMobile }) => (isMobile ? '100%' : '100px')};
+  min-height: ${({ isMobile }) => (isMobile ? '50px' : '46px')};
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-medium);
+  font-size: 1em;
   color: #fff;
-  font-weight: 600;
   text-align: center;
   margin-top: 5px;
+  margin-bottom: ${({ isMobile }) => (isMobile ? '4px' : '0')};
 
   &:active {
     transform: translateY(2px);
     box-shadow: 0 1px 0 0 var(--color-red-medium-shadow);
   }
+
+  &.animated,
+  &.mobile-animated {
+    position: relative;
+    overflow: hidden;
+  }
+
+  &.animated::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-image: url('${Assets.Image.GlossyBgSmall.src}');
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    animation: sheen 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  &.mobile-animated::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-image: url('${Assets.Image.GlossyBgSmall.src}');
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    animation: sheen 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes sheen {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 200%;
+    }
+  }
 `
 
-export const ResourceDownloadButtonStyle = styled.button`
+export const ResourceDownloadButtonStyle = styled.div<{
+  isMobile?: boolean
+}>`
   position: relative;
-  padding-right: 10px;
+  padding-right: ${({ isMobile }) => (isMobile ? '0' : '10px')};
 
   .download-button-trigger {
     background: none;
@@ -158,6 +479,10 @@ export const ResourceDownloadButtonStyle = styled.button`
       outline-offset: 2px;
     }
   }
+
+  img {
+    display: block;
+  }
 `
 
 export const RoundedFullButtonStyle = styled.button<{
@@ -172,6 +497,7 @@ export const RoundedFullButtonStyle = styled.button<{
 }>`
   cursor: pointer;
   width: fit-content;
+  min-width: fit-content;
   min-height: ${({ isSmall }) => (isSmall ? '36px' : '44px')};
   padding: ${({ isSmall }) => (isSmall ? '0 20px' : '0 20px')};
   border-radius: 100px;
@@ -232,6 +558,7 @@ export const MoreHorizontalButtonStyle = styled.button`
 `
 
 export const HiddenCheckboxStyle = styled.input`
+  width: fit-content;
   position: absolute;
   opacity: 0;
   pointer-events: none;
@@ -268,21 +595,119 @@ export const CheckboxLabelStyle = styled.label`
   user-select: none;
 `
 
-export const DropdownContainerStyle = styled.div<{
-  position: 'right' | 'bottom' | 'left'
-  viewGrid: boolean
-}>`
+export interface DropdownContainerStyleProps {
+  position?:
+    | 'bottomLeft'
+    | 'bottomRight'
+    | 'topLeft'
+    | 'topRight'
+    | 'leftTop'
+    | 'leftCenter'
+    | 'leftBottom'
+    | 'rightTop'
+    | 'rightCenter'
+    | 'rightBottom'
+  viewGrid?: boolean
+}
+
+export const DropdownContainerStyle = styled.div<DropdownContainerStyleProps>`
   position: absolute;
-  top: ${({ position }) => (position === 'bottom' ? '100%' : 'auto')};
-  bottom: ${({ position }) => (position === 'bottom' ? 'auto' : '0')};
-  left: ${({ position }) => (position === 'right' ? 'calc(100% + 5px)' : '0')};
+
+  ${({ position }) => {
+    const styles: Record<
+      NonNullable<DropdownContainerStyleProps['position']>,
+      {
+        top?: string
+        bottom?: string
+        left?: string
+        right?: string
+        transform?: string
+        marginTop?: string
+        marginBottom?: string
+      }
+    > = {
+      bottomLeft: {
+        top: '100%',
+        left: '0',
+        bottom: 'auto',
+        marginTop: '10px',
+      },
+      bottomRight: {
+        top: '100%',
+        right: '0',
+        bottom: 'auto',
+        marginTop: '10px',
+      },
+      topLeft: {
+        top: 'auto',
+        left: '0',
+        bottom: '100%',
+        marginBottom: '10px',
+      },
+      topRight: {
+        top: 'auto',
+        right: '0',
+        bottom: '100%',
+        marginBottom: '10px',
+      },
+      leftTop: {
+        top: '0',
+        left: 'auto',
+        bottom: 'auto',
+        right: 'calc(100% + 5px)',
+      },
+      leftCenter: {
+        top: '50%',
+        transform: 'translateY(-50%)',
+        right: 'calc(100% + 5px)',
+        bottom: 'auto',
+      },
+      leftBottom: {
+        top: 'auto',
+        left: 'auto',
+        bottom: '0',
+        right: 'calc(100% + 5px)',
+      },
+      rightTop: {
+        top: '0',
+        left: 'calc(100% + 5px)',
+        bottom: 'auto',
+      },
+      rightCenter: {
+        top: '50%',
+        transform: 'translateY(-50%)',
+        left: 'calc(100% + 5px)',
+        bottom: 'auto',
+      },
+      rightBottom: {
+        top: 'auto',
+        left: 'calc(100% + 5px)',
+        bottom: '0',
+      },
+    }
+
+    if (!position) {
+      return ''
+    }
+
+    const currentStyle = styles[position as NonNullable<typeof position>] as any
+    return `
+      top: ${currentStyle.top || 'auto'};
+      bottom: ${currentStyle.bottom || 'auto'};
+      left: ${currentStyle.left || 'auto'};
+      ${currentStyle.right ? `right: ${currentStyle.right};` : ''}
+      ${currentStyle.transform ? `transform: ${currentStyle.transform};` : ''}
+      ${currentStyle.marginTop ? `margin-top: ${currentStyle.marginTop};` : ''}
+      ${currentStyle.marginBottom ? `margin-bottom: ${currentStyle.marginBottom};` : ''}
+    `
+  }}
+
   z-index: 1000;
   min-width: 200px;
   background-color: ${({ viewGrid }) => (viewGrid ? '#f0f2f5' : '#fff')};
   border: 1px solid var(--line-color-primary);
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 10px;
   overflow: hidden;
   display: ${({ viewGrid }) => (viewGrid ? 'grid' : 'block')};
   grid-template-columns: repeat(3, 1fr);
@@ -368,7 +793,10 @@ export const DropdownButtonSmallStyle = styled.div`
 
   .link-text {
     font-size: 14px;
+    font-family: var(--font-family-rg-b);
+    letter-spacing: 0.01em;
     color: var(--font-color-secondary);
+    font-weight: 600;
 
     &.black {
       color: var(--font-color-primary);
@@ -396,10 +824,11 @@ export const DropdownButtonSmallStyle = styled.div`
   }
 `
 
-export const DropdownSmallMenuStyle = styled.div`
+export const DropdownSmallMenuStyle = styled.div<{ isMobile?: boolean }>`
   position: absolute;
   top: 100%;
-  left: 0;
+  left: ${({ isMobile }) => (isMobile ? '-25px' : 'auto')};
+  right: ${({ isMobile }) => (isMobile ? 'auto' : '0')};
   padding: 10px;
   min-width: 180px;
   background-color: #fff;
@@ -449,7 +878,7 @@ export const DropdownSmallItemStyle = styled.div<{
   }
 `
 
-export const GlobalNavBarStyle = styled.div`
+export const GlobalNavBarStyle = styled.div<{ zIndex?: number }>`
   width: 288px;
   height: 100vh;
   background-color: #fff;
@@ -457,7 +886,7 @@ export const GlobalNavBarStyle = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: ${({ zIndex }) => zIndex || 100};
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -465,9 +894,35 @@ export const GlobalNavBarStyle = styled.div`
   justify-content: flex-start;
   gap: 20px;
 
+  ${labtopL(`
+    width: 80px;
+    padding: 0;
+
+  `)}
+
+  ${labtopS(`
+    width: 100%;
+    height: fit-content;
+    min-height: 70px;
+    padding: 5px;
+    border-right: none;
+    border-top: 1px solid var(--line-color-primary);
+    top: auto;
+    bottom: 0;
+    left: 0;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `)}
+
   .logo-container {
     width: 188px;
     height: auto;
+
+    ${labtopL(`
+      display: none;
+    `)}
 
     .logo {
       display: block;
@@ -483,10 +938,29 @@ export const GlobalNavBarStyle = styled.div`
     padding: 20px 10px;
     width: 100%;
 
+    ${labtopS(`
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    `)}
+
+    ${phone(`
+      justify-content: space-evenly;
+      gap: 0;
+    `)}
+
     .divider {
       width: 100%;
       height: 1px;
       background-color: var(--line-color-primary);
+
+      ${labtopS(`
+        display: none;
+      `)}
     }
   }
 `
@@ -502,10 +976,15 @@ export const MenuItemStyle = styled.div`
   border-radius: 15px;
   position: relative;
 
+  ${labtopL(`
+    flex-direction: column;
+    position: relative;
+  `)}
+
   &.is-active {
     background-color: var(--color-light-blue-opacity-10);
     border: 1px solid var(--line-color-light-blue);
-    color: var(--font-color-dark-blue);
+    color: var(--font-color-light-blue);
   }
 
   .menu-item-icon {
@@ -517,7 +996,29 @@ export const MenuItemStyle = styled.div`
   .menu-item-text {
     font-size: var(--font-size-medium);
     font-weight: 400;
+
+    ${labtopL(`
+      display: none;
+    `)}
   }
+`
+
+export const MobileMoreMenuItemBoxStyle = styled.div`
+  width: 100%;
+  height: fit-content;
+  min-height: 70px;
+  padding: 5px;
+  border-right: none;
+  border-top: 1px solid var(--line-color-primary);
+  position: fixed;
+  top: auto;
+  bottom: 70px;
+  left: 0;
+  z-index: 901;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
 `
 
 export const BoxStyled = styled.div<{
@@ -889,7 +1390,8 @@ export const TextDivStyled = styled.div<{
     | 'lightBlue'
     | string
   onClick?: () => void
-  fontFamily?: 'round' | 'sans'
+  fontFamily?: 'round' | 'sans' | 'rg-b'
+  textAlign?: 'left' | 'right' | 'center' | 'justify' | 'start' | 'end'
 }>`
   padding: ${({ padding }) => padding};
   margin: ${({ margin }) => margin};
@@ -933,7 +1435,10 @@ export const TextDivStyled = styled.div<{
   font-family: ${({ fontFamily }) =>
     fontFamily === 'sans'
       ? 'var(--font-family-secondary)'
-      : 'var(--font-family-primary)'};
+      : fontFamily === 'rg-b'
+        ? 'var(--font-family-rg-b)'
+        : 'var(--font-family-primary)'};
+  text-align: ${({ textAlign }) => textAlign};
 `
 
 export const TextSpanStyled = styled.span<{
@@ -958,8 +1463,9 @@ export const TextSpanStyled = styled.span<{
     | 'lightBlue'
     | string
   onClick?: () => void
-  fontFamily?: 'round' | 'sans'
+  fontFamily?: 'round' | 'sans' | 'rg-b'
   color?: string
+  textAlign?: 'left' | 'right' | 'center' | 'justify' | 'start' | 'end'
 }>`
   padding: ${({ padding }) => padding};
   margin: ${({ margin }) => margin};
@@ -1003,8 +1509,11 @@ export const TextSpanStyled = styled.span<{
   font-family: ${({ fontFamily }) =>
     fontFamily === 'sans'
       ? 'var(--font-family-secondary)'
-      : 'var(--font-family-primary)'};
+      : fontFamily === 'rg-b'
+        ? 'var(--font-family-rg-b)'
+        : 'var(--font-family-primary)'};
   color: ${({ color }) => color};
+  text-align: ${({ textAlign }) => textAlign};
 `
 
 export const DivideStyle = styled.div`
@@ -1034,6 +1543,14 @@ export const ModalContainerStyle = styled.div`
   background-color: #fff;
   border-radius: 20px;
   overflow: hidden;
+
+  ${phone(`
+    max-width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    border-radius: 0;
+  `)}
 `
 
 export const ModalHeaderStyle = styled.div`
@@ -1079,7 +1596,6 @@ export const ModalHeaderStyle = styled.div`
     font-weight: 800;
     color: var(--font-color-primary);
     min-width: 120px;
-    text-align: center;
   }
 
   .btn-close {
@@ -1098,8 +1614,10 @@ export const ModalHeaderStyle = styled.div`
 export const ModalBodyStyle = styled.div<{
   viewCloud?: boolean
   calendarBody?: boolean
+  bookInfoBody?: boolean
 }>`
-  padding: ${({ calendarBody }) => (calendarBody ? '0' : '25px')};
+  padding: ${({ calendarBody, bookInfoBody }) =>
+    calendarBody ? '0' : bookInfoBody ? '15px' : '25px'};
   overflow-y: auto;
   overflow-x: hidden;
   max-height: calc(100vh - 133px);
@@ -1130,12 +1648,12 @@ export const ModalBodyStyle = styled.div<{
   `}
 `
 
-export const ModalFooterStyle = styled.div`
+export const ModalFooterStyle = styled.div<{ isFixedBottom?: boolean }>`
   width: 100%;
-  height: 80px;
+  min-height: 80px;
   padding: 20px;
   border-top: 1px solid var(--line-color-primary);
-  position: sticky;
+  position: ${({ isFixedBottom }) => (isFixedBottom ? 'fixed' : 'sticky')};
   bottom: 0;
   left: 0;
   right: 0;
@@ -1262,6 +1780,7 @@ export const PagenationItemStyle = styled.div`
   border-radius: 50%;
   background-color: var(--color-gray-medium);
   color: var(--font-color-primary);
+  font-size: var(--font-size-small);
 
   &.active {
     background-color: var(--font-color-primary);
@@ -1729,7 +2248,8 @@ export const CommonTitleStyle = styled.div<{
 export const TabBarStyle = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 15px 20px;
   padding: 20px 10px;
   border-top: 1px solid var(--line-color-primary);
   border-bottom: 1px solid var(--line-color-primary);

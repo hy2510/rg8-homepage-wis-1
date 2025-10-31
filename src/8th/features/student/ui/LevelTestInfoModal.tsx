@@ -1,13 +1,19 @@
 /**
  * 레벨테스트 모달
  */
+import { useMediaQuery } from '@/8th/MediaQueries'
 import {
   ModalBodyStyle,
   ModalContainerStyle,
   ModalFooterStyle,
   ModalHeaderStyle,
 } from '@/8th/shared/SharedStyled'
-import { BoxStyle, Gap, TextStyle } from '@/8th/shared/ui/Misc'
+import {
+  BoxStyle,
+  Gap,
+  TextStyle,
+  useLockBodyScroll,
+} from '@/8th/shared/ui/Misc'
 import { BookInfoModalStyle } from '../../FeaturesStyled'
 
 interface LevelTestInfoModalProps {
@@ -17,6 +23,11 @@ interface LevelTestInfoModalProps {
 export default function LevelTestInfoModal({
   onCloseModal,
 }: LevelTestInfoModalProps) {
+  // 모달이 열렸을 때 body 스크롤 막기
+  useLockBodyScroll()
+
+  const isMobile = useMediaQuery('(max-width: 480px)')
+
   return (
     <BookInfoModalStyle>
       <ModalContainerStyle>
@@ -63,10 +74,16 @@ export default function LevelTestInfoModal({
           </BoxStyle>
           <Gap size={20} />
         </ModalBodyStyle>
-        <ModalFooterStyle>
-          <BoxStyle height="100%" display="flex" alignItems="center" gap={10}>
+        <ModalFooterStyle isFixedBottom={isMobile}>
+          <BoxStyle
+            height="100%"
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            flexWrap="wrap"
+            gap={10}>
             <TextStyle fontFamily="sans" fontWeight="bold">
-              👉 현재 레벨 테스트를 응시할 수 있습니다.
+              현재 레벨 테스트를 응시할 수 있습니다.
             </TextStyle>
             <TextStyle
               onClick={() => {
@@ -74,8 +91,9 @@ export default function LevelTestInfoModal({
               }}
               fontFamily="sans"
               fontWeight="bold"
-              fontColor="lightBlue">
-              응시하기
+              fontColor="lightBlue"
+              margin="0 10px 0 0">
+              레벨 테스트 응시하기
             </TextStyle>
           </BoxStyle>
         </ModalFooterStyle>
@@ -108,15 +126,19 @@ function HistoryItem({
         margin="0 0 5px 0">
         {date}
       </TextStyle>
-      <BoxStyle display="flex" alignItems="center" gap={10}>
+      <BoxStyle
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        flexWrap="wrap"
+        gap={10}>
         <TextStyle fontFamily="sans" fontWeight="bold">
           레벨 테스트 결과 · {level}
         </TextStyle>
         {showViewReport && (
           <TextStyle
             fontSize="medium"
-            fontFamily="sans"
-            fontWeight="bold"
+            fontFamily="rg-b"
             fontColor="lightBlue"
             onClick={viewReport}>
             View Report

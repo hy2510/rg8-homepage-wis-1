@@ -6,11 +6,28 @@
   src: url('/src/8th/fonts/SDGdGulimTTF.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'SDRGGothicNeoRoundA';
+  src: url('/src/8th/fonts/SDRGGothicNeoRoundTTF-aRg.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SDRGGothicNeoRoundB';
+  src: url('/src/8th/fonts/SDRGGothicNeoRoundTTF-bBd.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/src/8th/fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+}
+
 :root {
   --font-family-primary: 'SDGdGulim2', sans-serif;
   /* --font-family-secondary:
     'Noto Sans KR', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
   --font-family-secondary: 'Chiron GoRound TC', sans-serif;
+  --font-family-rg-a: 'SDRGGothicNeoRoundA', 'Quicksand', sans-serif;
+  --font-family-rg-b: 'SDRGGothicNeoRoundB', 'Quicksand', sans-serif;
 
   --font-color-primary: #3c4b62;
   --font-color-primary-shadow: #293445;
@@ -55,7 +72,7 @@
   background: #fff;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 1440px) {
   :root {
     font-size: 15px;
   }
@@ -81,8 +98,22 @@
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  min-width: 100%;
+  max-width: 100%;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 0;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
 }
 
 button,
